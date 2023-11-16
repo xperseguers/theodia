@@ -18,6 +18,7 @@ namespace Causal\Theodia\Controller;
 
 use Causal\Theodia\Service\Theodia;
 use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Resource\FileRepository;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
@@ -67,6 +68,11 @@ class PlaceController extends ActionController
             'place' => $place,
             'jsonLd' => json_encode($this->getJsonLdLocation($place)),
         ]);
+
+        $typo3Branch = (new Typo3Version())->getBranch();
+        if (version_compare($typo3Branch, '11.5', '>=')) {
+            return $this->htmlResponse();
+        }
     }
 
     /**

@@ -68,7 +68,7 @@ class Theodia
 
         $events = $data[0]['data']['events']['items'] ?? [];
         foreach ($events as &$event) {
-            if (!$event['cancelled']) {
+            if (!($event['cancelled'] ?? false)) {
                 // Possibly not semantically "cancelled"
                 $event['cancelled'] = preg_match('/annul[ée]/i', $event['name']);
             }
