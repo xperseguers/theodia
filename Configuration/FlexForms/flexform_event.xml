@@ -18,7 +18,7 @@
 								<renderType>selectMultipleSideBySide</renderType>
 								<minItems>1</minItems>
 								<maxItems>99</maxItems>
-								<itemsProcFunc>Causal\Theodia\Tca\TheodiaCalendarSelector->getAll</itemsProcFunc>
+								<itemsProcFunc>Causal\Theodia\Backend\Configuration\TCA\TheodiaCalendarSelector->getAll</itemsProcFunc>
 								<size>10</size>
 							</config>
 						</TCEforms>

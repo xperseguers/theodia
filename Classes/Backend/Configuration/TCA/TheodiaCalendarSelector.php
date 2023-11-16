@@ -14,7 +14,7 @@ declare(strict_types = 1);
  * The TYPO3 project - inspiring people to share!
  */
 
-namespace Causal\Theodia\Tca;
+namespace Causal\Theodia\Backend\Configuration\TCA;
 
 use Causal\Theodia\Service\Theodia;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
