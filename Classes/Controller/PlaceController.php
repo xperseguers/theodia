@@ -44,7 +44,7 @@ class PlaceController extends ActionController
         $this->service = $service;
     }
 
-    public function listAction(): void
+    public function listAction()
     {
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
             ->getQueryBuilderForTable('tx_theodia_place');
