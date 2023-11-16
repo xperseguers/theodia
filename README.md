@@ -38,3 +38,13 @@ A sample configuration could be:
 
 You can find the ID of a calendar by searching it on https://theodia.org/en/widget, selecting it in the list,
 and looking at the generated code snippet.
+
+
+## Sponsors
+
+This extension has been initially developed by [Causal Sàrl](https://www.causal.ch) for the
+[Pastoral Unit Sainte-Claire, Fribourg](https://www.paroisse.ch) and is now further maintained by the same
+company and other contributors.
+
+Since end of 2023, the extension is sponsored by the web agency [hemmer](https://www.hemmer.ch), the company
+behind theodia.
