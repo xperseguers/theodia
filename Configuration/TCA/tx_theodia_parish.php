@@ -1,5 +1,9 @@
 <?php
-return [
+$typo3Branch = (new \TYPO3\CMS\Core\Information\Typo3Version())->getBranch();
+$v11AndUp = version_compare($typo3Branch, '11.5', '>=');
+$v12AndUp = version_compare($typo3Branch, '12.4', '>=');
+
+$tca = [
     'ctrl' => [
         'title' => 'LLL:EXT:theodia/Resources/Private/Language/locallang_db.xlf:tx_theodia_parish',
         'label' => 'name',
@@ -37,16 +41,20 @@ return [
         'sys_language_uid' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.language',
-            'config' => [
-                'type' => 'select',
-                'renderType' => 'selectSingle',
-                'foreign_table' => 'sys_language',
-                'foreign_table_where' => 'ORDER BY sys_language.title',
-                'items' => [
-                    ['LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.allLanguages', -1],
-                    ['LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.default_value', 0]
+            'config' => $v11AndUp
+                ? [
+                    'type' => 'language',
+                ]
+                : [
+                    'type' => 'select',
+                    'renderType' => 'selectSingle',
+                    'foreign_table' => 'sys_language',
+                    'foreign_table_where' => 'ORDER BY sys_language.title',
+                    'items' => [
+                        ['LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.allLanguages', -1],
+                        ['LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.default_value', 0]
+                    ],
                 ],
-            ],
         ],
         'l10n_parent' => [
             'displayCond' => 'FIELD:sys_language_uid:>:0',
@@ -54,9 +62,16 @@ return [
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
-                'items' => [
-                    ['', 0],
-                ],
+                'items' => $v12AndUp
+                    ? [
+                        [
+                            'label' => '',
+                            'value' => 0,
+                        ],
+                    ]
+                    : [
+                        ['', 0],
+                    ],
                 'foreign_table' => 'tx_theodia_place',
                 'foreign_table_where' => 'AND tx_theodia_place.pid=###CURRENT_PID### AND tx_theodia_place.sys_language_uid IN (-1,0)',
             ],
@@ -71,7 +86,13 @@ return [
             'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.hidden',
             'config' => [
                 'type' => 'check',
-                'default' => '0',
+                'renderType' => 'checkboxToggle',
+                'items' => [
+                    [
+                        0 => '',
+                        1 => '',
+                    ]
+                ],
             ],
         ],
         'name' => [
@@ -81,8 +102,15 @@ return [
                 'type' => 'input',
                 'size' => '30',
                 'max' => '255',
-                'eval' => 'required,trim',
+                'eval' => $v12AndUp ? 'trim' : 'required,trim',
+                'required' => true,
             ],
         ],
     ],
 ];
+
+if ($v12AndUp) {
+    unset($tca['ctrl']['cruser_id']);
+}
+
+return $tca;
