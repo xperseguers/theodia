@@ -144,7 +144,7 @@ class Theodia
 
     protected function prepareEventsPayload(array $calendars, string $dateYmd, int $itemsPerPage = 10): array
     {
-        // Trick Theodia into not detecting our fetch of information too easily
+        // Trick theodia into not detecting our fetch of information too easily
         // by asking future events with a time anytime between midnight and 07:59:59
         $hour = random_int(0, 7);
         $minute = random_int(0, 59);

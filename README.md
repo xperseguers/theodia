@@ -1,3 +1,3 @@
 # Theodia
 
-Official integration of Theodia for TYPO3
+Official integration of theodia for TYPO3

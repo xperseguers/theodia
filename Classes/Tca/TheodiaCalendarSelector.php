@@ -23,7 +23,7 @@ class TheodiaCalendarSelector
 {
 
     /**
-     * Returns the list of available Theodia calendars.
+     * Returns the list of available theodia calendars.
      *
      * @param array $conf
      * @param \TYPO3\CMS\Backend\Form\FormDataProvider\TcaSelectItems $pObj

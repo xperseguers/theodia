@@ -4,7 +4,7 @@
         <header/>
         <body>
             <trans-unit id="tx_theodia_place">
-                <target>Lieu Theodia</target>
+                <target>Lieu theodia</target>
             </trans-unit>
             <trans-unit id="tx_theodia_place.name">
                 <target>Nom</target>
@@ -13,7 +13,7 @@
                 <target>Paroisse</target>
             </trans-unit>
             <trans-unit id="tx_theodia_place.place_id">
-                <target>ID dans Theodia</target>
+                <target>ID dans theodia</target>
             </trans-unit>
             <trans-unit id="tx_theodia_place.latitude">
                 <target>Latitude</target>
@@ -71,7 +71,7 @@
             </trans-unit>
 
             <trans-unit id="tx_theodia_parish">
-                <target>Paroisse Theodia</target>
+                <target>Paroisse theodia</target>
             </trans-unit>
             <trans-unit id="tx_theodia_parish.name">
                 <target>Nom</target>
@@ -87,7 +87,7 @@
                 <target>Relations</target>
             </trans-unit>
             <trans-unit id="tabs.theodia">
-                <target>Theodia</target>
+                <target>theodia</target>
             </trans-unit>
 
             <trans-unit id="site.tx_theodia_calendars">

@@ -1,7 +1,7 @@
 {
   "name": "causal/theodia",
   "type": "typo3-cms-extension",
-  "description": "Official integration of Theodia (theodia.org) for TYPO3.",
+  "description": "Official integration of theodia (theodia.org) for TYPO3.",
   "keywords": [
     "TYPO3 CMS",
     "theodia"

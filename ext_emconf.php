@@ -1,8 +1,8 @@
 <?php
 
 $EM_CONF[$_EXTKEY] = [
-    'title' => 'Theodia',
-    'description' => 'Official integration of Theodia (theodia.org) for TYPO3.',
+    'title' => 'theodia',
+    'description' => 'Official integration of theodia (theodia.org) for TYPO3.',
     'category' => 'plugin',
     'author' => 'Xavier Perseguers',
     'author_email' => 'xavier@causal.ch',
