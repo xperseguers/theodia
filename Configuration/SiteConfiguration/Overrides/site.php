@@ -6,7 +6,6 @@ $GLOBALS['SiteConfiguration']['site']['columns']['tx_theodia_calendars'] = [
         'rows' => 10,
         'default' => implode(LF, [
             '148, Église Sts Pierre-et-Paul, Marly',
-            '149, Église du Saint-Sacrement, Marly',
             '150, Église de Praroman, Le Mouret',
         ]),
     ],
