@@ -26,10 +26,9 @@ class TheodiaCalendarSelector
      * Returns the list of available theodia calendars.
      *
      * @param array $conf
-     * @param \TYPO3\CMS\Backend\Form\FormDataProvider\TcaSelectItems $pObj
      * @return array
      */
-    public function getAll(array $conf = [], $pObj): array
+    public function getAll(array $conf = []): array
     {
         if (empty($conf)) {
             $conf = ['items' => []];
