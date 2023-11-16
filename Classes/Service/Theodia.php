@@ -18,6 +18,7 @@ namespace Causal\Theodia\Service;
 
 use TYPO3\CMS\Core\Core\Environment;
 use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\Site\SiteFinder;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class Theodia
@@ -26,28 +27,22 @@ class Theodia
     /**
      * @return array
      */
-    public static function getTheodiaCalendarsForTca(): array
+    public static function getTheodiaCalendarsForTca(int $storage): array
     {
-        $theodiaDirectory = Environment::getConfigPath() . '/theodia/';
-        $theodiaConfigurationFile = $theodiaDirectory . 'calendars.config.php';
-
-        if (is_file($theodiaConfigurationFile)) {
-            $calendars = include($theodiaConfigurationFile);
-            asort($calendars);
-        } else {
-            /**
-             * You should create a configuration file '<root>/config/theodia/calendars.config.php'
-             * with content of the form:
-
-               <?php
-               return [
-                   123 => 'Chapelle ...',
-                   124 => 'Eglise ...',
-               ];
-
-             */
-            $calendars = [];
+        $site = GeneralUtility::makeInstance(SiteFinder::class)->getSiteByPageId($storage);
+        $calendarsMapping = GeneralUtility::trimExplode(LF, $site->getConfiguration()['tx_theodia_calendars'] ?? '', true);
+        $calendars = [];
+        foreach ($calendarsMapping as $calendarMapping) {
+            if (strpos($calendarMapping, ',') === false) {
+                // Invalid configuration
+                continue;
+            }
+            [$id, $title] = GeneralUtility::trimExplode(',', $calendarMapping, true);
+            $calendars[(int)$id] = $title;
         }
+
+        // Sort calendars
+        asort($calendars);
 
         $tcaItems = [];
         $tcaItems[] = ['', '0'];

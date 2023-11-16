@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-    <file source-language="en" datatype="plaintext" original="messages" date="2020-05-20T14:18:30Z" product-name="up_sainte_claire">
+    <file source-language="en" datatype="plaintext" original="messages" date="2020-05-20T14:18:30Z" product-name="theodia">
         <header/>
         <body>
             <trans-unit id="tx_theodia_place">
@@ -85,6 +85,13 @@
             </trans-unit>
             <trans-unit id="tabs.relations">
                 <source>Relations</source>
+            </trans-unit>
+            <trans-unit id="tabs.theodia">
+                <source>Theodia</source>
+            </trans-unit>
+
+            <trans-unit id="site.tx_theodia_calendars">
+                <source>Calendars</source>
             </trans-unit>
         </body>
     </file>
