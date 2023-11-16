@@ -4,7 +4,7 @@ defined('TYPO3') || die();
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
     'theodia',
     'Event',
-    'theodia - Horaire des célébrations'
+    'LLL:EXT:theodia/Resources/Private/Language/locallang_db.xlf:plugins.event.title'
 );
 
 $pluginSignature = 'theodia_event';
@@ -15,7 +15,7 @@ $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist'][$pluginSignat
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
     'theodia',
     'Place',
-    'theodia - Lieu'
+    'LLL:EXT:theodia/Resources/Private/Language/locallang_db.xlf:plugins.place.title'
 );
 
 $pluginSignature = 'theodia_place';

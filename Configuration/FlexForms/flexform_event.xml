@@ -12,7 +12,7 @@
 				<el>
 					<settings.calendars>
 						<TCEforms>
-							<label>Calendriers</label>
+							<label>LLL:EXT:theodia/Resources/Private/Language/locallang_db.xlf:plugins.event.settings.calendars</label>
 							<config>
 								<type>select</type>
 								<renderType>selectMultipleSideBySide</renderType>
@@ -25,7 +25,7 @@
 					</settings.calendars>
 					<settings.numberOfEvents>
 						<TCEforms>
-							<label>Nombre d'évènements à afficher</label>
+							<label>LLL:EXT:theodia/Resources/Private/Language/locallang_db.xlf:plugins.event.settings.numberOfEvents</label>
 							<config>
 								<type>input</type>
 								<size>5</size>
@@ -37,7 +37,7 @@
 					</settings.numberOfEvents>
 					<settings.showLocation>
 						<TCEforms>
-							<label>Afficher le lieu de culte</label>
+							<label>LLL:EXT:theodia/Resources/Private/Language/locallang_db.xlf:plugins.event.settings.showLocation</label>
 							<displayCond><![CDATA[FIELD:settings.iframe:=:0]]></displayCond>
 							<config>
 								<type>check</type>
@@ -47,7 +47,7 @@
 					</settings.showLocation>
 					<settings.filter>
 						<TCEforms>
-							<label>Filtre (p. ex. : "/famille/i")</label>
+							<label>LLL:EXT:theodia/Resources/Private/Language/locallang_db.xlf:plugins.event.settings.filter</label>
 							<displayCond><![CDATA[FIELD:settings.iframe:=:0]]></displayCond>
 							<config>
 								<type>input</type>
@@ -58,7 +58,7 @@
 					</settings.filter>
 					<settings.iframe>
 						<TCEforms>
-							<label>Utiliser un bloc iframe (moins bien pour le référencement)</label>
+							<label>LLL:EXT:theodia/Resources/Private/Language/locallang_db.xlf:plugins.event.settings.iframe</label>
 							<config>
 								<type>check</type>
 								<renderType>checkboxToggle</renderType>
