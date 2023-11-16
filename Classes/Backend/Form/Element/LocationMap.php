@@ -17,6 +17,7 @@ declare(strict_types = 1);
 namespace Causal\Theodia\Backend\Form\Element;
 
 use TYPO3\CMS\Core\Core\Environment;
+use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Page\PageRenderer;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -31,6 +32,12 @@ class LocationMap extends \TYPO3\CMS\Backend\Form\Element\AbstractFormElement
 
     protected function renderMap(array $resultArray): array
     {
+        $typo3Branch = (new Typo3Version())->getBranch();
+        if (version_compare($typo3Branch, '12.4', '>=')) {
+            // Not yet ready
+            return $resultArray;
+        }
+
         /** @var PageRenderer $pageRenderer */
         $pageRenderer = GeneralUtility::makeInstance(PageRenderer::class);
         $pageRenderer->addRequireJsConfiguration(['paths' => [
