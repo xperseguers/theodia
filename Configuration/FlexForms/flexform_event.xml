@@ -1,0 +1,73 @@
+<T3DataStructure>
+	<meta>
+		<langDisable>1</langDisable>
+	</meta>
+	<sheets>
+		<sDEF>
+			<ROOT>
+				<TCEforms>
+					<sheetTitle>LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:general</sheetTitle>
+				</TCEforms>
+				<type>array</type>
+				<el>
+					<settings.calendars>
+						<TCEforms>
+							<label>Calendriers</label>
+							<config>
+								<type>select</type>
+								<renderType>selectMultipleSideBySide</renderType>
+								<minItems>1</minItems>
+								<maxItems>99</maxItems>
+								<itemsProcFunc>Causal\Theodia\Tca\TheodiaCalendarSelector->getAll</itemsProcFunc>
+								<size>10</size>
+							</config>
+						</TCEforms>
+					</settings.calendars>
+					<settings.numberOfEvents>
+						<TCEforms>
+							<label>Nombre d'évènements à afficher</label>
+							<config>
+								<type>input</type>
+								<size>5</size>
+								<eval>int+</eval>
+								<required>1</required>
+								<default>10</default>
+							</config>
+						</TCEforms>
+					</settings.numberOfEvents>
+					<settings.showLocation>
+						<TCEforms>
+							<label>Afficher le lieu de culte</label>
+							<displayCond><![CDATA[FIELD:settings.iframe:=:0]]></displayCond>
+							<config>
+								<type>check</type>
+								<renderType>checkboxToggle</renderType>
+							</config>
+						</TCEforms>
+					</settings.showLocation>
+					<settings.filter>
+						<TCEforms>
+							<label>Filtre (p. ex. : "/famille/i")</label>
+							<displayCond><![CDATA[FIELD:settings.iframe:=:0]]></displayCond>
+							<config>
+								<type>input</type>
+								<size>20</size>
+								<eval>trim</eval>
+							</config>
+						</TCEforms>
+					</settings.filter>
+					<settings.iframe>
+						<TCEforms>
+							<label>Utiliser un bloc iframe (moins bien pour le référencement)</label>
+							<config>
+								<type>check</type>
+								<renderType>checkboxToggle</renderType>
+							</config>
+							<onChange>reload</onChange>
+						</TCEforms>
+					</settings.iframe>
+				</el>
+			</ROOT>
+		</sDEF>
+	</sheets>
+</T3DataStructure>

@@ -1,0 +1,30 @@
+<T3DataStructure>
+	<meta>
+		<langDisable>1</langDisable>
+	</meta>
+	<sheets>
+		<sDEF>
+			<ROOT>
+				<TCEforms>
+					<sheetTitle>LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:general</sheetTitle>
+				</TCEforms>
+				<type>array</type>
+				<el>
+					<settings.place>
+						<TCEforms>
+							<label>Lieu</label>
+							<config>
+								<type>select</type>
+								<renderType>selectSingle</renderType>
+								<minItems>1</minItems>
+								<maxItems>1</maxItems>
+								<foreign_table>tx_theodia_place</foreign_table>
+								<foreign_table_where>AND tx_theodia_place.sys_language_uid IN (0,-1) ORDER BY tx_theodia_place.name</foreign_table_where>
+							</config>
+						</TCEforms>
+					</settings.place>
+				</el>
+			</ROOT>
+		</sDEF>
+	</sheets>
+</T3DataStructure>

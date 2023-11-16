@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+    <file source-language="en" datatype="plaintext" original="messages" date="2020-05-20T14:18:30Z" product-name="up_sainte_claire">
+        <header/>
+        <body>
+            <trans-unit id="tx_theodia_place">
+                <source>Theodia Place</source>
+            </trans-unit>
+            <trans-unit id="tx_theodia_place.name">
+                <source>Name</source>
+            </trans-unit>
+            <trans-unit id="tx_theodia_place.parish">
+                <source>Parish</source>
+            </trans-unit>
+            <trans-unit id="tx_theodia_place.place_id">
+                <source>ID in Theodia</source>
+            </trans-unit>
+            <trans-unit id="tx_theodia_place.latitude">
+                <source>Latitude</source>
+            </trans-unit>
+            <trans-unit id="tx_theodia_place.longitude">
+                <source>Longitude</source>
+            </trans-unit>
+            <trans-unit id="tx_theodia_place.patron">
+                <source>Patron</source>
+            </trans-unit>
+            <trans-unit id="tx_theodia_place.description">
+                <source>Description</source>
+            </trans-unit>
+            <trans-unit id="tx_theodia_place.year">
+                <source>Building Year</source>
+            </trans-unit>
+            <trans-unit id="tx_theodia_place.century">
+                <source>Building Century</source>
+            </trans-unit>
+            <trans-unit id="tx_theodia_place.seats">
+                <source>Number of Seats</source>
+            </trans-unit>
+            <trans-unit id="tx_theodia_place.address">
+                <source>Street</source>
+            </trans-unit>
+            <trans-unit id="tx_theodia_place.postal_code">
+                <source>Postal Code</source>
+            </trans-unit>
+            <trans-unit id="tx_theodia_place.city">
+                <source>City</source>
+            </trans-unit>
+            <trans-unit id="tx_theodia_place.region">
+                <source>Region</source>
+            </trans-unit>
+            <trans-unit id="tx_theodia_place.country">
+                <source>Country</source>
+            </trans-unit>
+            <trans-unit id="tx_theodia_place.url">
+                <source>External URL</source>
+            </trans-unit>
+            <trans-unit id="tx_theodia_place.page_uid">
+                <source>Detail page in this website</source>
+            </trans-unit>
+            <trans-unit id="tx_theodia_place.photo">
+                <source>Photo</source>
+            </trans-unit>
+            <trans-unit id="tx_theodia_place.map">
+                <source>Map</source>
+            </trans-unit>
+            <trans-unit id="tx_theodia_place.map.address">
+                <source>Address</source>
+            </trans-unit>
+            <trans-unit id="tx_theodia_place.map.show">
+                <source>Show</source>
+            </trans-unit>
+
+            <trans-unit id="tx_theodia_parish">
+                <source>Theodia Parish</source>
+            </trans-unit>
+            <trans-unit id="tx_theodia_parish.name">
+                <source>Name</source>
+            </trans-unit>
+
+            <trans-unit id="tabs.address">
+                <source>Address</source>
+            </trans-unit>
+            <trans-unit id="tabs.gps">
+                <source>GPS</source>
+            </trans-unit>
+            <trans-unit id="tabs.relations">
+                <source>Relations</source>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

@@ -1,0 +1,92 @@
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en"
+      xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+
+<div class="row">
+    <div class="col-md-4">
+        <f:render section="Information" arguments="{_all}"/>
+        <f:if condition="{jsonLd}">
+            <script type="application/ld+json">{jsonLd -> f:format.raw()}</script>
+        </f:if>
+    </div>
+    <f:if condition="{place.description}">
+        <div class="col-md-8">
+            <h3>Histoire</h3>
+            {place.description -> f:format.html()}
+        </div>
+    </f:if>
+</div>
+
+<f:section name="Information">
+    <div class="theodia-place">
+        <f:if condition="{place.patron}">
+            <f:render section="Info" arguments="{
+                icon: 'local_library',
+                key: 'Saint Patron',
+                value: place.patron
+            }"/>
+        </f:if>
+        <f:if condition="{place.year}">
+            <f:then>
+                <f:render section="Info" arguments="{
+                    icon: 'gavel',
+                    key: 'Année de construction',
+                    value: place.year
+                }"/>
+            </f:then>
+            <f:else>
+                <f:if condition="{place.century}">
+                    <f:render section="Info" arguments="{
+                        icon: 'gavel',
+                        key: 'Construction',
+                        value: '{place.century}e siècle'
+                    }"/>
+                </f:if>
+            </f:else>
+        </f:if>
+        <f:if condition="{place.seats}">
+            <f:render section="Info" arguments="{
+                icon: 'supervisor_account',
+                key: 'Nombre de places',
+                value: place.seats
+            }"/>
+        </f:if>
+        <f:if condition="{place.address}">
+            <f:render section="Info" arguments="{
+                icon: 'place',
+                key: 'Adresse',
+                value: '{place.address}, {place.postal_code} {place.city}'
+            }"/>
+        </f:if>
+        <f:if condition="{place.latitude}">
+            <f:render section="Info" arguments="{
+                icon: 'directions',
+                key: 'Comment s\'y rendre',
+                value: 'Afficher sur la carte',
+                link: 'https://maps.google.com/maps?daddr={place.latitude},{place.longitude}'
+            }"/>
+        </f:if>
+        <f:if condition="place.maps.embed">
+            {place.maps_embed -> f:format.raw()}
+        </f:if>
+    </div>
+</f:section>
+
+<f:section name="Info">
+    <div class="theodia-place-info">
+        <div class="info-icon">
+            <i class="material-icons">{icon}</i>
+        </div>
+        <div class="info-description">
+            <div class="info-description-key">{key}</div>
+            <div class="info-description-value">
+                <f:if condition="{link}">
+                    <f:then><a href="{link}" target="_blank">{value}</a></f:then>
+                    <f:else>{value}</f:else>
+                </f:if>
+            </div>
+        </div>
+    </div>
+</f:section>
+
+</html>
