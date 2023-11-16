@@ -1,0 +1,41 @@
+{
+  "name": "causal/theodia",
+  "type": "typo3-cms-extension",
+  "description": "Official integration of Theodia (theodia.org) for TYPO3.",
+  "keywords": [
+    "TYPO3 CMS",
+    "theodia"
+  ],
+  "homepage": "https://github.com/xperseguers/theodia",
+  "support": {
+    "issues": "https://github.com/xperseguers/theodia/issues"
+  },
+  "authors": [
+    {
+      "name": "Xavier Perseguers",
+      "email": "xavier@causal.ch",
+      "homepage": "https://www.causal.ch",
+      "role": "Developer"
+    }
+  ],
+  "license": [
+    "GPL-3.0-or-later"
+  ],
+  "require": {
+    "php": ">=7.4.0 <=7.4.99 || >=8.0.0 <=8.2.99",
+    "typo3/cms-core": "^10 || ^11 || ^12"
+  },
+  "autoload": {
+    "psr-4": {
+      "Causal\\Theodia\\": "Classes/"
+    }
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "0.1.x-dev"
+    },
+    "typo3/cms": {
+      "extension-key": "theodia"
+    }
+  }
+}
