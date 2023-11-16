@@ -37,7 +37,7 @@ class Theodia
                 // Invalid configuration
                 continue;
             }
-            [$id, $title] = GeneralUtility::trimExplode(',', $calendarMapping, true);
+            [$id, $title] = GeneralUtility::trimExplode(',', $calendarMapping, true, 2);
             $calendars[(int)$id] = $title;
         }
 
