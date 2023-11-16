@@ -65,7 +65,7 @@ class LocationMap extends \TYPO3\CMS\Backend\Form\Element\AbstractFormElement
             $longitude = 7.16079;
         }
         $resultArray['stylesheetFiles'][] = rtrim($this->getRelativeFilePath(
-            'EXT:theodia/Resources/Public/css/leaflet.css'
+            'EXT:theodia/Resources/Public/Css/leaflet.css'
         ), '/');
         $resultArray['requireJsModules']['locationMap'] = [
             'TYPO3/CMS/Theodia/FormEngine/Element/LocationMap' => 'function(LocationMap) {
