@@ -1,8 +1,5 @@
 <?php
-$typo3Branch = (new \TYPO3\CMS\Core\Information\Typo3Version())->getBranch();
-$v11AndUp = version_compare($typo3Branch, '11.5', '>=');
-$v12AndUp = version_compare($typo3Branch, '12.4', '>=');
-
+$typo3Version = (new \TYPO3\CMS\Core\Information\Typo3Version())->getMajorVersion();
 $tca = [
     'ctrl' => [
         'title' => 'LLL:EXT:theodia/Resources/Private/Language/locallang_db.xlf:tx_theodia_place',
@@ -51,7 +48,7 @@ $tca = [
         'sys_language_uid' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.language',
-            'config' => $v11AndUp
+            'config' => $typo3Version >= 11
                 ? [
                     'type' => 'language',
                 ]
@@ -72,7 +69,7 @@ $tca = [
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
-                'items' => $v12AndUp
+                'items' => $typo3Version >= 12
                     ? [
                         [
                             'label' => '',
@@ -112,7 +109,7 @@ $tca = [
                 'type' => 'input',
                 'size' => '30',
                 'max' => '255',
-                'eval' => $v12AndUp ? 'trim' : 'required,trim',
+                'eval' => $typo3Version >= 12 ? 'trim' : 'required,trim',
                 'required' => true,
             ],
         ],
@@ -122,7 +119,7 @@ $tca = [
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
-                'items' => $v12AndUp
+                'items' => $typo3Version >= 12
                     ? [
                         [
                             'label' => '',
@@ -143,7 +140,7 @@ $tca = [
             'exclude' => 1,
             'label' => 'LLL:EXT:theodia/Resources/Private/Language/locallang_db.xlf:tx_theodia_place.place_id',
             'l10n_mode' => 'exclude',
-            'config' => $v12AndUp
+            'config' => $typo3Version >= 12
                 ? [
                     'type' => 'number',
                     'size' => '6',
@@ -206,7 +203,7 @@ $tca = [
             'exclude' => 0,
             'label' => 'LLL:EXT:theodia/Resources/Private/Language/locallang_db.xlf:tx_theodia_place.year',
             'l10n_mode' => 'exclude',
-            'config' => $v12AndUp
+            'config' => $typo3Version >= 12
                 ? [
                     'type' => 'number',
                     'size' => '6',
@@ -233,7 +230,7 @@ $tca = [
             'exclude' => 0,
             'label' => 'LLL:EXT:theodia/Resources/Private/Language/locallang_db.xlf:tx_theodia_place.seats',
             'l10n_mode' => 'exclude',
-            'config' => $v12AndUp
+            'config' => $typo3Version >= 12
                 ? [
                     'type' => 'number',
                     'size' => '6',
@@ -313,7 +310,7 @@ $tca = [
             'exclude' => 0,
             'label' => 'LLL:EXT:theodia/Resources/Private/Language/locallang_db.xlf:tx_theodia_place.page_uid',
             'l10n_mode' => 'exclude',
-            'config' => $v12AndUp
+            'config' => $typo3Version >= 12
                 ? [
                     'type' => 'group',
                     'allowed' => 'pages',
@@ -364,7 +361,7 @@ $tca = [
     ],
 ];
 
-if ($v12AndUp) {
+if ($typo3Version >= 12) {
     unset($tca['ctrl']['cruser_id']);
 }
 

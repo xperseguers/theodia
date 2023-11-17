@@ -69,8 +69,7 @@ class PlaceController extends ActionController
             'jsonLd' => json_encode($this->getJsonLdLocation($place)),
         ]);
 
-        $typo3Branch = (new Typo3Version())->getBranch();
-        if (version_compare($typo3Branch, '11.5', '>=')) {
+        if ((new Typo3Version())->getMajorVersion() >= 11) {
             return $this->htmlResponse();
         }
     }

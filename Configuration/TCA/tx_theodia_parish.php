@@ -1,8 +1,5 @@
 <?php
-$typo3Branch = (new \TYPO3\CMS\Core\Information\Typo3Version())->getBranch();
-$v11AndUp = version_compare($typo3Branch, '11.5', '>=');
-$v12AndUp = version_compare($typo3Branch, '12.4', '>=');
-
+$typo3Version = (new \TYPO3\CMS\Core\Information\Typo3Version())->getMajorVersion();
 $tca = [
     'ctrl' => [
         'title' => 'LLL:EXT:theodia/Resources/Private/Language/locallang_db.xlf:tx_theodia_parish',
@@ -41,7 +38,7 @@ $tca = [
         'sys_language_uid' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.language',
-            'config' => $v11AndUp
+            'config' => $typo3Version >= 11
                 ? [
                     'type' => 'language',
                 ]
@@ -62,7 +59,7 @@ $tca = [
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
-                'items' => $v12AndUp
+                'items' => $typo3Version >= 12
                     ? [
                         [
                             'label' => '',
@@ -102,14 +99,14 @@ $tca = [
                 'type' => 'input',
                 'size' => '30',
                 'max' => '255',
-                'eval' => $v12AndUp ? 'trim' : 'required,trim',
+                'eval' => $typo3Version >= 12 ? 'trim' : 'required,trim',
                 'required' => true,
             ],
         ],
     ],
 ];
 
-if ($v12AndUp) {
+if ($typo3Version >= 12) {
     unset($tca['ctrl']['cruser_id']);
 }
 
