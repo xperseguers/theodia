@@ -18,8 +18,10 @@ namespace Causal\Theodia\Backend\Form\Element;
 
 use TYPO3\CMS\Core\Core\Environment;
 use TYPO3\CMS\Core\Information\Typo3Version;
+use TYPO3\CMS\Core\Page\JavaScriptModuleInstruction;
 use TYPO3\CMS\Core\Page\PageRenderer;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Utility\PathUtility;
 
 class LocationMap extends \TYPO3\CMS\Backend\Form\Element\AbstractFormElement
 {
@@ -32,19 +34,16 @@ class LocationMap extends \TYPO3\CMS\Backend\Form\Element\AbstractFormElement
 
     protected function renderMap(array $resultArray): array
     {
-        $typo3Branch = (new Typo3Version())->getBranch();
-        if (version_compare($typo3Branch, '12.4', '>=')) {
-            // Not yet ready
-            return $resultArray;
+        $typo3Version = (new Typo3Version())->getMajorVersion();
+        if ($typo3Version < 12) {
+            /** @var PageRenderer $pageRenderer */
+            $pageRenderer = GeneralUtility::makeInstance(PageRenderer::class);
+            $pageRenderer->addRequireJsConfiguration(['paths' => [
+                'TYPO3/CMS/Theodia/Leaflet' => rtrim($this->getRelativeFilePath(
+                    'EXT:theodia/Resources/Public/JavaScript/leaflet.js'
+                ), '.js/')
+            ]]);
         }
-
-        /** @var PageRenderer $pageRenderer */
-        $pageRenderer = GeneralUtility::makeInstance(PageRenderer::class);
-        $pageRenderer->addRequireJsConfiguration(['paths' => [
-            'TYPO3/CMS/Theodia/Leaflet' => rtrim($this->getRelativeFilePath(
-                'EXT:theodia/Resources/Public/JavaScript/leaflet.js'
-            ), '.js/')
-        ]]);
 
         $row = $this->data['databaseRow'];
         $parameters = $this->data['parameterArray']['fieldConf']['config']['parameters'];
@@ -71,25 +70,39 @@ class LocationMap extends \TYPO3\CMS\Backend\Form\Element\AbstractFormElement
             $latitude = 46.77657;
             $longitude = 7.16079;
         }
-        $resultArray['stylesheetFiles'][] = rtrim($this->getRelativeFilePath(
-            'EXT:theodia/Resources/Public/Css/leaflet.css'
-        ), '/');
-        $resultArray['requireJsModules']['locationMap'] = [
-            'TYPO3/CMS/Theodia/FormEngine/Element/LocationMap' => 'function(LocationMap) {
-                new LocationMap({
-                    uid: \'' . $row['uid'] . '\',
-                    table: \'' . $this->data['tableName'] . '\',
-                    fieldLatitude: \'' . $fieldLatitude . '\',
-                    fieldLongitude: \'' . $fieldLongitude . '\',
-                    latitude: \'' . $latitude . '\',
-                    longitude: \'' . $longitude . '\',
-                    addressFields: [' .
+        $resultArray['stylesheetFiles'][] = PathUtility::getAbsoluteWebPath(
+            GeneralUtility::getFileAbsFileName('EXT:theodia/Resources/Public/Css/leaflet.css')
+        );
+
+        if ($typo3Version >= 12) {
+            $resultArray['requireJsModules'][] = JavaScriptModuleInstruction::create('@causal/theodia/location-map.js')
+                ->invoke('create', [
+                    'uid' => $row['uid'],
+                    'table' => $this->data['tableName'],
+                    'fieldLatitude' => $fieldLatitude,
+                    'fieldLongitude' => $fieldLongitude,
+                    'latitude' => $latitude,
+                    'longitude' => $longitude,
+                    'addressFields' => $sourceAddressFields
+                ]);
+        } else {
+            $resultArray['requireJsModules']['locationMap'] = [
+                'TYPO3/CMS/Theodia/FormEngine/Element/LocationMap' => 'function(LocationMap) {
+                    new LocationMap({
+                        uid: \'' . $row['uid'] . '\',
+                        table: \'' . $this->data['tableName'] . '\',
+                        fieldLatitude: \'' . $fieldLatitude . '\',
+                        fieldLongitude: \'' . $fieldLongitude . '\',
+                        latitude: \'' . $latitude . '\',
+                        longitude: \'' . $longitude . '\',
+                        addressFields: [' .
                         (!empty($sourceAddressFields)
-                        ? '\'' . implode('\',\'', $sourceAddressFields) . '\''
-                        : '') . ']
-                });
-            }'
-        ];
+                            ? '\'' . implode('\',\'', $sourceAddressFields) . '\''
+                            : '') . ']
+                    });
+                }'
+            ];
+        }
 
         $addressLabel = htmlspecialchars($this->translate('tx_theodia_place.map.address'));
         $showLabel = htmlspecialchars($this->translate('tx_theodia_place.map.show'));
@@ -119,7 +132,7 @@ HTML;
 
     protected function getRelativeFilePath(string $filePath): string
     {
-        return \TYPO3\CMS\Core\Utility\PathUtility::getRelativePath(
+        return PathUtility::getRelativePath(
             Environment::getPublicPath() . '/typo3/',
             GeneralUtility::getFileAbsFileName($filePath)
         );
