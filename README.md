@@ -40,6 +40,13 @@ You can find the ID of a calendar by searching it on https://theodia.org/en/widg
 and looking at the generated code snippet.
 
 
+## Places of worship
+
+Upon first encounter, the extension will automatically create a new place of worship when it encounters a new
+one in the calendar. Those places are fetched from theodia and stored at the root of the TYPO3 install (`pid=0`).
+Once imported, you may move that record wherever you want and edit it freely.
+
+
 ## Sponsors
 
 This extension has been initially developed by [Causal Sàrl](https://www.causal.ch) for the

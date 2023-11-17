@@ -314,7 +314,7 @@ class Theodia
 
         $payload = $this->prepareFrontOfficePlacePayload($id);
         $info = $this->callApi($payload, 'place_' . $id, 604800 /* 1 week */);
-        // TODO: (possibly) extract image from Theodia by fetching $info['_links']['images']['href']
+        // TODO: (possibly) extract image from theodia by fetching $info['_links']['images']['href']
 
         $place = $info[0]['data']['place'];
         $data = [
