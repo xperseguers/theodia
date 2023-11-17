@@ -49,7 +49,7 @@ Once imported, you may move that record wherever you want and edit it freely.
 
 ## Sponsors
 
-This extension has been initially developed by [Causal Sàrl](https://www.causal.ch) for the
+This extension has been initially developed in May 2020 by [Causal Sàrl](https://www.causal.ch) for the
 [Pastoral Unit Sainte-Claire, Fribourg](https://www.paroisse.ch) and is now further maintained by the same
 company and other contributors.
 
