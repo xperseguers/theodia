@@ -12,6 +12,7 @@
  */
 
 import 'leaflet';
+import FormEngineValidation from '@typo3/backend/form-engine-validation.js';
 
 /**
  * Module: @causal/theodia/location-map
@@ -61,7 +62,19 @@ class LocationMap {
     }
 
     updateCoordinateFields(event) {
-        console.log(event);
+        const movedMarker = event.target,
+            coordinates = movedMarker.getLatLng(),
+            fieldPrefix = 'data[' + this.options.table + '][' + this.options.uid + ']',
+            latitudeField = document.querySelector('*[data-formengine-input-name="' + fieldPrefix + '[' + this.options.fieldLatitude + ']"]'),
+            longitudeField = document.querySelector('*[data-formengine-input-name="' + fieldPrefix + '[' + this.options.fieldLongitude + ']"]'),
+            hiddenLatitudeField = document.querySelector('input[name="' + fieldPrefix + '[' + this.options.fieldLatitude + ']"]'),
+            hiddenLongitudeField = document.querySelector('input[name="' + fieldPrefix + '[' + this.options.fieldLongitude + ']"]');
+        latitudeField.value = coordinates.lat.toFixed(6);
+        longitudeField.value = coordinates.lng.toFixed(6);
+        hiddenLatitudeField.value = latitudeField.value
+        hiddenLongitudeField.value = longitudeField.value
+        FormEngineValidation.markFieldAsChanged(latitudeField);
+        FormEngineValidation.markFieldAsChanged(longitudeField);
     }
 }
 
