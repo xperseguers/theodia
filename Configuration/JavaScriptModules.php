@@ -6,7 +6,7 @@ return [
         'core',
     ],
     'imports' => [
-        '@causal/theodia/' => 'EXT:theodia/Resources/Public/JavaScript/FormEngine/Element/V12/',
-        'leaflet' => 'EXT:theodia/Resources/Public/JavaScript/leaflet.js',
+        '@causal/theodia/' => 'EXT:theodia/Resources/Public/ECMAScript6/',
+        'leaflet' => 'EXT:theodia/Resources/Public/JavaScript/Contrib/leaflet.js',
     ],
 ];
