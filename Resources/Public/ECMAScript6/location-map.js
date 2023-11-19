@@ -107,9 +107,17 @@ class LocationMap {
     }
 
     triggerResizeOnActive() {
-        setTimeout(function () {
-            this.invalidateSize();
-        }.bind(this.map), 10);
+        const that = this;
+
+        document.querySelectorAll('.t3js-tabmenu-item a').forEach(function (item, idx) {
+            item.addEventListener('click', function () {
+                if (document.querySelector('#map').offsetParent) {
+                    setTimeout(function () {
+                        this.invalidateSize();
+                    }.bind(that.map), 10);
+                }
+            });
+        });
     }
 
     updateCoordinateFields(event) {
