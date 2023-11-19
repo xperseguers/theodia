@@ -1,3 +1,16 @@
+/*
+ * This file is part of the TYPO3 CMS project.
+ *
+ * It is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License, either version 2
+ * of the License, or any later version.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE.txt file that was distributed with this source code.
+ *
+ * The TYPO3 project - inspiring people to share!
+ */
+
 define(['jquery', 'TYPO3/CMS/Theodia/Leaflet'],
     function ($, L) {
         'use strict';
@@ -30,10 +43,10 @@ define(['jquery', 'TYPO3/CMS/Theodia/Leaflet'],
             $('#fetch-address').click(function (e) {
                 e.preventDefault();
 
-                var fieldPrefix = 'data[' + that.options.table + '][' + that.options.uid + ']';
+                const fieldPrefix = 'data[' + that.options.table + '][' + that.options.uid + ']';
                 var address = '';
                 for (var i = 0; i < that.options.addressFields.length; i++) {
-                    var fieldName = fieldPrefix + '[' + that.options.addressFields[i] + ']';
+                    const fieldName = fieldPrefix + '[' + that.options.addressFields[i] + ']';
                     var $field = $('*[data-formengine-input-name="' + fieldName + '"]');
                     if (!$field.val()) {
                         $field = $('*[name="' + fieldName + '"]');
@@ -61,20 +74,15 @@ define(['jquery', 'TYPO3/CMS/Theodia/Leaflet'],
                     }).done(function (data) {
                         if (data.length) {
                             //var bbox = data[0].boundingbox;
-                            var latitude = data[0].lat;
-                            var longitude = data[0].lon;
+                            const latitude = data[0].lat;
+                            const longitude = data[0].lon;
 
                             that.map.flyTo([latitude, longitude], 15);
                             that.options.latitude = latitude;
                             that.options.longitude = longitude;
                             that.addMarker();
 
-                            var fieldPrefix = 'data[' + that.options.table + '][' + that.options.uid + ']',
-                                $latitudeField = $('*[data-formengine-input-name="' + fieldPrefix + '[' + that.options.fieldLatitude + ']"]'),
-                                $longitudeField = $('*[data-formengine-input-name="' + fieldPrefix + '[' + that.options.fieldLongitude + ']"]');
-
-                            $latitudeField.val(Number(latitude).toFixed(6)).trigger('change');
-                            $longitudeField.val(Number(longitude).toFixed(6)).trigger('change');
+                            that.updateCoordinateFields({target: that.marker});
                         }
                     });
                 }
@@ -103,11 +111,11 @@ define(['jquery', 'TYPO3/CMS/Theodia/Leaflet'],
         };
 
         LocationMap.prototype.updateCoordinateFields = function (event) {
-            var movedMarker = event.target,
-                coordinates = movedMarker.getLatLng(),
-                fieldPrefix = 'data[' + this.options.table + '][' + this.options.uid + ']',
-                $latitudeField = $('*[data-formengine-input-name="' + fieldPrefix + '[' + this.options.fieldLatitude + ']"]'),
-                $longitudeField = $('*[data-formengine-input-name="' + fieldPrefix + '[' + this.options.fieldLongitude + ']"]');
+            const movedMarker = event.target,
+                  coordinates = movedMarker.getLatLng(),
+                  fieldPrefix = 'data[' + this.options.table + '][' + this.options.uid + ']',
+                  $latitudeField = $('*[data-formengine-input-name="' + fieldPrefix + '[' + this.options.fieldLatitude + ']"]'),
+                  $longitudeField = $('*[data-formengine-input-name="' + fieldPrefix + '[' + this.options.fieldLongitude + ']"]');
 
             $latitudeField.val(coordinates.lat.toFixed(6)).trigger('change');
             $longitudeField.val(coordinates.lng.toFixed(6)).trigger('change');
