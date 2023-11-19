@@ -15,6 +15,14 @@ import 'leaflet';
 import FormEngineValidation from '@typo3/backend/form-engine-validation.js';
 
 /**
+ * Element.matches() polyfill (simple version)
+ * https://developer.mozilla.org/en-US/docs/Web/API/Element/matches#Polyfill
+ */
+if (!Element.prototype.matches) {
+    Element.prototype.matches = Element.prototype.msMatchesSelector || Element.prototype.webkitMatchesSelector;
+}
+
+/**
  * Module: @causal/theodia/location-map
  * @exports @causal/theodia/location-map
  */
@@ -43,7 +51,50 @@ class LocationMap {
     }
 
     initializeGeocoder() {
+        const that = this;
 
+        document.querySelector("#fetch-address").addEventListener('click', function (event) {
+            event.preventDefault();
+
+            const fieldPrefix = 'data[' + that.options.table + '][' + that.options.uid + ']';
+            let address = '';
+            for (let i = 0; i < that.options.addressFields.length; i++) {
+                const fieldName = fieldPrefix + '[' + that.options.addressFields[i] + ']';
+                let $field = document.querySelector('*[data-formengine-input-name="' + fieldName + '"]');
+                if (!$field.value) {
+                    $field = document.querySelector('*[name="' + fieldName + '"]');
+                }
+                address += $field.value.replace("\n", ' ') + ' ';
+            }
+            if (address.trim().length) {
+                document.querySelector('#map-address').value = address.trim();
+                document.querySelector('#geocode').click();
+            }
+        });
+
+        document.querySelector('#geocode').addEventListener('click', function (event) {
+            event.preventDefault();
+
+            const address = document.querySelector('#map-address').value.trim();
+            if (address) {
+                fetch('https://nominatim.openstreetmap.org/search?q=' + address + '&limit=1&format=json')
+                    .then(function (response) {
+                        return response.json();
+                    })
+                    .then(function (data) {
+                        if (data.length) {
+                            const latitude = data[0].lat;
+                            const longitude = data[0].lon;
+                            that.map.flyTo([latitude, longitude], 15);
+                            that.options.latitude = latitude;
+                            that.options.longitude = longitude;
+                            that.addMarker();
+
+                            that.updateCoordinateFields({target: that.marker});
+                        }
+                    });
+            }
+        });
     }
 
     addMarker() {
