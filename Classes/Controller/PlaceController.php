@@ -49,22 +49,26 @@ class PlaceController extends ActionController
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
             ->getQueryBuilderForTable('tx_theodia_place');
         $place = $queryBuilder
-            ->select('place.*', 'r.uid_local AS photo_file_uid')
-            ->from('tx_theodia_place', 'place')
-            ->leftJoin('place',
-                'sys_file_reference',
-                'r',
-                $queryBuilder->expr()->eq('r.uid_foreign', $queryBuilder->quoteIdentifier('place.uid'))
-            )
+            ->select('*')
+            ->from('tx_theodia_place')
             ->where(
-                $queryBuilder->expr()->eq('place.uid', $queryBuilder->createNamedParameter((int)($this->settings['place'] ?? 0), \PDO::PARAM_INT)),
-                $queryBuilder->expr()->eq('r.tablenames', $queryBuilder->quote('tx_theodia_place')),
-                $queryBuilder->expr()->eq('r.fieldname', $queryBuilder->quote('photo'))
+                $queryBuilder->expr()->eq('uid', $queryBuilder->createNamedParameter((int)($this->settings['place'] ?? 0), \PDO::PARAM_INT))
             )
             ->execute()
             ->fetchAssociative();
 
         if (!empty($place)) {
+            $place['photo_file_uid'] = (int)$queryBuilder
+                ->select('uid_local')
+                ->from('sys_file_reference')
+                ->where(
+                    $queryBuilder->expr()->eq('uid_foreign', $queryBuilder->createNamedParameter($place['uid'], \PDO::PARAM_INT)),
+                    $queryBuilder->expr()->eq('tablenames', $queryBuilder->quote('tx_theodia_place')),
+                    $queryBuilder->expr()->eq('fieldname', $queryBuilder->quote('photo'))
+                )
+                ->execute()
+                ->fetchOne();
+
             $this->view->assignMultiple([
                 'place' => $place,
                 'jsonLd' => json_encode($this->getJsonLdLocation($place)),
@@ -74,46 +78,6 @@ class PlaceController extends ActionController
         if ((new Typo3Version())->getMajorVersion() >= 11) {
             return $this->htmlResponse();
         }
-    }
-
-    /**
-     * @return string
-     */
-    protected function generateIframeSnippet(): string
-    {
-        $contentObject = GeneralUtility::makeInstance(ContentObjectRenderer::class);
-        $cssLink = $contentObject->typoLink_URL([
-            'parameter.' => [
-                'data' => 'path:EXT:up_sainte_claire/Resources/Public/css/theodia.css'
-            ],
-            'forceAbsoluteUrl' => 1,
-        ]);
-
-        $baseUrl = 'https://theodia.org/widget/v1/events';
-        $parameters = [
-            'calendars' => $this->settings['calendars'],
-            'css' => $cssLink,
-            'dateFormat' => 'EEEE d MMMM yyyy',
-            'language' => 'fr',
-            'quantity' => (int)$this->settings['numberOfEvents'],
-            'showMore' => 'false',
-            'showPlace' => 'false',
-            'timeFormat' => 'HH:mm'
-        ];
-        $iframeSrc =  $baseUrl . '?' . str_replace('&', '&amp;', http_build_query($parameters));
-
-        $html = <<<HTML
-<iframe title="Horaire des messes theodia" src="$iframeSrc" style="width:100%;height:auto;padding:0;border:0;"></iframe>
-<script>
-   (function() {
-       var d = document, s = d.createElement('script');
-       s.src = "https://theodia.org/widget/v1/embed.js";
-       s.setAttribute('data-timestamp', +new Date());
-       (d.head || d.body).appendChild(s);
-   })();
-</script>
-HTML;
-       return $html;
     }
 
     /**
@@ -177,13 +141,5 @@ HTML;
         }
 
         return $data;
-    }
-
-    /**
-     * @return TypoScriptFrontendController
-     */
-    protected function getTypoScriptFrontendController()
-    {
-        return $GLOBALS['TSFE'];
     }
 }
