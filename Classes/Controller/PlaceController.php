@@ -57,17 +57,19 @@ class PlaceController extends ActionController
                 $queryBuilder->expr()->eq('r.uid_foreign', $queryBuilder->quoteIdentifier('place.uid'))
             )
             ->where(
-                $queryBuilder->expr()->eq('place.uid', $queryBuilder->createNamedParameter((int)$this->settings['place'], \PDO::PARAM_INT)),
+                $queryBuilder->expr()->eq('place.uid', $queryBuilder->createNamedParameter((int)($this->settings['place'] ?? 0), \PDO::PARAM_INT)),
                 $queryBuilder->expr()->eq('r.tablenames', $queryBuilder->quote('tx_theodia_place')),
                 $queryBuilder->expr()->eq('r.fieldname', $queryBuilder->quote('photo'))
             )
             ->execute()
             ->fetchAssociative();
 
-        $this->view->assignMultiple([
-            'place' => $place,
-            'jsonLd' => json_encode($this->getJsonLdLocation($place)),
-        ]);
+        if (!empty($place)) {
+            $this->view->assignMultiple([
+                'place' => $place,
+                'jsonLd' => json_encode($this->getJsonLdLocation($place)),
+            ]);
+        }
 
         if ((new Typo3Version())->getMajorVersion() >= 11) {
             return $this->htmlResponse();
