@@ -60,8 +60,8 @@ imported, you may move that record wherever you want and edit it freely.
 
 This extension has been initially developed in May 2020 by
 [Causal Sàrl](https://www.causal.ch) for the
-[Pastoral Unit Sainte-Claire, Fribourg](https://www.paroisse.ch) and is now
-further maintained by the same company and other contributors.
+[Pastoral Unit Sainte-Claire](https://www.paroisse.ch) in canton Fribourg (CH)
+and is now further maintained by the same company and other contributors.
 
 Since end of 2023, the extension is sponsored by the web agency
 [hemmer](https://www.hemmer.ch), the company behind theodia.

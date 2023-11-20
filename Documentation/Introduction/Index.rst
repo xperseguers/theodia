@@ -42,6 +42,20 @@ Screenshots
    :alt: Upcoming masses as seen on https://www.paroisse.ch
 
 
+.. _sponsors:
+
+Sponsors
+--------
+
+This extension has been initially developed in May 2020 by
+`Causal Sàrl <https://www.causal.ch>`__ for the
+`Pastoral Unit Sainte-Claire <https://www.paroisse.ch>`__ in canton Fribourg
+(CH), and is now further maintained by the same company and other contributors.
+
+Since end of 2023, the extension is sponsored by the web agency
+`hemmer <https://www.hemmer.ch>`__, the company behind theodia.
+
+
 .. _support:
 
 Support
