@@ -11,8 +11,12 @@ theodia calendars.
 
 The easiest way to do this is to use the site configuration editor in the
 Backend, which will automatically add the correct configuration for you. To do
-so, go to the Backend, and click on Site Management > Sites, then click on the
-pencil to edit your website and go to the "theodia" tab:
+so, go to the Backend and then:
+
+- Open Site Management > Sites
+- Find the site you want to configure and click the pencil icon to edit it
+- Go to the "theodia" tab
+- Add a mapping for each calendar you want to use in this site.
 
 .. image:: Images/configuration.png
    :alt: Configuration of calendars to use
@@ -30,7 +34,7 @@ https://theodia.org/en/widget, selecting it in the list, and looking at the
 generated code snippet.
 
 This mapping is used to generate the list of available calendars to be used with
-the plugin:
+:ref:`the plugin <usage>`:
 
-.. image:: Images/plugin-calendars.png
+.. image:: ../Usage/Images/plugin-calendars.png
    :alt: List of calendars to show in a given plugin

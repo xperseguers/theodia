@@ -44,6 +44,7 @@ of worship in a parish or pastoral unit.
    Introduction/Index
    Installation/Index
    Configuration/Index
+   Usage/Index
    ChangeLog/Index
    Links
 
