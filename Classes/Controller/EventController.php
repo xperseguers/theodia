@@ -151,13 +151,15 @@ HTML;
 
         $jsonEvents = [];
         foreach ($events as $event) {
+            $startDate = $event['start'];
+            $endDate = $event['end'] ?? (clone $startDate)->modify('+1 hour');
             $data = [
                 '@context' => 'http://schema.org',
                 '@type' => 'Event',
                 'name' => $event['name'],
                 'description' => ($event['description'] ?? '') ?: 'Rite romain ordinaire',
-                'startDate' => $event['start']->format('Y-m-d\TH:i'),
-                'endDate' => $event['end']->format('Y-m-d\TH:i'),
+                'startDate' => $startDate->format('Y-m-d\TH:i'),
+                'endDate' => $endDate->format('Y-m-d\TH:i'),
                 'location' => $this->getJsonLdLocation($event['place']),
                 'eventStatus' => $event['cancelled']
                     ? 'http://schema.org/EventCancelled'
