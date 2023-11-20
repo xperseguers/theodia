@@ -2,7 +2,7 @@
 
 $EM_CONF[$_EXTKEY] = [
     'title' => 'theodia',
-    'description' => 'Official integration of theodia (theodia.org) for TYPO3.',
+    'description' => 'Fetch data from theodia.org to display the Mass schedule for the various places of worship in a parish or pastoral unit.',
     'category' => 'plugin',
     'author' => 'Xavier Perseguers',
     'author_email' => 'xavier@causal.ch',

@@ -30,7 +30,8 @@ theodia
 
 ----
 
-Official integration of theodia (theodia.org) for TYPO3.
+Fetch data from theodia.org to display the Mass schedule for the various places
+of worship in a parish or pastoral unit.
 
 ----
 
