@@ -186,11 +186,16 @@ class JsonLdViewHelper extends AbstractViewHelper
 
     protected static function getJsonLdOrganizer(array $event): array
     {
+        $rootUrl = (string)$GLOBALS['TYPO3_REQUEST']->getAttribute('site')->getBase();
+        if (strpos($rootUrl, '://') === false) {
+            $rootUrl = $GLOBALS['TYPO3_REQUEST']->getAttribute('normalizedParams')->getRequestHost();
+        }
+
         $data = [
             '@context' => 'http://schema.org',
             '@type' => 'Organization',
-            'name' => 'Unité pastorale Sainte-Claire',
-            'url' => 'https://www.paroisse.ch',
+            'name' => $GLOBALS['TYPO3_CONF_VARS']['SYS']['sitename'],
+            'url' => $rootUrl,
         ];
 
         return $data;
