@@ -104,18 +104,9 @@ class EventController extends ActionController
      */
     protected function generateIframeSnippet(): string
     {
-        $contentObject = GeneralUtility::makeInstance(ContentObjectRenderer::class);
-        $cssLink = $contentObject->typoLink_URL([
-            'parameter.' => [
-                'data' => 'path:EXT:up_sainte_claire/Resources/Public/css/theodia.css'
-            ],
-            'forceAbsoluteUrl' => 1,
-        ]);
-
         $baseUrl = 'https://theodia.org/widget/v1/events';
         $parameters = [
             'calendars' => $this->settings['calendars'],
-            'css' => $cssLink,
             'dateFormat' => 'EEEE d MMMM yyyy',
             'language' => 'fr',
             'quantity' => (int)$this->settings['numberOfEvents'],
@@ -123,6 +114,15 @@ class EventController extends ActionController
             'showPlace' => 'false',
             'timeFormat' => 'HH:mm'
         ];
+        if (!empty($this->settings['cssIframe'])) {
+            $contentObject = GeneralUtility::makeInstance(ContentObjectRenderer::class);
+            $parameters['css'] = $contentObject->typoLink_URL([
+                'parameter.' => [
+                    'data' => 'path:' . trim($this->settings['cssIframe']),
+                ],
+                'forceAbsoluteUrl' => 1,
+            ]);
+        }
         $iframeSrc =  $baseUrl . '?' . str_replace('&', '&amp;', http_build_query($parameters));
 
         $html = <<<HTML

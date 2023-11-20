@@ -15,4 +15,8 @@ plugin.tx_theodia {
 			1 = {$plugin.tx_theodia.view.layoutRootPath}
 		}
 	}
+
+	settings {
+		cssIframe = {$plugin.tx_theodia.settings.cssIframe}
+	}
 }

@@ -1,0 +1,138 @@
+html {
+    font-family: sans-serif;
+    line-height: 1.15;
+    background-color: transparent;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    -ms-overflow-style: scrollbar;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+body {
+    font-family: "Helvetica", "Arial", sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: transparent;
+    margin: 0;
+}
+
+theodia-events .container {
+    /* use em if you want to be relative to parent window properties or px if you want to override and have fixed sizes */
+    font-size: 14px;
+    line-height: 1.5;
+    font-weight: 300;
+    color: inherit;
+}
+
+theodia-events .container .groups .group {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    margin-bottom: 8px;
+}
+
+theodia-events .container .groups .group:first-child {
+    padding-top:0;
+}
+
+theodia-events .container .groups .group:not(:last-child) {
+    border-bottom: 1px solid rgba(136,136,136,0.33);
+}
+
+theodia-events .container .groups .group .date {
+    font-weight: bold;
+    padding-bottom: 8px;
+}
+
+theodia-events .container .groups .group .events .event {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-left: 0;
+    padding-right: 16px;
+    transition: padding .2s ease, background-color .75s ease;
+}
+
+theodia-events .container .groups .group .events .event:not(:last-child) {
+    margin-bottom: 8px;
+}
+
+theodia-events .container .groups .group .events .event {
+    text-decoration: none;
+    color: inherit;
+}
+
+theodia-events .container .groups .group .events .event:active {
+    background:rgba(0,0,0,0.2);
+}
+theodia-events .container .groups .group .events .event:hover {
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+theodia-events .container .groups .group .events .event .time {
+    width: 50px;
+}
+
+theodia-events .container .groups .group .events .event .infos .infos-wrapper {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: row;
+    flex-direction: row;
+}
+
+theodia-events .container .groups .group .events .event .infos .infos-wrapper .language {
+    width: 50px;
+}
+
+theodia-events .container .groups .group .events .event .infos .infos-wrapper .rite {
+    width: 50px;
+}
+
+theodia-events .container .groups .group .events .event .infos .infos-wrapper .name {
+    -ms-flex: 1;
+    flex: 1;
+}
+
+theodia-events .container .groups .group .events .event .infos .place {}
+
+theodia-events .container .footer {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+    height: 36px;
+}
+
+theodia-events .container .footer div {
+    -ms-flex: 1;
+    flex: 1;
+    margin: 0;
+
+    text-align:center;
+    padding:5px;
+    font-weight:bold;
+    cursor:pointer;
+    outline:none;
+    font-size:20px;
+}
+
+theodia-events .container .footer div:hover {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+theodia-events .container .footer div:active {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.rite {
+    display: none;
+}

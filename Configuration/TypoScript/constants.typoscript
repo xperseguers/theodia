@@ -7,4 +7,9 @@ plugin.tx_theodia {
 		# cat=plugin.tx_theodia/file; type=string; label=Path to template layouts (FE)
 		layoutRootPath = EXT:theodia/Resources/Private/Layouts/
 	}
+
+	settings {
+		# cat=plugin.tx_theodia/file; type=string; label=Custom CSS: Path custom CSS when using an iframe to list events
+		cssIframe = EXT:theodia/Resources/Public/Css/iframe.css
+	}
 }
