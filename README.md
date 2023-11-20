@@ -21,4 +21,4 @@ composer require causal/theodia
 ## Documentation
 
 Please read the
-`complete manual <https://docs.typo3.org/p/causal/theodia/main/en-us/>`__.
+[complete manual](https://docs.typo3.org/p/causal/theodia/main/en-us/).
