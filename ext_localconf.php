@@ -15,7 +15,7 @@ defined('TYPO3') || die();
         $_EXTKEY,
         'Place',
         [
-            \Causal\Theodia\Controller\PlaceController::class => 'list',
+            \Causal\Theodia\Controller\PlaceController::class => 'show',
         ],
         []
     );
