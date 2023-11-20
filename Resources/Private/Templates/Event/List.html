@@ -1,14 +1,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en"
       xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers"
+      xmlns:t="http://typo3.org/ns/Causal/Theodia/ViewHelpers"
       data-namespace-typo3-fluid="true">
 
 <div class="theodia-events">
     <f:if condition="{eventsGroupedByDay}">
         <f:then>
             <f:render section="Events" arguments="{groupedEvents:eventsGroupedByDay}"/>
-            <f:if condition="{jsonLd}">
-                <script type="application/ld+json">{jsonLd -> f:format.raw()}</script>
-            </f:if>
         </f:then>
         <f:else>
             <div class="alert alert-info" role="alert">
@@ -16,6 +14,8 @@
             </div>
         </f:else>
     </f:if>
+
+    <t:jsonLd events="{events}"/>
 </div>
 
 <f:section name="Events">

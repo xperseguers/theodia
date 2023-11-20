@@ -1,13 +1,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en"
       xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers"
+      xmlns:t="http://typo3.org/ns/Causal/Theodia/ViewHelpers"
       data-namespace-typo3-fluid="true">
 
 <div class="row">
     <div class="col-md-4">
         <f:render section="Information" arguments="{_all}"/>
-        <f:if condition="{jsonLd}">
-            <script type="application/ld+json">{jsonLd -> f:format.raw()}</script>
-        </f:if>
+        <t:jsonLd place="{place}"/>
     </div>
     <f:if condition="{place.description}">
         <div class="col-md-8">

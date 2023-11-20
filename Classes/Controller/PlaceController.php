@@ -71,75 +71,11 @@ class PlaceController extends ActionController
 
             $this->view->assignMultiple([
                 'place' => $place,
-                'jsonLd' => json_encode($this->getJsonLdLocation($place)),
             ]);
         }
 
         if ((new Typo3Version())->getMajorVersion() >= 11) {
             return $this->htmlResponse();
         }
-    }
-
-    /**
-     * @param array $place
-     * @return array
-     */
-    protected function getJsonLdLocation(array $place): array
-    {
-        $contentObject = GeneralUtility::makeInstance(ContentObjectRenderer::class);
-
-        $data = [
-            '@context' => 'http://schema.org',
-            '@type' => 'CatholicChurch',
-            'name' => $place['name'],
-            'address' => [
-                '@context' => 'http://schema.org',
-                '@type' => 'PostalAddress',
-                'addressCountry' => $place['country'],
-                'addressRegion' => $place['region'],
-                'addressLocality' => $place['city'],
-                'postalCode' => $place['postal_code'],
-                'streetAddress' => $place['address'],
-            ],
-        ];
-
-        if (!empty($place['latitude'])) {
-            $data['geo'] = [
-                '@context' => 'http://schema.org',
-                '@type' => 'GeoCoordinates',
-                'latitude' => $place['latitude'],
-                'longitude' => $place['longitude'],
-            ];
-        }
-
-        if (!empty($place['seats'])) {
-            $data['maximumAttendeeCapacity'] = $place['seats'];
-        }
-
-        if (!empty($place['page_uid'])) {
-            $data['url'] = $contentObject->typoLink_URL([
-                'parameter' => $place['page_uid'],
-                'forceAbsoluteUrl' => 1,
-            ]);
-        }
-
-        if (!empty($place['photo_file_uid'])) {
-            $fileRepository = GeneralUtility::makeInstance(FileRepository::class);
-            $imageFile = $fileRepository->findByUid($place['photo_file_uid']);
-            if ($imageFile !== null) {
-                $baseUrl = GeneralUtility::getIndpEnv('TYPO3_SITE_URL');
-                $image = $contentObject->getImgResource($imageFile, [
-                    'maxW' => '600',
-                    'maxH' => '600',
-                ])[3];
-                $data['photo'] = [
-                    '@context' => 'http://schema.org',
-                    '@type' => 'Photograph',
-                    'image' => $baseUrl . $image,
-                ];
-            }
-        }
-
-        return $data;
     }
 }
