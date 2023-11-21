@@ -84,6 +84,13 @@ class Theodia
             // Extend with the place of this event
             $placeId = (int)$event['calendar']['place']['id'];
             $event['place'] = $this->getPlace($placeId);
+
+            // Clean-up some types
+            $event['id'] = (int)$event['id'];
+            $event['cancelled'] = (bool)$event['cancelled'];
+            $event['calendar']['id'] = (int)$event['calendar']['id'];
+            $event['calendar']['place']['id'] = (int)$event['calendar']['place']['id'];
+            $event['calendar']['rite']['id'] = (int)$event['calendar']['rite']['id'];
         }
 
         return $events;
