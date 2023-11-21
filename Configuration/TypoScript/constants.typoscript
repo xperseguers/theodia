@@ -1,15 +1,15 @@
 plugin.tx_theodia {
-	view {
-		# cat=plugin.tx_theodia/file; type=string; label=Path to template root (FE)
-		templateRootPath = EXT:theodia/Resources/Private/Templates/
-		# cat=plugin.tx_theodia/file; type=string; label=Path to template partials (FE)
-		partialRootPath = EXT:theodia/Resources/Private/Partials/
-		# cat=plugin.tx_theodia/file; type=string; label=Path to template layouts (FE)
-		layoutRootPath = EXT:theodia/Resources/Private/Layouts/
-	}
+    view {
+        # cat=plugin.tx_theodia/file; type=string; label=Path to template root (FE)
+        templateRootPath = EXT:theodia/Resources/Private/Templates/
+        # cat=plugin.tx_theodia/file; type=string; label=Path to template partials (FE)
+        partialRootPath = EXT:theodia/Resources/Private/Partials/
+        # cat=plugin.tx_theodia/file; type=string; label=Path to template layouts (FE)
+        layoutRootPath = EXT:theodia/Resources/Private/Layouts/
+    }
 
-	settings {
-		# cat=plugin.tx_theodia/file; type=string; label=Custom CSS: Path custom CSS when using an iframe to list events
-		cssIframe = EXT:theodia/Resources/Public/Css/iframe.css
-	}
+    settings {
+        # cat=plugin.tx_theodia/file; type=string; label=Custom CSS: Path custom CSS when using an iframe to list events
+        cssIframe = EXT:theodia/Resources/Public/Css/iframe.css
+    }
 }

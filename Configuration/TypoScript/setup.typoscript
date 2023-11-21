@@ -1,22 +1,22 @@
 plugin.tx_theodia {
-	view {
-		templateRootPaths {
-			0 = EXT:theodia/Resources/Private/Templates/
-			1 = {$plugin.tx_theodia.view.templateRootPath}
-		}
+    view {
+        templateRootPaths {
+            0 = EXT:theodia/Resources/Private/Templates/
+            1 = {$plugin.tx_theodia.view.templateRootPath}
+        }
 
-		partialRootPaths  {
-			0 = EXT:theodia/Resources/Private/Partials/
-			1 = {$plugin.tx_theodia.view.partialRootPath}
-		}
+        partialRootPaths {
+            0 = EXT:theodia/Resources/Private/Partials/
+            1 = {$plugin.tx_theodia.view.partialRootPath}
+        }
 
-		layoutRootPaths  {
-			0 = EXT:theodia/Resources/Private/Layouts/
-			1 = {$plugin.tx_theodia.view.layoutRootPath}
-		}
-	}
+        layoutRootPaths {
+            0 = EXT:theodia/Resources/Private/Layouts/
+            1 = {$plugin.tx_theodia.view.layoutRootPath}
+        }
+    }
 
-	settings {
-		cssIframe = {$plugin.tx_theodia.settings.cssIframe}
-	}
+    settings {
+        cssIframe = {$plugin.tx_theodia.settings.cssIframe}
+    }
 }
