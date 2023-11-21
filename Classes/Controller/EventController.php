@@ -16,7 +16,7 @@ declare(strict_types = 1);
 
 namespace Causal\Theodia\Controller;
 
-use Causal\Theodia\Service\Theodia;
+use Causal\Theodia\Service\TheodiaOrg;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Resource\FileRepository;
@@ -30,16 +30,16 @@ class EventController extends ActionController
     protected const CACHE_LIFETIME = 14400; /* 4 hours */
 
     /**
-     * @var Theodia
+     * @var TheodiaOrg
      */
     protected $service;
 
     /**
      * TheodiaController constructor.
      *
-     * @param Theodia $service
+     * @param TheodiaOrg $service
      */
-    public function __construct(Theodia $service)
+    public function __construct(TheodiaOrg $service)
     {
         $this->service = $service;
     }

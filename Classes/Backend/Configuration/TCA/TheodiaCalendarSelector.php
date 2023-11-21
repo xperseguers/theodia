@@ -16,7 +16,7 @@ declare(strict_types = 1);
 
 namespace Causal\Theodia\Backend\Configuration\TCA;
 
-use Causal\Theodia\Service\Theodia;
+use Causal\Theodia\Service\TheodiaOrg;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 
 class TheodiaCalendarSelector
@@ -35,7 +35,7 @@ class TheodiaCalendarSelector
         }
 
         $record = BackendUtility::getRecord($conf['table'],  (int)($conf['row']['uid'] ?? 0), 'pid');
-        $theodiaCalendars = Theodia::getTheodiaCalendarsForTca($record['pid'] ?? 0);
+        $theodiaCalendars = TheodiaOrg::getTheodiaCalendarsForTca($record['pid'] ?? 0);
         // Drop empty item at the beginning
         array_shift($theodiaCalendars);
 
