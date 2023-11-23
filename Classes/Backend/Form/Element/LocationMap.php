@@ -39,7 +39,7 @@ class LocationMap extends \TYPO3\CMS\Backend\Form\Element\AbstractFormElement
             /** @var PageRenderer $pageRenderer */
             $pageRenderer = GeneralUtility::makeInstance(PageRenderer::class);
             $pageRenderer->addRequireJsConfiguration(['paths' => [
-                'TYPO3/CMS/Theodia/Leaflet' => rtrim($this->getRelativeFilePath(
+                'TYPO3/CMS/Theodia/Leaflet' => rtrim($this->getAbsoluteFilePath(
                     'EXT:theodia/Resources/Public/JavaScript/Contrib/leaflet.js'
                 ), '.js/')
             ]]);
@@ -130,10 +130,9 @@ HTML;
         return $resultArray;
     }
 
-    protected function getRelativeFilePath(string $filePath): string
+    protected function getAbsoluteFilePath(string $filePath): string
     {
-        return PathUtility::getRelativePath(
-            Environment::getPublicPath() . '/typo3/',
+        return PathUtility::getAbsoluteWebPath(
             GeneralUtility::getFileAbsFileName($filePath)
         );
     }
