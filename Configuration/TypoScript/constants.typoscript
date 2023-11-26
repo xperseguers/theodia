@@ -9,10 +9,10 @@ plugin.tx_theodia {
     }
 
     settings {
-        # cat=plugin.tx_theodia/typo/1; type=string; label=Format of the dates in the event list: Default is "%A %e %B %Y" (e.g., Monday 25 December 2023)
+        # cat=plugin.tx_theodia/typo/a; type=string; label=Format of the dates in the event list: Default is "%A %e %B %Y" (e.g., Monday 25 December 2023)
         eventDateFormat = %A %e %B %Y
 
-        # cat=plugin.tx_theodia/typo/2; type=string; label=Format of the times in the event list: Use for "H:i" for 24h format or "g:i a" for 12h format (e.g., 6:00 AM or 17:00 PM)
+        # cat=plugin.tx_theodia/typo/b; type=string; label=Format of the times in the event list: Use for "H:i" for 24h format or "g:i a" for 12h format (e.g., 6:00 AM or 17:00 PM)
         eventTimeFormat = H:i
 
         # cat=plugin.tx_theodia/file; type=string; label=Custom CSS: Path to a custom CSS when using an iframe to list events
