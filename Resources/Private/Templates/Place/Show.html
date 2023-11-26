@@ -10,7 +10,7 @@
     </div>
     <f:if condition="{place.description}">
         <div class="col-md-8">
-            <h3>Histoire</h3>
+            <h3><f:translate key="place.history"/></h3>
             {place.description -> f:format.html()}
         </div>
     </f:if>
@@ -21,7 +21,7 @@
         <f:if condition="{place.patron}">
             <f:render section="Info" arguments="{
                 icon: 'local_library',
-                key: 'Saint Patron',
+                key: '{f:translate(key:\'place.patron\')}',
                 value: place.patron
             }"/>
         </f:if>
@@ -29,7 +29,7 @@
             <f:then>
                 <f:render section="Info" arguments="{
                     icon: 'gavel',
-                    key: 'Année de construction',
+                    key: '{f:translate(key:\'place.year\')}',
                     value: place.year
                 }"/>
             </f:then>
@@ -37,8 +37,8 @@
                 <f:if condition="{place.century}">
                     <f:render section="Info" arguments="{
                         icon: 'gavel',
-                        key: 'Construction',
-                        value: '{place.century}e siècle'
+                        key: '{f:translate(key:\'place.construction\')}',
+                        value: '{f:translate(key:\'place.construction.century\', arguments:{0:place.century})}'
                     }"/>
                 </f:if>
             </f:else>
@@ -46,22 +46,22 @@
         <f:if condition="{place.seats}">
             <f:render section="Info" arguments="{
                 icon: 'supervisor_account',
-                key: 'Nombre de places',
+                key: '{f:translate(key:\'place.seats\')}',
                 value: place.seats
             }"/>
         </f:if>
         <f:if condition="{place.address}">
             <f:render section="Info" arguments="{
                 icon: 'place',
-                key: 'Adresse',
+                key: '{f:translate(key:\'place.address\')}',
                 value: '{place.address}, {place.postal_code} {place.city}'
             }"/>
         </f:if>
         <f:if condition="{place.latitude}">
             <f:render section="Info" arguments="{
                 icon: 'directions',
-                key: 'Comment s\'y rendre',
-                value: 'Afficher sur la carte',
+                key: '{f:translate(key:\'place.directions\')}',
+                value: '{f:translate(key:\'place.showOnMap\')}',
                 link: 'https://maps.google.com/maps?daddr={place.latitude},{place.longitude}'
             }"/>
         </f:if>

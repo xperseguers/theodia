@@ -10,7 +10,7 @@
         </f:then>
         <f:else>
             <div class="alert alert-info" role="alert">
-                Aucune messe agendée.
+                <f:translate key="events.empty"/>
             </div>
         </f:else>
     </f:if>
@@ -36,7 +36,7 @@
         <div class="event-detail">
             <span class="event-title">
                 <f:if condition="{event.cancelled}">
-                    <span class="badge badge-danger">annulée</span>
+                    <span class="badge badge-danger"><f:translate key="event.cancelled"/></span>
                 </f:if>
                 {event.name}
             </span>

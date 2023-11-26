@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+    <file source-language="en" target-language="fr" datatype="plaintext" original="messages" date="2023-11-26T15:43:12Z" product-name="theodia">
+        <header/>
+        <body>
+            <trans-unit id="events.empty">
+                <target>Aucune messe agendée.</target>
+            </trans-unit>
+            <trans-unit id="event.cancelled">
+                <target>annulée</target>
+            </trans-unit>
+
+            <trans-unit id="place.history">
+                <target>Histoire</target>
+            </trans-unit>
+            <trans-unit id="place.patron">
+                <target>Saint Patron</target>
+            </trans-unit>
+            <trans-unit id="place.year">
+                <target>Année de construction</target>
+            </trans-unit>
+            <trans-unit id="place.construction">
+                <target>Construction</target>
+            </trans-unit>
+            <trans-unit id="place.construction.century">
+                <target>%se siècle</target>
+            </trans-unit>
+            <trans-unit id="place.seats">
+                <target>Nombre de places</target>
+            </trans-unit>
+            <trans-unit id="place.address">
+                <target>Adresse</target>
+            </trans-unit>
+            <trans-unit id="place.directions">
+                <target>Comment s'y rendre</target>
+            </trans-unit>
+            <trans-unit id="place.showOnMap">
+                <target>Afficher sur la carte</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

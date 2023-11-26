@@ -51,16 +51,16 @@
                 <source>Longitude</source>
             </trans-unit>
             <trans-unit id="tx_theodia_place.patron">
-                <source>Patron</source>
+                <source>Saint Patron</source>
             </trans-unit>
             <trans-unit id="tx_theodia_place.description">
                 <source>Description</source>
             </trans-unit>
             <trans-unit id="tx_theodia_place.year">
-                <source>Building Year</source>
+                <source>Construction Year</source>
             </trans-unit>
             <trans-unit id="tx_theodia_place.century">
-                <source>Building Century</source>
+                <source>Construction Century</source>
             </trans-unit>
             <trans-unit id="tx_theodia_place.seats">
                 <source>Number of Seats</source>

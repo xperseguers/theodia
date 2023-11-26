@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+    <file source-language="en" datatype="plaintext" original="messages" date="2023-11-26T15:43:12Z" product-name="theodia">
+        <header/>
+        <body>
+            <trans-unit id="events.empty">
+                <source>No mass scheduled.</source>
+            </trans-unit>
+            <trans-unit id="event.cancelled">
+                <source>cancelled</source>
+            </trans-unit>
+
+            <trans-unit id="place.history">
+                <source>History</source>
+            </trans-unit>
+            <trans-unit id="place.patron">
+                <source>Patron Saint</source>
+            </trans-unit>
+            <trans-unit id="place.year">
+                <source>Year of Construction</source>
+            </trans-unit>
+            <trans-unit id="place.construction">
+                <source>Construction</source>
+            </trans-unit>
+            <trans-unit id="place.construction.century">
+                <source>%sth century</source>
+            </trans-unit>
+            <trans-unit id="place.seats">
+                <source>Number of Seats</source>
+            </trans-unit>
+            <trans-unit id="place.address">
+                <source>Address</source>
+            </trans-unit>
+            <trans-unit id="place.directions">
+                <source>How to get there</source>
+            </trans-unit>
+            <trans-unit id="place.showOnMap">
+                <source>Show on map</source>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>
