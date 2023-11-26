@@ -31,7 +31,7 @@
 <f:section name="Event">
     <div class="theodia-event {f:if(condition:event.cancelled, then:'event-cancelled')}">
         <div class="event-time">
-            {event.start -> f:format.date(format:'H:i')}
+            {event.start -> f:format.date(format:settings.eventTimeFormat)}
         </div>
         <div class="event-detail">
             <span class="event-title">
