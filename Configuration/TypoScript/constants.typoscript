@@ -9,7 +9,10 @@ plugin.tx_theodia {
     }
 
     settings {
-        # cat=plugin.tx_theodia/file; type=string; label=Custom CSS: Path custom CSS when using an iframe to list events
+        # cat=plugin.tx_theodia/typo; type=string; label=Format of the dates in the event list: Default is %A %e %B %Y (e.g., Monday 25 December 2023)
+        eventDateFormat = %A %e %B %Y
+
+        # cat=plugin.tx_theodia/file; type=string; label=Custom CSS: Path to a custom CSS when using an iframe to list events
         cssIframe = EXT:theodia/Resources/Public/Css/iframe.css
     }
 }

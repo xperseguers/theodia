@@ -20,7 +20,7 @@
 
 <f:section name="Events">
     <f:for each="{groupedEvents}" as="dayEvents">
-        <h4>{dayEvents.date -> f:format.date(format:'%A %e %B %Y')}</h4>
+        <h4>{dayEvents.date -> f:format.date(format:settings.eventDateFormat)}</h4>
 
         <f:for each="{dayEvents.events}" as="event">
             <f:render section="Event" arguments="{event:event}"/>

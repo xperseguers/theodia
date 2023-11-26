@@ -17,6 +17,7 @@ plugin.tx_theodia {
     }
 
     settings {
+        eventDateFormat = {$plugin.tx_theodia.settings.eventDateFormat}
         cssIframe = {$plugin.tx_theodia.settings.cssIframe}
     }
 }
