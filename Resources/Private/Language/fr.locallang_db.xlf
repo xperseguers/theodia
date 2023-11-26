@@ -18,6 +18,9 @@
             <trans-unit id="plugins.event.settings.filter">
                 <target>Filtre (p. ex. "/famille/i")</target>
             </trans-unit>
+            <trans-unit id="plugins.event.settings.filter.description">
+                <target>Syntaxe de l'expression régulière : https://www.php.net/manual/fr/pcre.pattern.php</target>
+            </trans-unit>
             <trans-unit id="plugins.event.settings.iframe">
                 <target>Utiliser un bloc iframe (moins bien pour le référencement)</target>
             </trans-unit>

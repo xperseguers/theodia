@@ -48,6 +48,7 @@
                     <settings.filter>
                         <TCEforms>
                             <label>LLL:EXT:theodia/Resources/Private/Language/locallang_db.xlf:plugins.event.settings.filter</label>
+                            <description>LLL:EXT:theodia/Resources/Private/Language/locallang_db.xlf:plugins.event.settings.filter.description</description>
                             <displayCond><![CDATA[FIELD:settings.iframe:=:0]]></displayCond>
                             <config>
                                 <type>input</type>
