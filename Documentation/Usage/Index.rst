@@ -91,10 +91,10 @@ Filter
    only events that are related to a mass for families, you could select all
    calendars and use the following filter::
 
-      /family/i
+      /famil(y|ies)/i
 
    This will show all events, in any place of worship, that contain the word
-   "family" in their title (case insensitive).
+   "family" or "families" in their title (case insensitive).
 
    Another typical example (in French) is to show only events were the parish's
    choir is involved::
