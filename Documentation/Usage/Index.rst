@@ -94,7 +94,7 @@ Filter
       /family/i
 
    This will show all events, in any place of worship, that contain the word
-   "family" in its title (case insensitive).
+   "family" in their title (case insensitive).
 
    Another typical example (in French) is to show only events were the parish's
    choir is involved::

@@ -14,5 +14,7 @@ For more details,
 =======  ======================================================
 Version  Changes
 =======  ======================================================
+1.2.x    In-depth documentation and localization of the plugins
+1.1.x    Various important bug fixes
 1.0.x    First release to the TER (TYPO3 10, 11 and 12 LTS)
 =======  ======================================================
