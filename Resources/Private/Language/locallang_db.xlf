@@ -9,6 +9,9 @@
             <trans-unit id="plugins.event.settings.calendars">
                 <source>Calendars</source>
             </trans-unit>
+            <trans-unit id="plugins.event.settings.calendars.errorEmpty">
+                <source>No calendars selected</source>
+            </trans-unit>
             <trans-unit id="plugins.event.settings.numberOfEvents">
                 <source>Number of events to display</source>
             </trans-unit>
@@ -16,10 +19,10 @@
                 <source>Show place of worship</source>
             </trans-unit>
             <trans-unit id="plugins.event.settings.filter">
-                <source>Filter (e.g., "/family/i")</source>
+                <source>Filter</source>
             </trans-unit>
             <trans-unit id="plugins.event.settings.filter.description">
-                <source>Regular expression syntax: https://www.php.net/manual/en/pcre.pattern.php</source>
+                <source>E.g., "/family/i". Regular expression syntax: https://www.php.net/manual/en/pcre.pattern.php</source>
             </trans-unit>
             <trans-unit id="plugins.event.settings.iframe">
                 <source>Use an iframe block</source>

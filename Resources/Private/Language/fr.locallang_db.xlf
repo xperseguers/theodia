@@ -9,6 +9,9 @@
             <trans-unit id="plugins.event.settings.calendars">
                 <target>Calendriers</target>
             </trans-unit>
+            <trans-unit id="plugins.event.settings.calendars.errorEmpty">
+                <target>Aucun calendrier sélectionné</target>
+            </trans-unit>
             <trans-unit id="plugins.event.settings.numberOfEvents">
                 <target>Nombre d'événements à afficher</target>
             </trans-unit>
@@ -16,10 +19,10 @@
                 <target>Afficher le lieu de culte</target>
             </trans-unit>
             <trans-unit id="plugins.event.settings.filter">
-                <target>Filtre (p. ex. "/famille/i")</target>
+                <target>Filtre</target>
             </trans-unit>
             <trans-unit id="plugins.event.settings.filter.description">
-                <target>Syntaxe de l'expression régulière : https://www.php.net/manual/fr/pcre.pattern.php</target>
+                <target>Par exemple : "/famille/i". Syntaxe de l'expression régulière : https://www.php.net/manual/fr/pcre.pattern.php</target>
             </trans-unit>
             <trans-unit id="plugins.event.settings.iframe">
                 <target>Utiliser un bloc iframe</target>
