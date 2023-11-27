@@ -18,6 +18,15 @@ composer require causal/theodia
 ```
 
 
+## Upgrade
+
+If you are upgrading from version 1.x, please upgrade the plugins:
+
+1. Open Admin Tools > Upgrade
+2. Click the button "Run Upgrade Wizard"
+3. Run the upgrade wizard "EXT:theodia: Migrate plugins"
+
+
 ## Documentation
 
 Please read the

@@ -25,4 +25,7 @@ defined('TYPO3') || die();
         'priority' => '70',
         'class' => \Causal\Theodia\Backend\Form\Element\LocationMap::class,
     ];
+
+    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update']['TxTheodiaPlugins']
+        = \Causal\Theodia\Updates\PluginsUpdater::class;
 })('theodia');
