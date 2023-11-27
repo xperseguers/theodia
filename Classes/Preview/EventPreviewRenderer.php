@@ -16,7 +16,9 @@ declare(strict_types = 1);
 
 namespace Causal\Theodia\Preview;
 
-class EventPreviewRenderer extends AbstractPreviewRenderer
+use TYPO3\CMS\Backend\Preview\StandardContentPreviewRenderer;
+
+class EventPreviewRenderer extends StandardContentPreviewRenderer
 {
-    const PLUGIN_TITLE = 'plugins.event.title';
+
 }
