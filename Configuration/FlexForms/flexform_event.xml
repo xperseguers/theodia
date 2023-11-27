@@ -60,6 +60,7 @@
                     <settings.iframe>
                         <TCEforms>
                             <label>LLL:EXT:theodia/Resources/Private/Language/locallang_db.xlf:plugins.event.settings.iframe</label>
+                            <description>LLL:EXT:theodia/Resources/Private/Language/locallang_db.xlf:plugins.event.settings.iframe.description</description>
                             <config>
                                 <type>check</type>
                                 <renderType>checkboxToggle</renderType>

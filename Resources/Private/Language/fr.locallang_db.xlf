@@ -22,7 +22,10 @@
                 <target>Syntaxe de l'expression régulière : https://www.php.net/manual/fr/pcre.pattern.php</target>
             </trans-unit>
             <trans-unit id="plugins.event.settings.iframe">
-                <target>Utiliser un bloc iframe (moins bien pour le référencement)</target>
+                <target>Utiliser un bloc iframe</target>
+            </trans-unit>
+            <trans-unit id="plugins.event.settings.iframe.description">
+                <target>Veuillez noter que c'est moins bien pour le référencement</target>
             </trans-unit>
 
             <trans-unit id="plugins.place.title">

@@ -133,4 +133,5 @@ cssIframe
    :Default: EXT:theodia/Resources/Public/Css/iframe.css
    :Path: plugin.tx_theodia.settings
 
-   Path to a custom CSS when using an iframe to list events.
+   Path to a custom CSS when :ref:`using an iframe <pluginIframe>` to list
+   events.
