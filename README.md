@@ -20,7 +20,7 @@ composer require causal/theodia
 
 ## Upgrade
 
-If you are upgrading from version 1.x, please upgrade the plugins:
+If you are upgrading from version 1.x, please migrate the plugins:
 
 1. Open Admin Tools > Upgrade
 2. Click the button "Run Upgrade Wizard"
