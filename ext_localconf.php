@@ -8,7 +8,8 @@ defined('TYPO3') || die();
         [
             \Causal\Theodia\Controller\EventController::class => 'list',
         ],
-        []
+        [],
+        \TYPO3\CMS\Extbase\Utility\ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
     );
 
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
@@ -17,7 +18,8 @@ defined('TYPO3') || die();
         [
             \Causal\Theodia\Controller\PlaceController::class => 'show',
         ],
-        []
+        [],
+        \TYPO3\CMS\Extbase\Utility\ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
     );
 
     $GLOBALS['TYPO3_CONF_VARS']['SYS']['formEngine']['nodeRegistry'][1551542901] = [
@@ -25,4 +27,7 @@ defined('TYPO3') || die();
         'priority' => '70',
         'class' => \Causal\Theodia\Backend\Form\Element\LocationMap::class,
     ];
+
+    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update']['TxTheodiaPlugins']
+        = \Causal\Theodia\Updates\PluginsUpdater::class;
 })('theodia');
