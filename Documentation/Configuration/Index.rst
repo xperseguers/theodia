@@ -38,3 +38,35 @@ This mapping is used to generate the list of available calendars to be used with
 
 .. image:: ../Usage/Images/plugin-calendars.png
    :alt: List of calendars to show in a given plugin
+
+
+.. _configuration-typoscript:
+
+Configuration in TypoScript
+---------------------------
+
+You should also configure the extension in TypoScript. You can do so like that:
+
+1. Open the Template module within the Web section.
+2. Select your root page template (usually the one with the world icon).
+3. Make sure you are on the "Info/Modify" view (top selector).
+4. Click on the button "Edit the whole template record".
+5. Switch to tab "Includes".
+6. Include "theodia (theodia)" within the "Include static (from extensions)"
+   section.
+
+Alternatively if you are using a Site package, you can add the following to
+your :file:`Configuration/TypoScript/constants.typoscript` file (or alike):
+
+.. code-block:: typoscript
+
+   @import 'EXT:theodia/Configuration/TypoScript/constants.typoscript'
+
+and in your :file:`Configuration/TypoScript/setup.typoscript` file (or alike):
+
+.. code-block:: typoscript
+
+   @import 'EXT:theodia/Configuration/TypoScript/setup.typoscript'
+
+then adapt the configuration to your needs (you may use the built-in Constant
+Editor to guide you).
