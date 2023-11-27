@@ -37,6 +37,9 @@
             <trans-unit id="plugins.place.settings.place">
                 <source>Place</source>
             </trans-unit>
+            <trans-unit id="plugins.place.settings.place.errorEmpty">
+                <source>No places selected</source>
+            </trans-unit>
 
             <trans-unit id="tx_theodia_place">
                 <source>theodia Place</source>

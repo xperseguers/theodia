@@ -16,97 +16,52 @@ declare(strict_types = 1);
 
 namespace Causal\Theodia\Preview;
 
-use TYPO3\CMS\Backend\Preview\StandardContentPreviewRenderer;
+use Causal\Theodia\Service\TheodiaOrg;
 use TYPO3\CMS\Backend\View\BackendLayout\Grid\GridColumnItem;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-class EventPreviewRenderer extends StandardContentPreviewRenderer
+class EventPreviewRenderer extends AbstractFlexFormPreviewRendereer
 {
-    protected $flexFormData;
+    const PLUGIN_NAME = 'Event';
 
-    public function renderPageModulePreviewContent(GridColumnItem $item): string
+    protected function renderFlexFormPreviewContent(array $record, array &$out): void
     {
-        $out = [];
         $languageService = $this->getLanguageService();
-        $labelPrefix = 'LLL:EXT:theodia/Resources/Private/Language/locallang_db.xlf:plugins.event.';
 
-        $pluginTitle = $languageService->sL($labelPrefix . 'title');
-        $out[] = '<strong>' . htmlspecialchars($pluginTitle) . '</strong>';
-
-        $this->flexFormData = GeneralUtility::xml2array($item->getRecord()['pi_flexform']);
-        if (is_array($this->flexFormData)) {
-            $out[] = '<table class="table table-sm mt-3 mb-0">';
-
-            $errorPattern = '<span class="badge badge-danger">%s</span>';
-
-            $label = $languageService->sL($labelPrefix . 'settings.calendars');
-            $calendars = GeneralUtility::intExplode(',', $this->getFieldFromFlexForm('settings.calendars'), true);
-            if (empty($calendars)) {
-                $error = $languageService->sL($labelPrefix . 'settings.calendars.errorEmpty');
-                $description = sprintf($errorPattern, htmlspecialchars($error));
-            } else {
-                $description = $this->getCalendarNames($item->getRecord()['pid'], $calendars);
-            }
-            $out[] = $this->addTableRow($label, $description);
-
-            $label = $languageService->sL($labelPrefix . 'settings.numberOfEvents');
-            $numberOfEvents = (int)$this->getFieldFromFlexForm('settings.numberOfEvents');
-            $out[] = $this->addTableRow($label, (string)$numberOfEvents);
-
-            $iframe = (bool)$this->getFieldFromFlexForm('settings.iframe');
-            if ($iframe) {
-                $label = $languageService->sL($labelPrefix . 'settings.iframe');
-                $out[] = $this->addTableRow($label, $this->describeBoolean());
-            } else {
-                $label = $languageService->sL($labelPrefix . 'settings.showLocation');
-                $showLocation = (bool)$this->getFieldFromFlexForm('settings.showLocation');
-                $out[] = $this->addTableRow($label, $this->describeBoolean($showLocation));
-
-                $filter = $this->getFieldFromFlexForm('settings.filter');
-                if (!empty($filter)) {
-                    $label = $languageService->sL($labelPrefix . 'settings.filter');
-                    $out[] = $this->addTableRow($label, htmlspecialchars($filter));
-                }
-            }
-
-            $out[] = '</table>';
+        $label = $languageService->sL($this->labelPrefix . 'settings.calendars');
+        $calendars = GeneralUtility::intExplode(',', $this->getFieldFromFlexForm('settings.calendars'), true);
+        if (empty($calendars)) {
+            $error = $languageService->sL($this->labelPrefix . 'settings.calendars.errorEmpty');
+            $description = $this->showError(htmlspecialchars($error));
+        } else {
+            $description = $this->getCalendarNames($record['pid'], $calendars);
         }
+        $out[] = $this->addTableRow($label, $description);
 
-        return implode(LF, $out);
-    }
+        $label = $languageService->sL($this->labelPrefix . 'settings.numberOfEvents');
+        $numberOfEvents = (int)$this->getFieldFromFlexForm('settings.numberOfEvents');
+        $out[] = $this->addTableRow($label, (string)$numberOfEvents);
 
-    protected function getFieldFromFlexForm(string $key, string $sheet = 'sDEF'): ?string
-    {
-        $flexForm = $this->flexFormData;
-        if (isset($flexForm['data'])) {
-            $flexForm = $flexForm['data'];
-            return $flexForm[$sheet]['lDEF'][$key]['vDEF'] ?? null;
+        $iframe = (bool)$this->getFieldFromFlexForm('settings.iframe');
+        if ($iframe) {
+            $label = $languageService->sL($this->labelPrefix . 'settings.iframe');
+            $out[] = $this->addTableRow($label, $this->describeBoolean());
+        } else {
+            $label = $languageService->sL($this->labelPrefix . 'settings.showLocation');
+            $showLocation = (bool)$this->getFieldFromFlexForm('settings.showLocation');
+            $out[] = $this->addTableRow($label, $this->describeBoolean($showLocation));
+
+            $filter = $this->getFieldFromFlexForm('settings.filter');
+            if (!empty($filter)) {
+                $label = $languageService->sL($this->labelPrefix . 'settings.filter');
+                $out[] = $this->addTableRow($label, htmlspecialchars($filter));
+            }
         }
-
-        return null;
-    }
-
-    protected function addTableRow(string $label, string $content): string
-    {
-        $out[] = '<tr>';
-        $out[] = '<td class="align-top">' . htmlspecialchars($label) . '</td>';
-        $out[] = '<td class="align-top" style="font-weight: bold">' . $content . '</td>';
-        $out[] = '</tr>';
-
-        return implode(LF, $out);
-    }
-
-    protected function describeBoolean(bool $value = true): string
-    {
-        $key = 'LLL:EXT:beuser/Resources/Private/Language/locallang.xlf:';
-        $key .= $value ? 'yes' : 'no';
-
-        return htmlspecialchars($this->getLanguageService()->sL($key));
     }
 
     protected function getCalendarNames(int $storage, array $calendars): string
     {
-        $theodiaCalendars = \Causal\Theodia\Service\TheodiaOrg::getTheodiaCalendars($storage);
+        $theodiaCalendars = TheodiaOrg::getTheodiaCalendars($storage);
 
         $out = [];
         foreach ($calendars as $calendar) {
