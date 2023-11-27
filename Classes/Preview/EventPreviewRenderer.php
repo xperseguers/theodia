@@ -110,9 +110,15 @@ class EventPreviewRenderer extends StandardContentPreviewRenderer
 
         $out = [];
         foreach ($calendars as $calendar) {
-            $out[] = '- ' . htmlspecialchars($theodiaCalendars[$calendar] ?? $calendar);
+            $out[] = htmlspecialchars($theodiaCalendars[$calendar] ?? $calendar);
         }
 
-        return implode('<br>' . LF, $out);
+        $output = '';
+        if (count($out) > 1) {
+            $output .= '- ';
+        }
+        $output .= implode('<br>' . LF . '- ', $out);
+
+        return $output;
     }
 }
