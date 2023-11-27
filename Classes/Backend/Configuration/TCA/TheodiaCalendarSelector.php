@@ -35,13 +35,11 @@ class TheodiaCalendarSelector
         }
 
         $record = BackendUtility::getRecord($conf['table'],  (int)($conf['row']['uid'] ?? 0), 'pid');
-        $theodiaCalendars = TheodiaOrg::getTheodiaCalendarsForTca($record['pid'] ?? 0);
-        // Drop empty item at the beginning
-        array_shift($theodiaCalendars);
+        $theodiaCalendars = TheodiaOrg::getTheodiaCalendars($record['pid'] ?? 0);
 
-        $conf['items'] = array_merge(
-            $conf['items'], $theodiaCalendars
-        );
+        foreach ($theodiaCalendars as $id => $title) {
+            $conf['items'][] = [$title, $id];
+        }
 
         return $conf;
     }

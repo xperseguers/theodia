@@ -23,17 +23,16 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class TheodiaOrg
 {
-
     /**
      * @return array
      */
-    public static function getTheodiaCalendarsForTca(int $storage): array
+    public static function getTheodiaCalendars(int $storage): array
     {
         $site = GeneralUtility::makeInstance(SiteFinder::class)->getSiteByPageId($storage);
         $calendarsMapping = GeneralUtility::trimExplode(LF, $site->getConfiguration()['tx_theodia_calendars'] ?? '', true);
         $calendars = [];
         foreach ($calendarsMapping as $calendarMapping) {
-            if (strpos($calendarMapping, ',') === false) {
+            if (!str_contains($calendarMapping, ',')) {
                 // Invalid configuration
                 continue;
             }
@@ -44,14 +43,7 @@ class TheodiaOrg
         // Sort calendars
         asort($calendars);
 
-        $tcaItems = [];
-        $tcaItems[] = ['', '0'];
-
-        foreach ($calendars as $id => $title) {
-            $tcaItems[] = [$title, $id];
-        }
-
-        return $tcaItems;
+        return $calendars;
     }
 
     public function getEventsByCalendars(array $calendars, int $items = 10, int $cacheLifeTime = 14400): array

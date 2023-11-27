@@ -35,17 +35,17 @@ class EventPreviewRenderer extends StandardContentPreviewRenderer
 
         $this->flexFormData = GeneralUtility::xml2array($item->getRecord()['pi_flexform']);
         if (is_array($this->flexFormData)) {
-            $out[] = '<table>';
+            $out[] = '<table class="table table-sm mt-3 mb-0">';
 
             $errorPattern = '<span class="badge badge-danger">%s</span>';
 
             $label = $languageService->sL($labelPrefix . 'settings.calendars');
-            $calendars = $this->getFieldFromFlexForm('settings.calendars');
+            $calendars = GeneralUtility::intExplode(',', $this->getFieldFromFlexForm('settings.calendars'), true);
             if (empty($calendars)) {
                 $error = $languageService->sL($labelPrefix . 'settings.calendars.errorEmpty');
                 $description = sprintf($errorPattern, htmlspecialchars($error));
             } else {
-                $description = htmlspecialchars($calendars);
+                $description = $this->getCalendarNames($item->getRecord()['pid'], $calendars);
             }
             $out[] = $this->addTableRow($label, $description);
 
@@ -56,7 +56,7 @@ class EventPreviewRenderer extends StandardContentPreviewRenderer
             $iframe = (bool)$this->getFieldFromFlexForm('settings.iframe');
             if ($iframe) {
                 $label = $languageService->sL($labelPrefix . 'settings.iframe');
-                $out[] = $this->addTableRow($label, $this->describeBoolean($iframe));
+                $out[] = $this->addTableRow($label, $this->describeBoolean());
             } else {
                 $label = $languageService->sL($labelPrefix . 'settings.showLocation');
                 $showLocation = (bool)$this->getFieldFromFlexForm('settings.showLocation');
@@ -93,18 +93,30 @@ class EventPreviewRenderer extends StandardContentPreviewRenderer
     protected function addTableRow(string $label, string $content): string
     {
         $out[] = '<tr>';
-        $out[] = '<td>' . htmlspecialchars($label) . '</td>';
-        $out[] = '<td style="font-weight: bold">' . $content . '</td>';
+        $out[] = '<td class="align-top">' . htmlspecialchars($label) . '</td>';
+        $out[] = '<td class="align-top" style="font-weight: bold">' . $content . '</td>';
         $out[] = '</tr>';
 
         return implode(LF, $out);
     }
 
-    protected function describeBoolean(bool $value): string
+    protected function describeBoolean(bool $value = true): string
     {
         $key = 'LLL:EXT:beuser/Resources/Private/Language/locallang.xlf:';
         $key .= $value ? 'yes' : 'no';
 
         return htmlspecialchars($this->getLanguageService()->sL($key));
+    }
+
+    protected function getCalendarNames(int $storage, array $calendars): string
+    {
+        $theodiaCalendars = \Causal\Theodia\Service\TheodiaOrg::getTheodiaCalendars($storage);
+
+        $out = [];
+        foreach ($calendars as $calendar) {
+            $out[] = '- ' . htmlspecialchars($theodiaCalendars[$calendar] ?? $calendar);
+        }
+
+        return implode('<br>' . LF, $out);
     }
 }
