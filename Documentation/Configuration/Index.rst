@@ -70,3 +70,67 @@ and in your :file:`Configuration/TypoScript/setup.typoscript` file (or alike):
 
 then adapt the configuration to your needs (you may use the built-in Constant
 Editor to guide you).
+
+
+.. _configuration-typoscript-constants:
+
+Constants
+^^^^^^^^^
+
+Any constant needs to be prefixed with
+:typoscript:`plugin.tx_theodia.settings.`.
+
+.. only:: html
+
+   .. contents:: Properties
+      :depth: 1
+      :local:
+
+.. _tsEventDateFormat:
+
+eventDateFormat
+"""""""""""""""
+
+.. confval:: eventDateFormat
+
+   :type: string
+   :Default: %A %e %B %Y
+   :Path: plugin.tx_theodia.settings
+
+   Format of the dates in the event list. The default value will show, e.g.,
+   Monday 25 December 2023 (localized to the language you use).
+
+   Format of the string is either a
+   `strftime() format string <https://www.php.net/manual/en/function.strftime.php>`__
+   (localized) or a
+   `date() format string <https://www.php.net/manual/en/datetime.format.php>`__
+   (English/numeric only).
+
+
+.. _tsEventTimeFormat:
+
+eventTimeFormat
+"""""""""""""""
+
+.. confval:: eventTimeFormat
+
+   :type: string
+   :Default: H:i
+   :Path: plugin.tx_theodia.settings
+
+   Format of the times in the event list. Typically use ``H:i`` for 24h format
+   or ``g:i a`` for 12h format (e.g., 6:00 AM or 17:00 PM).
+
+
+.. _tsCssIframe:
+
+cssIframe
+"""""""""
+
+.. confval:: cssIframe
+
+   :type: string
+   :Default: EXT:theodia/Resources/Public/Css/iframe.css
+   :Path: plugin.tx_theodia.settings
+
+   Path to a custom CSS when using an iframe to list events.
