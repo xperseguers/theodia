@@ -119,7 +119,7 @@ eventTimeFormat
    :Path: plugin.tx_theodia.settings
 
    Format of the times in the event list. Typically use ``H:i`` for 24h format
-   or ``g:i a`` for 12h format (e.g., 6:00 AM or 17:00 PM).
+   (e.g. 08:30 or 17:00) or ``g:i a`` for 12h format (e.g., 8:30 AM or 5:00 PM).
 
 
 .. _tsCssIframe:
