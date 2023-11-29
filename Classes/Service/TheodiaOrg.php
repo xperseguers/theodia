@@ -29,15 +29,11 @@ class TheodiaOrg
     public static function getTheodiaCalendars(int $storage): array
     {
         $site = GeneralUtility::makeInstance(SiteFinder::class)->getSiteByPageId($storage);
-        $calendarsMapping = GeneralUtility::trimExplode(LF, $site->getConfiguration()['tx_theodia_calendars'] ?? '', true);
+        $theodiaCalendars = $site->getConfiguration()['tx_theodia_calendars'] ?? [];
         $calendars = [];
-        foreach ($calendarsMapping as $calendarMapping) {
-            if (!str_contains($calendarMapping, ',')) {
-                // Invalid configuration
-                continue;
-            }
-            [$id, $title] = GeneralUtility::trimExplode(',', $calendarMapping, true, 2);
-            $calendars[(int)$id] = $title;
+        foreach ($theodiaCalendars as $theodiaCalendar) {
+            $id = (int)$theodiaCalendar['id'];
+            $calendars[$id] = trim($theodiaCalendar['name']);
         }
 
         // Sort calendars
