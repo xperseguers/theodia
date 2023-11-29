@@ -20,11 +20,13 @@ composer require causal/theodia
 
 ## Upgrade
 
-If you are upgrading from version 1.x, please migrate the plugins:
+If you are upgrading from version 1.x, please migrate the plugins and the
+configuration of your theodia calendars:
 
 1. Open Admin Tools > Upgrade
 2. Click the button "Run Upgrade Wizard"
 3. Run the upgrade wizard "EXT:theodia: Migrate plugins"
+4. Run the upgrade wizard "EXT:theodia: Migrate site configuration"
 
 
 ## Documentation

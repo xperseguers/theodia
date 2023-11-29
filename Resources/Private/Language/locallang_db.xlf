@@ -129,7 +129,17 @@
             </trans-unit>
 
             <trans-unit id="site.tx_theodia_calendars">
-                <source>Calendars</source>
+                <source>Available Calendars for this Site</source>
+            </trans-unit>
+
+            <trans-unit id="site_theodia_calendar">
+                <source>theodia Calendar</source>
+            </trans-unit>
+            <trans-unit id="site_theodia_calendar.id">
+                <source>Calendar ID in theodia</source>
+            </trans-unit>
+            <trans-unit id="site_theodia_calendar.name">
+                <source>Name</source>
             </trans-unit>
         </body>
     </file>
