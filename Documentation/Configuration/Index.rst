@@ -39,6 +39,17 @@ be used with :ref:`the plugin <usage>`:
    :alt: List of calendars to show in a given plugin
 
 
+.. hint::
+
+   The order in which you configure your different theodia calendars has no
+   effect whatsoever on the order in which the calendars are presented in the
+   plugin. The plugin automatically sorts the available calendars in
+   alphabetical order.
+
+   If, for the sake of Swissness, you want to order the calendars in the Site
+   Configuration, you may do with the corresponding controls on the right.
+
+
 .. _configuration-typoscript:
 
 Configuration in TypoScript

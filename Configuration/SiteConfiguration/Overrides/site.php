@@ -4,11 +4,13 @@ $GLOBALS['SiteConfiguration']['site']['columns']['tx_theodia_calendars'] = [
     'config' => [
         'type' => 'inline',
         'foreign_table' => 'site_theodia_calendar',
+        'foreign_sortby' => 'sorting',  // This field doesn't exist but is required to enable sorting
         'appearance' => [
             'collapseAll' => true,
             'enabledControls' => [
                 'info' => false,
             ],
+            'useSortable' => true,
         ],
     ]
 ];
