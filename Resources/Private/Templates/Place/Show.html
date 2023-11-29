@@ -3,18 +3,22 @@
       xmlns:t="http://typo3.org/ns/Causal/Theodia/ViewHelpers"
       data-namespace-typo3-fluid="true">
 
-<div class="row">
-    <div class="col-md-4">
-        <f:render section="Information" arguments="{_all}"/>
-        <t:jsonLd place="{place}"/>
-    </div>
-    <f:if condition="{place.description}">
-        <div class="col-md-8">
-            <h3><f:translate key="place.history"/></h3>
-            {place.description -> f:format.html()}
+<f:layout name="Default"/>
+
+<f:section name="Main">
+    <div class="row">
+        <div class="col-md-4">
+            <f:render section="Information" arguments="{_all}"/>
+            <t:jsonLd place="{place}"/>
         </div>
-    </f:if>
-</div>
+        <f:if condition="{place.description}">
+            <div class="col-md-8">
+                <h3><f:translate key="place.history"/></h3>
+                {place.description -> f:format.html()}
+            </div>
+        </f:if>
+    </div>
+</f:section>
 
 <f:section name="Information">
     <div class="theodia-place">

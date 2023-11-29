@@ -3,7 +3,9 @@
       xmlns:t="http://typo3.org/ns/Causal/Theodia/ViewHelpers"
       data-namespace-typo3-fluid="true">
 
-<div class="theodia-events">
+<f:layout name="Default"/>
+
+<f:section name="Main">
     <f:if condition="{eventsGroupedByDay}">
         <f:then>
             <f:render section="Events" arguments="{groupedEvents:eventsGroupedByDay}"/>
@@ -16,48 +18,52 @@
     </f:if>
 
     <t:jsonLd events="{events}"/>
-</div>
+</f:section>
 
 <f:section name="Events">
     <f:for each="{groupedEvents}" as="dayEvents">
         <h4>{dayEvents.date -> f:format.date(format:settings.eventDateFormat)}</h4>
 
-        <f:for each="{dayEvents.events}" as="event">
-            <f:render section="Event" arguments="{event:event}"/>
-        </f:for>
+        <ul class="list-group mb-3">
+            <f:for each="{dayEvents.events}" as="event">
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <f:render section="Event" arguments="{event:event}"/>
+                </li>
+            </f:for>
+        </ul>
     </f:for>
 </f:section>
 
 <f:section name="Event">
-    <div class="theodia-event {f:if(condition:event.cancelled, then:'event-cancelled')}">
-        <div class="event-time">
+    <div class="ms-2 me-auto tx-theodia-event {f:if(condition:event.cancelled, then:'event-cancelled')}">
+        <div>
             {event.start -> f:format.date(format:settings.eventTimeFormat)}
-        </div>
-        <div class="event-detail">
-            <span class="event-title">
-                <f:if condition="{event.cancelled}">
-                    <span class="badge badge-danger"><f:translate key="event.cancelled"/></span>
-                </f:if>
-                {event.name}
-            </span>
-
-            <f:alias map="{place: event.place}">
-                <f:if condition="{settings.showLocation}">
-                    <div class="event-location">
-                        <f:if condition="{place.page_uid}">
-                            <f:then><f:link.page pageUid="{place.page_uid}">{place.name}</f:link.page></f:then>
-                            <f:else>{place.name}</f:else>
-                        </f:if>
-                    </div>
-                </f:if>
-            </f:alias>
-
-            <f:comment>
-                <!-- show link to download ICS file -->
-                <a href="https://theodia.org/api/feed?language=en&events={event.id}">ICS</a>
-            </f:comment>
+            <span class="fw-bold">{event.name}</span>
+            <f:if condition="{settings.showLocation}">
+                <f:render section="Location" arguments="{event:event}"/>
+            </f:if>
         </div>
     </div>
+
+    <f:if condition="{event.cancelled}">
+        <span class="badge bg-danger"><f:translate key="event.cancelled"/></span>
+    </f:if>
+
+    <f:comment>
+        <!-- show link to download ICS file -->
+        <a href="https://theodia.org/api/feed?language=en&events={event.id}">ICS</a>
+    </f:comment>
+</f:section>
+
+<f:section name="Location">
+    <f:alias map="{place: event.place}">
+        <div class="tx-theodia-event-location">
+            <f:if condition="{place.page_uid}">
+                <f:then><f:link.page pageUid="{place.page_uid}">{place.name}</f:link.page></f:then>
+                <f:else>{place.name}</f:else>
+            </f:if>
+        </div>
+    </f:alias>
 </f:section>
 
 </html>
