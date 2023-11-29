@@ -21,14 +21,16 @@ so, go to the Backend and then:
 .. image:: Images/configuration.png
    :alt: Configuration of calendars to use
 
-A few examples:
-
-- Église Sts Pierre-et-Paul, Marly (id = ``148``)
-- Église de Praroman, Le Mouret (id = ``150``)
-
 You can find the ID of a calendar by searching it on
 https://theodia.org/en/widget, selecting it in the list, and looking at the
 generated code snippet.
+
+.. note:
+
+   A few examples to help you get started:
+
+   - Église Sts Pierre-et-Paul, Marly (id = ``148``)
+   - Église de Praroman, Le Mouret (id = ``150``)
 
 These definitions are then used to generate the list of available calendars to
 be used with :ref:`the plugin <usage>`:
