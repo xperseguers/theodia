@@ -25,7 +25,7 @@ You can find the ID of a calendar by searching it on
 https://theodia.org/en/widget, selecting it in the list, and looking at the
 generated code snippet.
 
-.. note:
+.. note::
 
    A few examples to help you get started:
 
