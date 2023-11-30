@@ -48,7 +48,7 @@
                 <source>Name</source>
             </trans-unit>
             <trans-unit id="tx_theodia_place.parish">
-                <source>Parish</source>
+                <source>Parish (deprecated)</source>
             </trans-unit>
             <trans-unit id="tx_theodia_place.place_id">
                 <source>ID in theodia</source>
@@ -109,7 +109,7 @@
             </trans-unit>
 
             <trans-unit id="tx_theodia_parish">
-                <source>theodia Parish</source>
+                <source>theodia Parish (deprecated)</source>
             </trans-unit>
             <trans-unit id="tx_theodia_parish.name">
                 <source>Name</source>

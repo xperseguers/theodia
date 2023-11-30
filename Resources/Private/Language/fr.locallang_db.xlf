@@ -48,7 +48,7 @@
                 <target>Nom</target>
             </trans-unit>
             <trans-unit id="tx_theodia_place.parish">
-                <target>Paroisse</target>
+                <target>Paroisse (obsolète)</target>
             </trans-unit>
             <trans-unit id="tx_theodia_place.place_id">
                 <target>ID dans theodia</target>
@@ -109,7 +109,7 @@
             </trans-unit>
 
             <trans-unit id="tx_theodia_parish">
-                <target>Paroisse theodia</target>
+                <target>Paroisse theodia (obsolète)</target>
             </trans-unit>
             <trans-unit id="tx_theodia_parish.name">
                 <target>Nom</target>

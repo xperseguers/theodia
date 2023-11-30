@@ -22,7 +22,7 @@ $tca = [
     'types' => [
         '1' => [
             'showitem' => '
-                    name, parish, patron, description, year, century, seats, url,
+                    name, patron, description, year, century, seats, url, parish,
                 --div--;LLL:EXT:theodia/Resources/Private/Language/locallang_db.xlf:tabs.address,
                     address, postal_code, city, region, country,
                 --div--;LLL:EXT:theodia/Resources/Private/Language/locallang_db.xlf:tabs.gps,
@@ -31,6 +31,8 @@ $tca = [
                     place_id, page_uid, photo,
                 --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:language,
                     sys_language_uid, l10n_parent, l10n_diffsource,
+                --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:categories,
+                    categories,
                 --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:access,
                     hidden'
         ],
