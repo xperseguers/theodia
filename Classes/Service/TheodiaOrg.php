@@ -18,6 +18,7 @@ namespace Causal\Theodia\Service;
 
 use TYPO3\CMS\Core\Core\Environment;
 use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\Site\Entity\Site;
 use TYPO3\CMS\Core\Site\SiteFinder;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -48,6 +49,9 @@ class TheodiaOrg
             return [];
         }
 
+        /** @var Site $site */
+        $site = $GLOBALS['TYPO3_REQUEST']->getAttribute('site');
+
         $today = date('Y-m-d');
         sort($calendars);
         $payload = $this->prepareEventsPayload($calendars, $today, $items);
@@ -71,7 +75,7 @@ class TheodiaOrg
 
             // Extend with the place of this event
             $placeId = (int)$event['calendar']['place']['id'];
-            $event['place'] = $this->getPlace($placeId);
+            $event['place'] = $this->getPlace($site, $placeId);
 
             // Clean-up some types
             $event['id'] = (int)$event['id'];
@@ -84,12 +88,12 @@ class TheodiaOrg
         return $events;
     }
 
-    protected function getPlace(int $id): array
+    protected function getPlace(Site $site, int $id): array
     {
         static $places = [];
 
         if (!isset($places[$id])) {
-            $places[$id] = $this->createAndFetchTheodiaPlace($id);
+            $places[$id] = $this->createAndFetchTheodiaPlace($site, $id);
         }
 
         return $places[$id];
@@ -285,21 +289,28 @@ class TheodiaOrg
     }
 
     /**
+     * @param Site $site
      * @param int $id
      * @return array
      */
-    protected function createAndFetchTheodiaPlace(int $id): array
+    protected function createAndFetchTheodiaPlace(Site $site, int $id): array
     {
+        $storage = (int)($site->getConfiguration()['tx_theodia_storage'] ?? 0);
+
         $tableConnection = GeneralUtility::makeInstance(ConnectionPool::class)
             ->getConnectionForTable('tx_theodia_place');
 
+        $where = [
+            'place_id' => $id,
+        ];
+        if (!empty($storage)) {
+            $where['pid'] = $storage;
+        }
         $data = $tableConnection
             ->select(
                 ['*'],
                 'tx_theodia_place',
-                [
-                    'place_id' => $id,
-                ]
+                $where
             )
             ->fetchAssociative();
         if (!empty($data)) {
@@ -313,6 +324,7 @@ class TheodiaOrg
 
         $place = $info[0]['data']['place'];
         $data = [
+            'pid' => $storage,
             'tstamp' => $GLOBALS['EXEC_TIME'],
             'crdate' => $GLOBALS['EXEC_TIME'],
             'place_id' => $id,
@@ -337,9 +349,7 @@ class TheodiaOrg
             ->select(
                 ['*'],
                 'tx_theodia_place',
-                [
-                    'place_id' => $id,
-                ]
+                $where
             )
             ->fetchAssociative();
     }

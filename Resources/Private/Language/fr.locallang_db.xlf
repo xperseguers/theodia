@@ -128,6 +128,12 @@
                 <target>theodia</target>
             </trans-unit>
 
+            <trans-unit id="site.tx_theodia_storage">
+                <target>ID du dossier de stockage</target>
+            </trans-unit>
+            <trans-unit id="site.tx_theodia_storage.description">
+                <target>Ce dossier stocke les enregistrements de lieu theodia.</target>
+            </trans-unit>
             <trans-unit id="site.tx_theodia_calendars">
                 <target>Calendriers disponibles pour ce site</target>
             </trans-unit>

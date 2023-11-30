@@ -25,8 +25,8 @@ places of worship should be presented.
 Events are related to a location (or place of worship). Upon first encounter,
 this extension will automatically create a new place of worship when it
 encounters a new one in the calendar. Those places are fetched from theodia and
-stored at the root of the TYPO3 install (``pid=0``). Once imported, you may move
-that record wherever you want and edit it freely.
+stored in the storage folder you defined in your Site Configuration. Once
+imported, you may edit it freely.
 
 
 .. _usage-settings:

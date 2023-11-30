@@ -128,6 +128,12 @@
                 <source>theodia</source>
             </trans-unit>
 
+            <trans-unit id="site.tx_theodia_storage">
+                <source>Storage Page ID</source>
+            </trans-unit>
+            <trans-unit id="site.tx_theodia_storage.description">
+                <source>This folder stores theodia place records.</source>
+            </trans-unit>
             <trans-unit id="site.tx_theodia_calendars">
                 <source>Available Calendars for this Site</source>
             </trans-unit>
