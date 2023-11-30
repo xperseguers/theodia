@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+    <file source-language="en" target-language="fr" datatype="plaintext" original="messages" date="2023-11-30T15:15:12Z" product-name="theodia">
+        <header/>
+        <body>
+            <trans-unit id="plugin.theodia_event.title">
+                <target>Horaire des célébrations</target>
+            </trans-unit>
+            <trans-unit id="plugin.theodia_event.description">
+                <target>Affiche les événements à venir pour un ou plusieurs calendriers.</target>
+            </trans-unit>
+            <trans-unit id="plugin.theodia_place.title">
+                <target>Lieu de culte</target>
+            </trans-unit>
+            <trans-unit id="plugin.theodia_place.description">
+                <target>Affiche une page détaillée pour un lieu de culte donné.</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>
