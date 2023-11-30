@@ -65,7 +65,7 @@ class EventPreviewRenderer extends AbstractFlexFormPreviewRendereer
 
         $out = [];
         foreach ($calendars as $calendar) {
-            $out[] = htmlspecialchars($theodiaCalendars[$calendar] ?? $calendar);
+            $out[] = htmlspecialchars((string)($theodiaCalendars[$calendar] ?? $calendar));
         }
 
         $output = '';
