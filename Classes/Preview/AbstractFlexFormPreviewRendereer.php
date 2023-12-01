@@ -16,8 +16,6 @@ declare(strict_types = 1);
 
 namespace Causal\Theodia\Preview;
 
-namespace Causal\Theodia\Preview;
-
 use TYPO3\CMS\Backend\Preview\StandardContentPreviewRenderer;
 use TYPO3\CMS\Backend\View\BackendLayout\Grid\GridColumnItem;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
