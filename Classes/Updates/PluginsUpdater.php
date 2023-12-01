@@ -25,7 +25,6 @@ use TYPO3\CMS\Install\Updates\UpgradeWizardInterface;
 
 class PluginsUpdater implements UpgradeWizardInterface
 {
-
     public function getIdentifier(): string
     {
         return 'TxTheodiaPlugins';

@@ -26,7 +26,6 @@ use TYPO3\CMS\Install\Updates\UpgradeWizardInterface;
 
 class SiteConfigurationUpdater implements UpgradeWizardInterface
 {
-
     public function getIdentifier(): string
     {
         return 'TxTheodiaSiteConfiguration';
