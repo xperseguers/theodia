@@ -18,6 +18,7 @@ namespace Causal\Theodia\Service;
 
 use TYPO3\CMS\Core\Core\Environment;
 use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\Exception\SiteNotFoundException;
 use TYPO3\CMS\Core\Site\Entity\Site;
 use TYPO3\CMS\Core\Site\SiteFinder;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -29,9 +30,15 @@ class TheodiaOrg
      */
     public static function getTheodiaCalendars(int $storage): array
     {
-        $site = GeneralUtility::makeInstance(SiteFinder::class)->getSiteByPageId($storage);
-        $theodiaCalendars = $site->getConfiguration()['tx_theodia_calendars'] ?? [];
         $calendars = [];
+
+        try {
+            $site = GeneralUtility::makeInstance(SiteFinder::class)->getSiteByPageId($storage);
+        } catch (SiteNotFoundException $e) {
+            return $calendars;
+        }
+
+        $theodiaCalendars = $site->getConfiguration()['tx_theodia_calendars'] ?? [];
         foreach ($theodiaCalendars as $theodiaCalendar) {
             $id = (int)$theodiaCalendar['id'];
             $calendars[$id] = trim($theodiaCalendar['name']);
