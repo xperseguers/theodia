@@ -18,7 +18,7 @@ namespace Causal\Theodia\Preview;
 
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 
-class PlacePreviewRenderer extends AbstractFlexFormPreviewRendereer
+class PlacePreviewRenderer extends AbstractFlexFormPreviewRenderer
 {
     const PLUGIN_NAME = 'Place';
 

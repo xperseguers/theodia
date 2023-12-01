@@ -20,7 +20,7 @@ use Causal\Theodia\Service\TheodiaOrg;
 use TYPO3\CMS\Backend\View\BackendLayout\Grid\GridColumnItem;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-class EventPreviewRenderer extends AbstractFlexFormPreviewRendereer
+class EventPreviewRenderer extends AbstractFlexFormPreviewRenderer
 {
     const PLUGIN_NAME = 'Event';
 

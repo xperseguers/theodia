@@ -20,7 +20,7 @@ use TYPO3\CMS\Backend\Preview\StandardContentPreviewRenderer;
 use TYPO3\CMS\Backend\View\BackendLayout\Grid\GridColumnItem;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-abstract class AbstractFlexFormPreviewRendereer extends StandardContentPreviewRenderer
+abstract class AbstractFlexFormPreviewRenderer extends StandardContentPreviewRenderer
 {
     // Self-referential 'abstract' declaration
     const PLUGIN_NAME = self::PLUGIN_NAME;
