@@ -17,6 +17,7 @@ $tca = [
         'enablecolumns' => [
             'disabled' => 'hidden',
         ],
+        'searchFields' => 'name, patron, city',
         'iconfile' => 'EXT:theodia/Resources/Public/Icons/tx_theodia_place.svg',
     ],
     'types' => [
