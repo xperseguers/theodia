@@ -17,6 +17,8 @@ declare(strict_types = 1);
 namespace Causal\Theodia\Preview;
 
 use TYPO3\CMS\Backend\Utility\BackendUtility;
+use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class PlacePreviewRenderer extends AbstractFlexFormPreviewRenderer
 {
@@ -27,12 +29,28 @@ class PlacePreviewRenderer extends AbstractFlexFormPreviewRenderer
         $languageService = $this->getLanguageService();
 
         $label = $languageService->sL($this->labelPrefix . 'settings.place');
-        $place = $this->getPlaceName((int)$this->getFieldFromFlexForm('settings.place'));
+        $placeId = (int)$this->getFieldFromFlexForm('settings.place');
+        $suffixLabel = '';
+        if (empty($placeId)) {
+            // Dynamically find the place pointing to this page
+            $placeId = (int)GeneralUtility::makeInstance(ConnectionPool::class)
+                ->getConnectionForTable('tx_theodia_place')
+                ->select(
+                    ['uid'],
+                    'tx_theodia_place',
+                    [
+                        'page_uid' => $record['pid'] ?? -1,
+                    ]
+                )
+                ->fetchOne();
+            $suffixLabel = ' ' . $languageService->sL($this->labelPrefix . 'settings.place.dynamic');
+        }
+        $place = $this->getPlaceName($placeId);
         if (empty($place)) {
             $error = $languageService->sL($this->labelPrefix . 'settings.place.errorEmpty');
             $description = $this->showError(htmlspecialchars($error));
         } else {
-            $description = htmlspecialchars($place);
+            $description = htmlspecialchars($place . $suffixLabel);
         }
         $out[] = $this->addTableRow($label, $description);
     }

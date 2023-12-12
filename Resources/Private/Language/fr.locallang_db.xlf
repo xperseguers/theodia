@@ -37,6 +37,9 @@
             <trans-unit id="plugins.place.settings.place">
                 <target>Lieu</target>
             </trans-unit>
+            <trans-unit id="plugins.place.settings.place.dynamic">
+                <target>(dynamique)</target>
+            </trans-unit>
             <trans-unit id="plugins.place.settings.place.errorEmpty">
                 <target>Aucun lieu sélectionné</target>
             </trans-unit>

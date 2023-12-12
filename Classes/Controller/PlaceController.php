@@ -46,13 +46,29 @@ class PlaceController extends ActionController
 
     public function showAction()
     {
+        $placeId = (int)($this->settings['place'] ?? 0);
+        if (empty($placeId)) {
+            // Dynamically find the place pointing to this page
+            $pageId = $this->configurationManager->getContentObject()->data['pid'];
+            $placeId = (int)GeneralUtility::makeInstance(ConnectionPool::class)
+                ->getConnectionForTable('tx_theodia_place')
+                ->select(
+                    ['uid'],
+                    'tx_theodia_place',
+                    [
+                        'page_uid' => $pageId,
+                    ]
+                )
+                ->fetchOne();
+        }
+
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
             ->getQueryBuilderForTable('tx_theodia_place');
         $place = $queryBuilder
             ->select('*')
             ->from('tx_theodia_place')
             ->where(
-                $queryBuilder->expr()->eq('uid', $queryBuilder->createNamedParameter((int)($this->settings['place'] ?? 0), \PDO::PARAM_INT))
+                $queryBuilder->expr()->eq('uid', $queryBuilder->createNamedParameter($placeId, \PDO::PARAM_INT))
             )
             ->execute()
             ->fetchAssociative();
