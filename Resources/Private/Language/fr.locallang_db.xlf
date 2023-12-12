@@ -96,7 +96,7 @@
                 <target>Page de détail dans ce site Web</target>
             </trans-unit>
             <trans-unit id="tx_theodia_place.photo">
-                <target>Photo</target>
+                <target>Photo(s)</target>
             </trans-unit>
             <trans-unit id="tx_theodia_place.map">
                 <target>Carte</target>

@@ -58,7 +58,13 @@ class PlaceController extends ActionController
             ->fetchAssociative();
 
         if (!empty($place)) {
-            $place['photo_file_uid'] = (int)$queryBuilder
+            unset($place['photo']);
+            $place['photos'] = [];
+            $fileRepository = GeneralUtility::makeInstance(FileRepository::class);
+
+            $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
+                ->getQueryBuilderForTable('sys_file_reference');
+            $fileUids = $queryBuilder
                 ->select('uid_local')
                 ->from('sys_file_reference')
                 ->where(
@@ -66,8 +72,16 @@ class PlaceController extends ActionController
                     $queryBuilder->expr()->eq('tablenames', $queryBuilder->quote('tx_theodia_place')),
                     $queryBuilder->expr()->eq('fieldname', $queryBuilder->quote('photo'))
                 )
+                ->orderBy('sorting_foreign')
                 ->execute()
-                ->fetchOne();
+                ->fetchFirstColumn();
+
+            foreach ($fileUids as $fileUid) {
+                $imageFile = $fileRepository->findByUid($fileUid);
+                if ($imageFile !== null) {
+                    $place['photos'][] = $imageFile;
+                }
+            }
 
             $this->view->assignMultiple([
                 'place' => $place,

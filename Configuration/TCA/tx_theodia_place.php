@@ -343,7 +343,7 @@ $tca = [
             'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
                 'photo',
                 [
-                    'maxitems' => 1,
+                    'maxitems' => 20,
                     'minitems'=> 0
                 ],
                 $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext']

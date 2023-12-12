@@ -164,21 +164,45 @@ class JsonLdViewHelper extends AbstractViewHelper
             ]);
         }
 
-        if (!empty($place['photo_file_uid'])) {
+        if (!isset($place['photos'])) {
+            // TODO: Candidate to merge with similar code in PlaceController
+            $place['photos'] = [];
             $fileRepository = GeneralUtility::makeInstance(FileRepository::class);
-            $imageFile = $fileRepository->findByUid($place['photo_file_uid']);
-            if ($imageFile !== null) {
-                $baseUrl = GeneralUtility::getIndpEnv('TYPO3_SITE_URL');
-                $image = $contentObject->getImgResource($imageFile, [
-                    'maxW' => '600',
-                    'maxH' => '600',
-                ])[3];
-                $data['photo'] = [
-                    '@context' => 'http://schema.org',
-                    '@type' => 'Photograph',
-                    'image' => $baseUrl . $image,
-                ];
+
+            $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
+                ->getQueryBuilderForTable('sys_file_reference');
+            $fileUids = $queryBuilder
+                ->select('uid_local')
+                ->from('sys_file_reference')
+                ->where(
+                    $queryBuilder->expr()->eq('uid_foreign', $queryBuilder->createNamedParameter($place['uid'], \PDO::PARAM_INT)),
+                    $queryBuilder->expr()->eq('tablenames', $queryBuilder->quote('tx_theodia_place')),
+                    $queryBuilder->expr()->eq('fieldname', $queryBuilder->quote('photo'))
+                )
+                ->orderBy('sorting_foreign')
+                ->execute()
+                ->fetchFirstColumn();
+
+            foreach ($fileUids as $fileUid) {
+                $imageFile = $fileRepository->findByUid($fileUid);
+                if ($imageFile !== null) {
+                    $place['photos'][] = $imageFile;
+                }
             }
+        }
+
+        if (!empty($place['photos'])) {
+            $imageFile = $place['photos'][0];
+            $baseUrl = GeneralUtility::getIndpEnv('TYPO3_SITE_URL');
+            $image = $contentObject->getImgResource($imageFile, [
+                'maxW' => '600',
+                'maxH' => '600',
+            ])[3];
+            $data['photo'] = [
+                '@context' => 'http://schema.org',
+                '@type' => 'Photograph',
+                'image' => $baseUrl . $image,
+            ];
         }
 
         return $data;

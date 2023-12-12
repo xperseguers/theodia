@@ -96,7 +96,7 @@
                 <source>Detail page in this website</source>
             </trans-unit>
             <trans-unit id="tx_theodia_place.photo">
-                <source>Photo</source>
+                <source>Photo(s)</source>
             </trans-unit>
             <trans-unit id="tx_theodia_place.map">
                 <source>Map</source>
