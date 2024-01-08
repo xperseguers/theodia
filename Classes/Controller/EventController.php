@@ -90,6 +90,8 @@ class EventController extends ActionController
         $this->view->assignMultiple([
             'events' => $events,
             'eventsGroupedByDay' => $eventsGroupedByDay,
+            // Raw data for the plugin
+            'plugin' => $this->configurationManager->getContentObject()->data,
         ]);
 
         if ((new Typo3Version())->getMajorVersion() >= 11) {

@@ -42,6 +42,9 @@ class PlaceController extends ActionController
 
     public function showAction()
     {
+        // Raw data for the plugin
+        $this->view->assign('plugin', $this->configurationManager->getContentObject()->data);
+
         $placeId = (int)($this->settings['place'] ?? 0);
         if (empty($placeId)) {
             // Dynamically find the place pointing to this page
