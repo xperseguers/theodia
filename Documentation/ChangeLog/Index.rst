@@ -14,6 +14,8 @@ For more details,
 =======  ======================================================
 Version  Changes
 =======  ======================================================
+2.1.x    - Multiple photos for a place
+         - Dynamic selection of the place to display
 2.0.x    - Migration of the plugins to dedicated CType's
          - Enhanced configuration of theodia calendars to use
 1.2.x    In-depth documentation and localization of the plugins
