@@ -43,12 +43,13 @@ class PlaceController extends ActionController
     public function showAction()
     {
         // Raw data for the plugin
-        $this->view->assign('plugin', $this->configurationManager->getContentObject()->data);
+        $contentObjectData = $this->getContentObjectData();
+        $this->view->assign('plugin', $contentObjectData);
 
         $placeId = (int)($this->settings['place'] ?? 0);
         if (empty($placeId)) {
             // Dynamically find the place pointing to this page
-            $pageId = $this->configurationManager->getContentObject()->data['pid'];
+            $pageId = $contentObjectData['pid'];
             $placeId = (int)GeneralUtility::makeInstance(ConnectionPool::class)
                 ->getConnectionForTable('tx_theodia_place')
                 ->select(
@@ -105,6 +106,16 @@ class PlaceController extends ActionController
 
         if ((new Typo3Version())->getMajorVersion() >= 11) {
             return $this->htmlResponse();
+        }
+    }
+
+    protected function getContentObjectData(): array
+    {
+        $typo3Version = (new Typo3Version())->getMajorVersion();
+        if ($typo3Version >= 12) {
+            return $this->request->getAttribute('currentContentObject')->data;
+        } else {
+            return $this->configurationManager->getContentObject()->data;
         }
     }
 }
