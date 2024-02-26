@@ -13,10 +13,18 @@ foreach ($plugins as $CType => $title) {
     ], 'CType', 'theodia');
 }
 
-$flexForms = [
-    'theodia_event' => 'FILE:EXT:theodia/Configuration/FlexForms/flexform_event.xml',
-    'theodia_place' => 'FILE:EXT:theodia/Configuration/FlexForms/flexform_place.xml',
-];
+$typo3Branch = (new \TYPO3\CMS\Core\Information\Typo3Version())->getBranch();
+if (version_compare($typo3Branch, '12.0', '>=')) {
+    $flexForms = [
+        'theodia_event' => 'FILE:EXT:theodia/Configuration/FlexForms/flexform_event_v12.xml',
+        'theodia_place' => 'FILE:EXT:theodia/Configuration/FlexForms/flexform_place_v12.xml',
+    ];
+} else {
+    $flexForms = [
+        'theodia_event' => 'FILE:EXT:theodia/Configuration/FlexForms/flexform_event.xml',
+        'theodia_place' => 'FILE:EXT:theodia/Configuration/FlexForms/flexform_place.xml',
+    ];
+}
 foreach ($flexForms as $CType => $flexForm) {
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue(
         '*',
