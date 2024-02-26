@@ -22,6 +22,7 @@ use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Resource\FileRepository;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
 class PlaceController extends ActionController
 {
@@ -43,7 +44,7 @@ class PlaceController extends ActionController
     public function showAction()
     {
         // Raw data for the plugin
-        $contentObjectData = $this->getContentObjectData();
+        $contentObjectData = $this->getContentObject()->data;
         $this->view->assign('plugin', $contentObjectData);
 
         $placeId = (int)($this->settings['place'] ?? 0);
@@ -109,13 +110,13 @@ class PlaceController extends ActionController
         }
     }
 
-    protected function getContentObjectData(): array
+    protected function getContentObject(): ContentObjectRenderer
     {
         $typo3Version = (new Typo3Version())->getMajorVersion();
         if ($typo3Version >= 12) {
-            return $this->request->getAttribute('currentContentObject')->data;
+            return $this->request->getAttribute('currentContentObject');
         } else {
-            return $this->configurationManager->getContentObject()->data;
+            return $this->configurationManager->getContentObject();
         }
     }
 }

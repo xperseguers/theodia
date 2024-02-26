@@ -91,7 +91,7 @@ class EventController extends ActionController
             'events' => $events,
             'eventsGroupedByDay' => $eventsGroupedByDay,
             // Raw data for the plugin
-            'plugin' => $this->getContentObjectData(),
+            'plugin' => $this->getContentObject()->data,
         ]);
 
         if ((new Typo3Version())->getMajorVersion() >= 11) {
@@ -139,13 +139,13 @@ HTML;
        return $html;
     }
 
-    protected function getContentObjectData(): array
+    protected function getContentObject(): ContentObjectRenderer
     {
         $typo3Version = (new Typo3Version())->getMajorVersion();
         if ($typo3Version >= 12) {
-            return $this->request->getAttribute('currentContentObject')->data;
+            return $this->request->getAttribute('currentContentObject');
         } else {
-            return $this->configurationManager->getContentObject()->data;
+            return $this->configurationManager->getContentObject();
         }
     }
 
