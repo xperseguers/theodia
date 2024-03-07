@@ -18,6 +18,7 @@ namespace Causal\Theodia\Backend\Configuration\TCA;
 
 use Causal\Theodia\Service\TheodiaOrg;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class TheodiaCalendarSelector
 {
@@ -37,9 +38,12 @@ class TheodiaCalendarSelector
         if (isset($conf['effectivePid'])) {
             // Introduced in TYPO3 v12
             $pid = $conf['effectivePid'];
-        } else {
-            $record = BackendUtility::getRecord($conf['table'],  (int)($conf['row']['uid'] ?? 0), 'pid');
+        } elseif ((int)($conf['row']['uid'] ?? 0)) {
+            $record = BackendUtility::getRecord($conf['table'], (int)($conf['row']['uid']), 'pid');
             $pid = $record['pid'] ?? 0;
+        } else {
+            // Last resort... Let's get the pid from the GET parameters!
+            $pid = key(GeneralUtility::_GET('edit')['tt_content']);
         }
 
         $theodiaCalendars = TheodiaOrg::getTheodiaCalendars($pid);
