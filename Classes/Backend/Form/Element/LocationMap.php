@@ -26,7 +26,7 @@ use TYPO3\CMS\Core\Utility\PathUtility;
 class LocationMap extends \TYPO3\CMS\Backend\Form\Element\AbstractFormElement
 {
 
-    public function render()
+    public function render(): array
     {
         $resultArray = $this->initializeResultArray();
         return $this->renderMap($resultArray);
