@@ -17,6 +17,7 @@ declare(strict_types = 1);
 namespace Causal\Theodia\Controller;
 
 use Causal\Theodia\Service\TheodiaOrg;
+use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Resource\FileRepository;
@@ -69,7 +70,7 @@ class PlaceController extends ActionController
             ->select('*')
             ->from('tx_theodia_place')
             ->where(
-                $queryBuilder->expr()->eq('uid', $queryBuilder->createNamedParameter($placeId, \PDO::PARAM_INT))
+                $queryBuilder->expr()->eq('uid', $queryBuilder->createNamedParameter($placeId, Connection::PARAM_INT))
             )
             ->execute()
             ->fetchAssociative();
@@ -85,7 +86,7 @@ class PlaceController extends ActionController
                 ->select('uid_local')
                 ->from('sys_file_reference')
                 ->where(
-                    $queryBuilder->expr()->eq('uid_foreign', $queryBuilder->createNamedParameter($place['uid'], \PDO::PARAM_INT)),
+                    $queryBuilder->expr()->eq('uid_foreign', $queryBuilder->createNamedParameter($place['uid'], Connection::PARAM_INT)),
                     $queryBuilder->expr()->eq('tablenames', $queryBuilder->quote('tx_theodia_place')),
                     $queryBuilder->expr()->eq('fieldname', $queryBuilder->quote('photo'))
                 )

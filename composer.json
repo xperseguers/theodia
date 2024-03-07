@@ -29,7 +29,7 @@
   "require": {
     "php": ">=7.4.0 <=7.4.99 || >=8.0.0 <=8.3.99",
     "ext-mbstring": "*",
-    "typo3/cms-core": "^10 || ^11 || ^12 || ^13"
+    "typo3/cms-core": "^11 || ^12 || ^13"
   },
   "autoload": {
     "psr-4": {
@@ -38,7 +38,7 @@
   },
   "extra": {
     "branch-alias": {
-      "dev-main": "2.1.x-dev"
+      "dev-main": "2.2.x-dev"
     },
     "typo3/cms": {
       "extension-key": "theodia"
