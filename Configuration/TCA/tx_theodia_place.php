@@ -340,14 +340,21 @@ $tca = [
             'exclude' => 0,
             'label' => 'LLL:EXT:theodia/Resources/Private/Language/locallang_db.xlf:tx_theodia_place.photo',
             'l10n_mode' => 'exclude',
-            'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
-                'photo',
-                [
+            'config' => $typo3Version >= 12
+                ? [
+                    'type' => 'file',
                     'maxitems' => 20,
-                    'minitems'=> 0
-                ],
-                $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext']
-            )
+                    'minitems' => 0,
+                    'allowed' => 'common-image-types'
+                ]
+                :  \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
+                    'photo',
+                    [
+                        'maxitems' => 20,
+                        'minitems'=> 0
+                    ],
+                    $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext']
+                )
         ],
         'map' => [
             'label' => 'LLL:EXT:theodia/Resources/Private/Language/locallang_db.xlf:tx_theodia_place.map',
@@ -370,6 +377,9 @@ $tca = [
 
 if ($typo3Version >= 12) {
     unset($tca['ctrl']['cruser_id']);
+}
+if ($typo3Version >= 11) {
+    unset($tca['columns']['hidden']['config']['items']);
 }
 
 return $tca;
