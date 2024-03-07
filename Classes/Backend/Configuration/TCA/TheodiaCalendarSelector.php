@@ -22,7 +22,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class TheodiaCalendarSelector
 {
-
     /**
      * Returns the list of available theodia calendars.
      *
@@ -54,5 +53,4 @@ class TheodiaCalendarSelector
 
         return $conf;
     }
-
 }

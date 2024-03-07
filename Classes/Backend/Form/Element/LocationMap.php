@@ -25,7 +25,6 @@ use TYPO3\CMS\Core\Utility\PathUtility;
 
 class LocationMap extends \TYPO3\CMS\Backend\Form\Element\AbstractFormElement
 {
-
     public function render(): array
     {
         $resultArray = $this->initializeResultArray();
@@ -146,5 +145,4 @@ HTML;
         $label = $GLOBALS['LANG']->sL('LLL:EXT:theodia/Resources/Private/Language/locallang_db.xlf:' . $key);
         return $label ?: $key;
     }
-
 }
