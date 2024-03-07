@@ -34,8 +34,15 @@ class TheodiaCalendarSelector
             $conf = ['items' => []];
         }
 
-        $record = BackendUtility::getRecord($conf['table'],  (int)($conf['row']['uid'] ?? 0), 'pid');
-        $theodiaCalendars = TheodiaOrg::getTheodiaCalendars($record['pid'] ?? 0);
+        if (isset($conf['effectivePid'])) {
+            // Introduced in TYPO3 v12
+            $pid = $conf['effectivePid'];
+        } else {
+            $record = BackendUtility::getRecord($conf['table'],  (int)($conf['row']['uid'] ?? 0), 'pid');
+            $pid = $record['pid'] ?? 0;
+        }
+
+        $theodiaCalendars = TheodiaOrg::getTheodiaCalendars($pid);
 
         foreach ($theodiaCalendars as $id => $title) {
             $conf['items'][] = [$title, $id];
