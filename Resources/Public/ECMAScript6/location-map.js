@@ -72,6 +72,13 @@ class LocationMap {
             }
         });
 
+        document.querySelector('#map-address').addEventListener('keypress', function (event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                document.querySelector('#geocode').click();
+            }
+        });
+
         document.querySelector('#geocode').addEventListener('click', function (event) {
             event.preventDefault();
 
