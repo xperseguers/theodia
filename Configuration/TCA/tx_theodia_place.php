@@ -101,12 +101,6 @@ $tca = [
             'config' => [
                 'type' => 'check',
                 'renderType' => 'checkboxToggle',
-                'items' => [
-                    [
-                        0 => '',
-                        1 => '',
-                    ]
-                ],
             ],
         ],
         'name' => [
@@ -377,9 +371,6 @@ $tca = [
 
 if ($typo3Version >= 12) {
     unset($tca['ctrl']['cruser_id']);
-}
-if ($typo3Version >= 11) {
-    unset($tca['columns']['hidden']['config']['items']);
 }
 
 return $tca;

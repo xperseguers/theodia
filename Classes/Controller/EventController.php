@@ -17,6 +17,7 @@ declare(strict_types = 1);
 namespace Causal\Theodia\Controller;
 
 use Causal\Theodia\Service\TheodiaOrg;
+use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
@@ -42,7 +43,7 @@ class EventController extends ActionController
         $this->service = $service;
     }
 
-    public function listAction()
+    public function listAction(): ResponseInterface
     {
         if ((bool)$this->settings['iframe']) {
             return $this->generateIframeSnippet();
@@ -94,9 +95,7 @@ class EventController extends ActionController
             'plugin' => $this->getContentObject()->data,
         ]);
 
-        if ((new Typo3Version())->getMajorVersion() >= 11) {
-            return $this->htmlResponse();
-        }
+        return $this->htmlResponse();
     }
 
     /**

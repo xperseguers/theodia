@@ -17,6 +17,7 @@ declare(strict_types = 1);
 namespace Causal\Theodia\Controller;
 
 use Causal\Theodia\Service\TheodiaOrg;
+use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Information\Typo3Version;
@@ -42,7 +43,7 @@ class PlaceController extends ActionController
         $this->service = $service;
     }
 
-    public function showAction()
+    public function showAction(): ResponseInterface
     {
         // Raw data for the plugin
         $contentObjectData = $this->getContentObject()->data;
@@ -106,9 +107,7 @@ class PlaceController extends ActionController
             ]);
         }
 
-        if ((new Typo3Version())->getMajorVersion() >= 11) {
-            return $this->htmlResponse();
-        }
+        return $this->htmlResponse();
     }
 
     protected function getContentObject(): ContentObjectRenderer
