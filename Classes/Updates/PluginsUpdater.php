@@ -48,7 +48,7 @@ class PluginsUpdater implements UpgradeWizardInterface
 
         $rows = $queryBuilder
             ->select('*')
-            ->execute()
+            ->executeQuery()
             ->fetchAllAssociative();
 
         foreach ($rows as $row) {
@@ -73,7 +73,7 @@ class PluginsUpdater implements UpgradeWizardInterface
 
         return $queryBuilder
             ->count('*')
-            ->execute()
+            ->executeQuery()
             ->fetchOne() > 0;
     }
 

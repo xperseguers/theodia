@@ -72,7 +72,7 @@ class PlaceController extends ActionController
             ->where(
                 $queryBuilder->expr()->eq('uid', $queryBuilder->createNamedParameter($placeId, Connection::PARAM_INT))
             )
-            ->execute()
+            ->executeQuery()
             ->fetchAssociative();
 
         if (!empty($place)) {
@@ -91,7 +91,7 @@ class PlaceController extends ActionController
                     $queryBuilder->expr()->eq('fieldname', $queryBuilder->quote('photo'))
                 )
                 ->orderBy('sorting_foreign')
-                ->execute()
+                ->executeQuery()
                 ->fetchFirstColumn();
 
             foreach ($fileUids as $fileUid) {

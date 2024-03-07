@@ -181,7 +181,7 @@ class JsonLdViewHelper extends AbstractViewHelper
                     $queryBuilder->expr()->eq('fieldname', $queryBuilder->quote('photo'))
                 )
                 ->orderBy('sorting_foreign')
-                ->execute()
+                ->executeQuery()
                 ->fetchFirstColumn();
 
             foreach ($fileUids as $fileUid) {
