@@ -33,6 +33,12 @@ return Map::fromEntries([
             Directive::ImgSrc,
             SourceScheme::data,
             new UriValue('https://*.tile.openstreetmap.org')
+        ),
+        new Mutation(
+            MutationMode::Extend,
+            Directive::ConnectSrc,
+            SourceScheme::data,
+            new UriValue('https://nominatim.openstreetmap.org')
         )
     )
 ]);
