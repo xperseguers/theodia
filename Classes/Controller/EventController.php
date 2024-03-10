@@ -19,6 +19,7 @@ namespace Causal\Theodia\Controller;
 use Causal\Theodia\Service\TheodiaOrg;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Information\Typo3Version;
+use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
@@ -103,13 +104,22 @@ class EventController extends ActionController
     /**
      * @return string
      */
-    protected function generateIframeSnippet(): string
+    protected function generateIframeSnippet(): ResponseInterface
     {
+        /** @var SiteLanguage $siteLanguage */
+        $siteLanguage = $this->request->getAttribute('language');
+        $typo3Version = (new Typo3Version())->getMajorVersion();
+        if ($typo3Version >= 12) {
+            $languageCode = $siteLanguage->getLocale()->getLanguageCode();
+        } else {
+            $languageCode = $siteLanguage->getTwoLetterIsoCode();
+        }
+
         $baseUrl = 'https://theodia.org/widget/v1/events';
         $parameters = [
             'calendars' => $this->settings['calendars'],
             'dateFormat' => 'EEEE d MMMM yyyy',
-            'language' => 'fr',
+            'language' => $languageCode,
             'quantity' => (int)$this->settings['numberOfEvents'],
             'showMore' => 'false',
             'showPlace' => 'false',
@@ -137,7 +147,7 @@ class EventController extends ActionController
    })();
 </script>
 HTML;
-       return $html;
+       return $this->htmlResponse($html);
     }
 
     protected function getContentObject(): ContentObjectRenderer
