@@ -27,6 +27,7 @@ use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 class EventController extends ActionController
 {
     protected const CACHE_LIFETIME = 14400; /* 4 hours */
+    protected const MAX_EVENTS = 100;
 
     /**
      * @var TheodiaOrg
@@ -50,7 +51,7 @@ class EventController extends ActionController
         }
         $events = $this->service->getEventsByCalendars(
             GeneralUtility::intExplode(',', $this->settings['calendars']),
-            100,
+            static::MAX_EVENTS,
             static::CACHE_LIFETIME
         );
 
