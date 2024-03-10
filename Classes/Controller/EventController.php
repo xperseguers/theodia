@@ -61,13 +61,13 @@ class EventController extends ActionController
                     $filteredEvents[] = $event;
                 }
             }
-            $events = count($filteredEvents) > (int)$this->settings['numberOfEvents']
-                ? array_slice($filteredEvents, 0, (int)$this->settings['numberOfEvents'])
-                : $filteredEvents;
-        } else {
-            if (count($events) > (int)$this->settings['numberOfEvents']) {
-                $events = array_slice($events, 0, (int)$this->settings['numberOfEvents']);
-            }
+            $events = $filteredEvents;
+        }
+
+        $limitNumberOfEvents = (int)$this->settings['numberOfEvents'];
+        $isPartial = count($events) > $limitNumberOfEvents;
+        if ($isPartial) {
+            $events = array_slice($events, 0, $limitNumberOfEvents);
         }
 
         $eventsGroupedByDay = [];
@@ -91,6 +91,7 @@ class EventController extends ActionController
         $this->view->assignMultiple([
             'events' => $events,
             'eventsGroupedByDay' => $eventsGroupedByDay,
+            'isPartial' => $isPartial,
             // Raw data for the plugin
             'plugin' => $this->getContentObject()->data,
         ]);
