@@ -137,6 +137,12 @@
             <trans-unit id="site.tx_theodia_storage.description">
                 <source>This folder stores theodia place records.</source>
             </trans-unit>
+            <trans-unit id="site.tx_theodia_free_storage">
+                <source>Allow theodia place records to be moved</source>
+            </trans-unit>
+            <trans-unit id="site.tx_theodia_free_storage.description">
+                <source>Allow you to freely move theodia place records to another storage folder after the initial import</source>
+            </trans-unit>
             <trans-unit id="site.tx_theodia_calendars">
                 <source>Available Calendars for this Site</source>
             </trans-unit>
