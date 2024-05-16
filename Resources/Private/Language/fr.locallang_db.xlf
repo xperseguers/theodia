@@ -137,6 +137,12 @@
             <trans-unit id="site.tx_theodia_storage.description">
                 <target>Ce dossier stocke les enregistrements de lieu theodia.</target>
             </trans-unit>
+            <trans-unit id="site.tx_theodia_free_storage">
+                <target>Autoriser le déplacement des enregistrements de lieu theodia</target>
+            </trans-unit>
+            <trans-unit id="site.tx_theodia_free_storage.description">
+                <target>Vous permet de déplacer librement les enregistrements de lieu theodia dans un autre dossier de stockage après l'import initial.</target>
+            </trans-unit>
             <trans-unit id="site.tx_theodia_calendars">
                 <target>Calendriers disponibles pour ce site</target>
             </trans-unit>

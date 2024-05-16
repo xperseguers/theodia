@@ -13,6 +13,15 @@ $GLOBALS['SiteConfiguration']['site']['columns']['tx_theodia_storage'] = [
     ],
 ];
 
+$GLOBALS['SiteConfiguration']['site']['columns']['tx_theodia_free_storage'] = [
+    'label' => 'LLL:EXT:theodia/Resources/Private/Language/locallang_db.xlf:site.tx_theodia_free_storage',
+    'description' => 'LLL:EXT:theodia/Resources/Private/Language/locallang_db.xlf:site.tx_theodia_free_storage.description',
+    'config' => [
+        'type' => 'check',
+        'renderType' => 'checkboxToggle',
+    ],
+];
+
 $GLOBALS['SiteConfiguration']['site']['columns']['tx_theodia_calendars'] = [
     'label' => 'LLL:EXT:theodia/Resources/Private/Language/locallang_db.xlf:site.tx_theodia_calendars',
     'config' => [
@@ -31,4 +40,4 @@ $GLOBALS['SiteConfiguration']['site']['columns']['tx_theodia_calendars'] = [
 
 $GLOBALS['SiteConfiguration']['site']['types']['0']['showitem'] .= ',
     --div--;LLL:EXT:theodia/Resources/Private/Language/locallang_db.xlf:tabs.theodia,
-        tx_theodia_storage, tx_theodia_calendars';
+        tx_theodia_storage, tx_theodia_free_storage, tx_theodia_calendars';

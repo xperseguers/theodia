@@ -303,6 +303,7 @@ class TheodiaOrg
     protected function createAndFetchTheodiaPlace(Site $site, int $id): array
     {
         $storage = (int)($site->getConfiguration()['tx_theodia_storage'] ?? 0);
+        $freeStorage = (bool)($site->getConfiguration()['tx_theodia_free_storage'] ?? false);
 
         $tableConnection = GeneralUtility::makeInstance(ConnectionPool::class)
             ->getConnectionForTable('tx_theodia_place');
@@ -310,19 +311,46 @@ class TheodiaOrg
         $where = [
             'place_id' => $id,
         ];
-        if (!empty($storage)) {
+        if (!empty($storage) && !$freeStorage) {
             $where['pid'] = $storage;
         }
-        $data = $tableConnection
-            ->select(
-                ['*'],
-                'tx_theodia_place',
-                $where
-            )
-            ->fetchAssociative();
-        if (!empty($data)) {
-            // Place already exists in database, we do not update it
-            return $data;
+
+        if (!$freeStorage) {
+            $data = $tableConnection
+                ->select(
+                    ['*'],
+                    'tx_theodia_place',
+                    $where
+                )
+                ->fetchAssociative();
+
+            if (!empty($data)) {
+                // Place already exists in database, we do not update it
+                return $data;
+            }
+        } else {
+            // We need to fetch all possible places in the TYPO3 install and figure
+            // out which one is the right one for the corresponding site
+            $places = $tableConnection
+                ->select(
+                    ['*'],
+                    'tx_theodia_place',
+                    $where
+                )
+                ->fetchAllAssociative();
+            // We first try to find the place in the default storage of the site
+            foreach ($places as $place) {
+                if ($place['pid'] === $storage) {
+                    return $place;
+                }
+            }
+            $siteFinder = GeneralUtility::makeInstance(SiteFinder::class);
+            foreach ($places as $place) {
+                $placeSite = $siteFinder->getSiteByPageId($place['pid']);
+                if ($placeSite === $site) {
+                    return $place;
+                }
+            }
         }
 
         $payload = $this->prepareFrontOfficePlacePayload($id);
