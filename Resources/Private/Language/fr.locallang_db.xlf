@@ -54,7 +54,7 @@
                 <target>Paroisse (obsolète)</target>
             </trans-unit>
             <trans-unit id="tx_theodia_place.place_id">
-                <target>ID dans theodia</target>
+                <target>ID du lieu dans theodia</target>
             </trans-unit>
             <trans-unit id="tx_theodia_place.latitude">
                 <target>Latitude</target>

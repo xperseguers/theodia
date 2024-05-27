@@ -54,7 +54,7 @@
                 <source>Parish (deprecated)</source>
             </trans-unit>
             <trans-unit id="tx_theodia_place.place_id">
-                <source>ID in theodia</source>
+                <source>Place ID in theodia</source>
             </trans-unit>
             <trans-unit id="tx_theodia_place.latitude">
                 <source>Latitude</source>
