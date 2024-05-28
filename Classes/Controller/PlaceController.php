@@ -78,13 +78,11 @@ class PlaceController extends ActionController
 
         if (!empty($place)) {
             unset($place['photo']);
-            $place['photos'] = [];
-            $fileRepository = GeneralUtility::makeInstance(FileRepository::class);
 
             $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
                 ->getQueryBuilderForTable('sys_file_reference');
-            $fileUids = $queryBuilder
-                ->select('uid_local')
+            $place['photos'] = $queryBuilder
+                ->select('uid')
                 ->from('sys_file_reference')
                 ->where(
                     $queryBuilder->expr()->eq('uid_foreign', $queryBuilder->createNamedParameter($place['uid'], Connection::PARAM_INT)),
@@ -94,13 +92,6 @@ class PlaceController extends ActionController
                 ->orderBy('sorting_foreign')
                 ->executeQuery()
                 ->fetchFirstColumn();
-
-            foreach ($fileUids as $fileUid) {
-                $imageFile = $fileRepository->findByUid($fileUid);
-                if ($imageFile !== null) {
-                    $place['photos'][] = $imageFile;
-                }
-            }
 
             $this->view->assignMultiple([
                 'place' => $place,
