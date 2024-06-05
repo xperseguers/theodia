@@ -337,6 +337,16 @@ $tca = [
             'config' => $typo3Version >= 12
                 ? [
                     'type' => 'file',
+                    // Use the imageoverlayPalette instead of the basicoverlayPalette
+                    'overrideChildTca' => [
+                        'types' => [
+                            \TYPO3\CMS\Core\Resource\File::FILETYPE_IMAGE => [
+                                'showitem' => '
+                                    --palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
+                                    --palette--;;filePalette'
+                            ],
+                        ],
+                    ],
                     'maxitems' => 20,
                     'minitems' => 0,
                     'allowed' => 'common-image-types'
@@ -344,6 +354,16 @@ $tca = [
                 :  \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
                     'photo',
                     [
+                        // Use the imageoverlayPalette instead of the basicoverlayPalette
+                        'overrideChildTca' => [
+                            'types' => [
+                                \TYPO3\CMS\Core\Resource\File::FILETYPE_IMAGE => [
+                                    'showitem' => '
+                                    --palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
+                                    --palette--;;filePalette'
+                                ],
+                            ],
+                        ],
                         'maxitems' => 20,
                         'minitems'=> 0
                     ],
