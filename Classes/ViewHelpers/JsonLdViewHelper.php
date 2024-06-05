@@ -18,7 +18,7 @@ namespace Causal\Theodia\ViewHelpers;
 
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
-use TYPO3\CMS\Core\Resource\FileRepository;
+use TYPO3\CMS\Core\Resource\ResourceFactory;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
@@ -67,8 +67,8 @@ class JsonLdViewHelper extends AbstractViewHelper
      */
     protected static function getJsonLdEvents(array $events): array
     {
-        $fileRepository = GeneralUtility::makeInstance(FileRepository::class);
-        $baseUrl = GeneralUtility::getIndpEnv('TYPO3_SITE_URL');
+        $resourceFactory = GeneralUtility::makeInstance(ResourceFactory::class);
+        $baseUrl = rtrim(GeneralUtility::getIndpEnv('TYPO3_SITE_URL'), '/');
 
         $jsonEvents = [];
         foreach ($events as $event) {
@@ -97,22 +97,26 @@ class JsonLdViewHelper extends AbstractViewHelper
                 ]);
             }
 
-            $imageUid = GeneralUtility::makeInstance(ConnectionPool::class)
+            $reference = GeneralUtility::makeInstance(ConnectionPool::class)
                 ->getConnectionForTable('sys_file_reference')
                 ->select(
-                    ['uid_local'],
+                    ['*'],
                     'sys_file_reference',
                     [
                         'tablenames' => 'tx_theodia_place',
                         'fieldname' => 'photo',
                         'uid_foreign' => $event['place']['uid'],
+                    ],
+                    [],
+                    [
+                        'sorting_foreign' => 'ASC',
                     ]
                 )
-                ->fetchOne();
-            if (!empty($imageUid)) {
-                $file = $fileRepository->findByUid($imageUid);
-                if ($file !== null) {
-                    $data['image'] = $baseUrl . $file->getPublicUrl();
+                ->fetchAssociative();
+            if (!empty($reference)) {
+                $fileReference = $resourceFactory->getFileReferenceObject($reference['uid'], $reference);
+                if ($fileReference !== null) {
+                    $data['image'] = $baseUrl . $fileReference->getPublicUrl();
                 }
             }
 
@@ -168,12 +172,12 @@ class JsonLdViewHelper extends AbstractViewHelper
         if (!isset($place['photos'])) {
             // TODO: Candidate to merge with similar code in PlaceController
             $place['photos'] = [];
-            $fileRepository = GeneralUtility::makeInstance(FileRepository::class);
+            $resourceFactory = GeneralUtility::makeInstance(ResourceFactory::class);
 
             $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
                 ->getQueryBuilderForTable('sys_file_reference');
-            $fileUids = $queryBuilder
-                ->select('uid_local')
+            $references = $queryBuilder
+                ->select('*')
                 ->from('sys_file_reference')
                 ->where(
                     $queryBuilder->expr()->eq('uid_foreign', $queryBuilder->createNamedParameter($place['uid'], Connection::PARAM_INT)),
@@ -182,19 +186,19 @@ class JsonLdViewHelper extends AbstractViewHelper
                 )
                 ->orderBy('sorting_foreign')
                 ->executeQuery()
-                ->fetchFirstColumn();
+                ->fetchAllAssociative();
 
-            foreach ($fileUids as $fileUid) {
-                $imageFile = $fileRepository->findByUid($fileUid);
-                if ($imageFile !== null) {
-                    $place['photos'][] = $imageFile;
+            foreach ($references as $reference) {
+                $fileReference = $resourceFactory->getFileReferenceObject($reference['uid'], $reference);
+                if ($fileReference !== null) {
+                    $place['photos'][] = $fileReference;
                 }
             }
         }
 
         if (!empty($place['photos'])) {
             $imageFile = $place['photos'][0];
-            $baseUrl = GeneralUtility::getIndpEnv('TYPO3_SITE_URL');
+            $baseUrl = rtrim(GeneralUtility::getIndpEnv('TYPO3_SITE_URL'), '/');
             $image = $contentObject->getImgResource($imageFile, [
                 'maxW' => '600',
                 'maxH' => '600',

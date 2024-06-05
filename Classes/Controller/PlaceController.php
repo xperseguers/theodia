@@ -21,7 +21,7 @@ use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Information\Typo3Version;
-use TYPO3\CMS\Core\Resource\FileRepository;
+use TYPO3\CMS\Core\Resource\ResourceFactory;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
@@ -79,12 +79,12 @@ class PlaceController extends ActionController
         if (!empty($place)) {
             unset($place['photo']);
             $place['photos'] = [];
-            $fileRepository = GeneralUtility::makeInstance(FileRepository::class);
+            $resourceFactory = GeneralUtility::makeInstance(ResourceFactory::class);
 
             $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
                 ->getQueryBuilderForTable('sys_file_reference');
-            $fileUids = $queryBuilder
-                ->select('uid_local')
+            $references = $queryBuilder
+                ->select('*')
                 ->from('sys_file_reference')
                 ->where(
                     $queryBuilder->expr()->eq('uid_foreign', $queryBuilder->createNamedParameter($place['uid'], Connection::PARAM_INT)),
@@ -93,12 +93,12 @@ class PlaceController extends ActionController
                 )
                 ->orderBy('sorting_foreign')
                 ->executeQuery()
-                ->fetchFirstColumn();
+                ->fetchAllAssociative();
 
-            foreach ($fileUids as $fileUid) {
-                $imageFile = $fileRepository->findByUid($fileUid);
-                if ($imageFile !== null) {
-                    $place['photos'][] = $imageFile;
+            foreach ($references as $reference) {
+                $fileReference = $resourceFactory->getFileReferenceObject($reference['uid'], $reference);
+                if ($fileReference !== null) {
+                    $place['photos'][] = $fileReference;
                 }
             }
 
