@@ -26,6 +26,10 @@
                             <size>5</size>
                             <eval>int+</eval>
                             <required>1</required>
+                            <range>
+                                <lower>1</lower>
+                                <upper>200</upper>
+                            </range>
                             <default>10</default>
                         </config>
                     </settings.numberOfEvents>
