@@ -9,6 +9,9 @@
             <trans-unit id="plugins.event.settings.calendars">
                 <source>Calendars</source>
             </trans-unit>
+            <trans-unit id="plugins.event.settings.calendars.more">
+                <source>(%s more)</source>
+            </trans-unit>
             <trans-unit id="plugins.event.settings.calendars.errorEmpty">
                 <source>No calendars selected</source>
             </trans-unit>

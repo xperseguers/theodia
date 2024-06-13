@@ -68,6 +68,19 @@ class EventPreviewRenderer extends AbstractFlexFormPreviewRenderer
             $out[] = htmlspecialchars((string)($theodiaCalendars[$calendar] ?? $calendar));
         }
 
+        // No need to show too many calendars as it clutters the preview
+        $maxCalendars = 5;
+        $numberOfCalendars = count($out);
+        if ($numberOfCalendars > $maxCalendars) {
+            // Ensure we hide at least 2 calendars so that label is always in plural form
+            if ($numberOfCalendars - $maxCalendars < 2) {
+                $maxCalendars--;
+            }
+            $out = array_slice($out, 0, $maxCalendars);
+            $moreLabelPattern = $this->getLanguageService()->sL($this->labelPrefix . 'settings.calendars.more');
+            $out[] = '... <small><em>' . sprintf($moreLabelPattern, $numberOfCalendars - $maxCalendars) . '</em></small>';
+        }
+
         $output = '';
         if (count($out) > 1) {
             $output .= '- ';
