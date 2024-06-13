@@ -8,7 +8,7 @@
 <f:section name="Main">
     <f:if condition="{eventsGroupedByDay}">
         <f:then>
-            <f:render section="Events" arguments="{groupedEvents:eventsGroupedByDay, isPartial:isPartial, plugin:plugin}"/>
+            <f:render section="Events" arguments="{groupedEvents:eventsGroupedByDay, numberEvents:numberEvents, isPartial:isPartial, plugin:plugin}"/>
         </f:then>
         <f:else>
             <div class="alert alert-info" role="alert">
@@ -23,12 +23,12 @@
 <f:section name="Events">
     <f:if condition="{isPartial} && {settings.showMoreLink}">
         <f:then>
-            <div id="theodia-list-{plugin.uid}">
+            <div id="theodia-list-{plugin.uid}" data-events="{numberEvents}">
                 <f:render partial="Event/GroupedEvents" arguments="{groupedEvents:groupedEvents}"/>
             </div>
 
             <button data-theodia-show-more="1"
-                    data-target="theodia-list-{plugin.uid}"
+                    data-theodia-target="theodia-list-{plugin.uid}"
                     data-theodia-plugin="{plugin.uid}"
                     data-theodia-url="{f:uri.action(action:'showMore', pageType:1718265459)}"
                     class="btn btn-primary">

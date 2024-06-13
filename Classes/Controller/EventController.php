@@ -18,6 +18,7 @@ namespace Causal\Theodia\Controller;
 
 use Causal\Theodia\Service\TheodiaOrg;
 use Psr\Http\Message\ResponseInterface;
+use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Http\JsonResponse;
 use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
@@ -72,7 +73,79 @@ class EventController extends ActionController
         if ($isPartial) {
             $events = array_slice($events, 0, $limitNumberOfEvents);
         }
+        $eventsGroupedByDay = $this->groupEventsByDay($events);
 
+        // Mark the cache for this content element (well the whole page...) as valid for 4 hours
+        // TODO: is there a trick to mark only this specific content element as to be cached for 4 hours?
+        $frontendController = $this->getTypoScriptFrontendController();
+        $cacheLifetime = $frontendController->page['cache_timeout'] ?: static::CACHE_LIFETIME;
+        $frontendController->page['cache_timeout'] = min($cacheLifetime, static::CACHE_LIFETIME);
+
+        $this->view->assignMultiple([
+            'events' => $events,
+            'eventsGroupedByDay' => $eventsGroupedByDay,
+            'isPartial' => true, //$isPartial,
+            'numberEvents' => count($events),
+            // Raw data for the plugin
+            'plugin' => $this->getContentObject()->data,
+        ]);
+
+        return $this->htmlResponse();
+    }
+
+    public function showMoreAction(): ResponseInterface
+    {
+        $pluginUid = (int)($this->request->getParsedBody()['plugin'] ?? 0);
+        $offset = (int)($this->request->getParsedBody()['offset'] ?? 0);
+
+        $flexForm = GeneralUtility::makeInstance(ConnectionPool::class)
+            ->getConnectionForTable('tt_content')
+            ->select(
+                ['pi_flexform'],
+                'tt_content',
+                ['uid' => $pluginUid]
+            )
+            ->fetchOne();
+
+        $calendars = [];
+        if (!empty($flexForm)) {
+            $flexFormConfig = GeneralUtility::xml2array($flexForm);
+            $calendars = GeneralUtility::intExplode(',', $flexFormConfig['data']['sDEF']['lDEF']['settings.calendars']['vDEF'] ?? '', true);
+        }
+
+        if (empty($calendars)) {
+            // Early return
+            return new JsonResponse([], 400);
+        }
+
+        $events = $this->service->getEventsByCalendars(
+            $calendars,
+            static::MAX_EVENTS,
+            static::CACHE_LIFETIME
+        );
+
+        $limitNumberOfEvents = $offset + 5;   // Arbitrary number of additional events to show
+        $isPartial = count($events) > $limitNumberOfEvents;
+        if ($isPartial) {
+            $events = array_slice($events, 0, $limitNumberOfEvents);
+        }
+        $eventsGroupedByDay = $this->groupEventsByDay($events);
+
+        $this->view->assignMultiple([
+            'events' => $events,
+            'eventsGroupedByDay' => $eventsGroupedByDay,
+        ]);
+        $html = $this->view->render();
+
+        return new JsonResponse([
+            'hasMore' => $isPartial,
+            'numberEvents' => count($events),
+            'html' => trim($html),
+        ]);
+    }
+
+    protected function groupEventsByDay(array $events): array
+    {
         $eventsGroupedByDay = [];
         foreach ($events as $event) {
             $day = $event['start']->format('Y-m-d');
@@ -85,30 +158,7 @@ class EventController extends ActionController
             $eventsGroupedByDay[$day]['events'][] = $event;
         }
 
-        // Mark the cache for this content element (well the whole page...) as valid for 4 hours
-        // TODO: is there a trick to mark only this specific content element as to be cached for 4 hours?
-        $frontendController = $this->getTypoScriptFrontendController();
-        $cacheLifetime = $frontendController->page['cache_timeout'] ?: static::CACHE_LIFETIME;
-        $frontendController->page['cache_timeout'] = min($cacheLifetime, static::CACHE_LIFETIME);
-
-        $this->view->assignMultiple([
-            'events' => $events,
-            'eventsGroupedByDay' => $eventsGroupedByDay,
-            'isPartial' => $isPartial,
-            // Raw data for the plugin
-            'plugin' => $this->getContentObject()->data,
-        ]);
-
-        return $this->htmlResponse();
-    }
-
-    public function showMoreAction(): ResponseInterface
-    {
-        $pluginUid = (int)($this->request->getParsedBody()['plugin'] ?? 0);
-
-        return new JsonResponse([
-            'plugin' => $pluginUid,
-        ]);
+        return $eventsGroupedByDay;
     }
 
     /**

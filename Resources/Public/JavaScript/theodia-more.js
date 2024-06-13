@@ -17,9 +17,11 @@ document.addEventListener('DOMContentLoaded', function () {
             event.preventDefault();
             const url = element.dataset.theodiaUrl;
             const plugin = element.dataset.theodiaPlugin;
+            const targetEl = document.getElementById(element.dataset.theodiaTarget);
 
             var formData = new FormData();
             formData.append('plugin', plugin);
+            formData.append('offset', targetEl.dataset.events);
 
             fetch(url, {
                 method: 'POST',
