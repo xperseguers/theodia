@@ -338,18 +338,29 @@ class TheodiaOrg
                     $where
                 )
                 ->fetchAllAssociative();
-            // We first try to find the place in the default storage of the site
-            foreach ($places as $place) {
-                if ($place['pid'] === $storage) {
-                    return $place;
+            if (!empty($places)) {
+                // We first try to find the place in the default storage of the site
+                foreach ($places as $place) {
+                    if ($place['pid'] === $storage) {
+                        return $place;
+                    }
                 }
-            }
-            $siteFinder = GeneralUtility::makeInstance(SiteFinder::class);
-            foreach ($places as $place) {
-                $placeSite = $siteFinder->getSiteByPageId($place['pid']);
-                if ($placeSite === $site) {
-                    return $place;
+                // We then try to find the place in any storage of the site
+                $siteFinder = GeneralUtility::makeInstance(SiteFinder::class);
+                foreach ($places as $place) {
+                    $placeSite = $siteFinder->getSiteByPageId($place['pid']);
+                    if ($placeSite === $site) {
+                        return $place;
+                    }
                 }
+                // Finally, we just return the first place, in any site, we found
+                // TODO: possible enhancement? check if $place['pid'] is "within"
+                // the site's storage, from the point of view of the whole rootline,
+                // thus even outside of the corresponding site's boundary to support
+                // multi-site installations where a site is "within" another site
+                // and if not, skip that place (that would be two completely separate
+                // sites without anything in common)
+                return $places[0];
             }
         }
 
