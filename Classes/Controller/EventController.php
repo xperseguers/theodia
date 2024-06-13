@@ -23,6 +23,7 @@ use TYPO3\CMS\Core\Http\JsonResponse;
 use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Service\FlexFormService;
 use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
+use TYPO3\CMS\Core\Utility\ArrayUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
@@ -109,9 +110,10 @@ class EventController extends ActionController
             ->fetchOne();
 
         $flexFormService = GeneralUtility::makeInstance(FlexFormService::class);
-        $settings = $flexFormService->convertFlexFormContentToArray($flexForm ?? '')['settings'] ?? [];
+        $flexFormSettings = $flexFormService->convertFlexFormContentToArray($flexForm ?? '')['settings'] ?? [];
+        ArrayUtility::mergeRecursiveWithOverrule($this->settings, $flexFormSettings);
 
-        $calendars = GeneralUtility::intExplode(',', $settings['calendars'] ?? '', true);
+        $calendars = GeneralUtility::intExplode(',', $this->settings['calendars'] ?? '', true);
         if (empty($calendars)) {
             // Early return
             return new JsonResponse([], 400);
@@ -131,7 +133,7 @@ class EventController extends ActionController
         $eventsGroupedByDay = $this->groupEventsByDay($events);
 
         $this->view->assignMultiple([
-            'settings' => $settings,
+            'settings' => $this->settings,
             'events' => $events,
             'eventsGroupedByDay' => $eventsGroupedByDay,
         ]);
