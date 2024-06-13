@@ -6,6 +6,9 @@
             <trans-unit id="events.empty">
                 <source>No mass scheduled.</source>
             </trans-unit>
+            <trans-unit id="events.showMore">
+                <source>Show more</source>
+            </trans-unit>
             <trans-unit id="event.cancelled">
                 <source>cancelled</source>
             </trans-unit>

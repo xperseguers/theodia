@@ -29,6 +29,14 @@
                             <default>10</default>
                         </config>
                     </settings.numberOfEvents>
+                    <settings.showMoreLink>
+                        <label>LLL:EXT:theodia/Resources/Private/Language/locallang_db.xlf:plugins.event.settings.showMoreLink</label>
+                        <displayCond><![CDATA[FIELD:settings.iframe:=:0]]></displayCond>
+                        <config>
+                            <type>check</type>
+                            <renderType>checkboxToggle</renderType>
+                        </config>
+                    </settings.showMoreLink>
                     <settings.showLocation>
                         <label>LLL:EXT:theodia/Resources/Private/Language/locallang_db.xlf:plugins.event.settings.showLocation</label>
                         <displayCond><![CDATA[FIELD:settings.iframe:=:0]]></displayCond>

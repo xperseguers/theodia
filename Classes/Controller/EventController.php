@@ -18,6 +18,7 @@ namespace Causal\Theodia\Controller;
 
 use Causal\Theodia\Service\TheodiaOrg;
 use Psr\Http\Message\ResponseInterface;
+use TYPO3\CMS\Core\Http\JsonResponse;
 use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -99,6 +100,15 @@ class EventController extends ActionController
         ]);
 
         return $this->htmlResponse();
+    }
+
+    public function showMoreAction(): ResponseInterface
+    {
+        $pluginUid = (int)($this->request->getParsedBody()['plugin'] ?? 0);
+
+        return new JsonResponse([
+            'plugin' => $pluginUid,
+        ]);
     }
 
     /**

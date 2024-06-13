@@ -22,3 +22,22 @@ plugin.tx_theodia {
         cssIframe = {$plugin.tx_theodia.settings.cssIframe}
     }
 }
+
+ajaxTheodia_page = PAGE
+ajaxTheodia_page {
+    typeNum = 1718265459
+    10 = USER
+    10.userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
+    10.extensionName = Theodia
+    10.pluginName = Event
+    10.vendorName = Causal
+
+    config {
+        disableAllHeaderCode = 1
+        additionalHeaders = Content-type: application/json
+        xhtml_cleaning = 0
+        debug = 0
+        no_cache = 1
+        admPanel = 0
+    }
+}

@@ -6,9 +6,11 @@ defined('TYPO3') || die();
         $_EXTKEY,
         'Event',
         [
-            \Causal\Theodia\Controller\EventController::class => 'list',
+            \Causal\Theodia\Controller\EventController::class => 'list, showMore',
         ],
-        [],
+        [
+            \Causal\Theodia\Controller\EventController::class => 'showMore',
+        ],
         \TYPO3\CMS\Extbase\Utility\ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
     );
 

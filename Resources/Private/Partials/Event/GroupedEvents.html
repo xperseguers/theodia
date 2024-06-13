@@ -1,0 +1,49 @@
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en"
+      xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+
+<f:for each="{groupedEvents}" as="dayEvents">
+    <h4>{dayEvents.date -> f:format.date(format:settings.eventDateFormat)}</h4>
+
+    <ul class="list-group mb-3">
+        <f:for each="{dayEvents.events}" as="event">
+            <li class="list-group-item d-flex justify-content-between align-items-start">
+                <f:render section="Event" arguments="{event:event}"/>
+            </li>
+        </f:for>
+    </ul>
+</f:for>
+
+<f:section name="Event">
+    <div class="ms-2 me-auto tx-theodia-event {f:if(condition:event.cancelled, then:'event-cancelled')}">
+        <div>
+            {event.start -> f:format.date(format:settings.eventTimeFormat)}
+            <span class="fw-bold">{event.name}</span>
+            <f:if condition="{settings.showLocation}">
+                <f:render section="Location" arguments="{event:event}"/>
+            </f:if>
+        </div>
+    </div>
+
+    <f:if condition="{event.cancelled}">
+        <span class="badge bg-danger"><f:translate key="event.cancelled"/></span>
+    </f:if>
+
+    <f:comment>
+        <!-- show link to download ICS file -->
+        <a href="https://theodia.org/api/feed?language=en&events={event.id}">ICS</a>
+    </f:comment>
+</f:section>
+
+<f:section name="Location">
+    <f:alias map="{place: event.place}">
+        <div class="tx-theodia-event-location">
+            <f:if condition="{place.page_uid}">
+                <f:then><f:link.page pageUid="{place.page_uid}">{place.name}</f:link.page></f:then>
+                <f:else>{place.name}</f:else>
+            </f:if>
+        </div>
+    </f:alias>
+</f:section>
+
+</html>
