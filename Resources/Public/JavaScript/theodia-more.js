@@ -32,7 +32,12 @@ document.addEventListener('DOMContentLoaded', function () {
                 body: formData
             }).then(response => response.json())
                 .then(data => {
-                    console.log(data);
+                    if (!data.hasMore) {
+                        targetEl.innerHTML = data.html;
+                        targetEl.dataset.events = data.numberEvents;
+                        // Hide the show more button if not needed anymore
+                        element.style.display = 'none';
+                    }
                 });
         });
     });
