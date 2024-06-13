@@ -128,6 +128,8 @@ class EventController extends ActionController
         $limitNumberOfEvents = $offset + 5;   // Arbitrary number of additional events to show
         $isPartial = count($events) > $limitNumberOfEvents;
         if ($isPartial) {
+            // TODO: It would possibly be interesting to get a complete "another day"
+            // when grouping by day (below)
             $events = array_slice($events, 0, $limitNumberOfEvents);
         }
         $eventsGroupedByDay = $this->groupEventsByDay($events);
