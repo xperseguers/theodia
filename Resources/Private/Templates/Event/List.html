@@ -8,7 +8,7 @@
 <f:section name="Main">
     <f:if condition="{eventsGroupedByDay}">
         <f:then>
-            <f:render section="Events" arguments="{groupedEvents:eventsGroupedByDay}"/>
+            <f:render section="Events" arguments="{groupedEvents:eventsGroupedByDay, numberEvents:numberEvents, isPartial:isPartial, plugin:plugin}"/>
         </f:then>
         <f:else>
             <div class="alert alert-info" role="alert">
@@ -21,49 +21,26 @@
 </f:section>
 
 <f:section name="Events">
-    <f:for each="{groupedEvents}" as="dayEvents">
-        <h4>{dayEvents.date -> f:format.date(format:settings.eventDateFormat)}</h4>
+    <f:if condition="{isPartial} && {settings.showMoreLink}">
+        <f:then>
+            <div id="theodia-list-{plugin.uid}" data-events="{numberEvents}">
+                <f:render partial="Event/GroupedEvents" arguments="{groupedEvents:groupedEvents}"/>
+            </div>
 
-        <ul class="list-group mb-3">
-            <f:for each="{dayEvents.events}" as="event">
-                <li class="list-group-item d-flex justify-content-between align-items-start">
-                    <f:render section="Event" arguments="{event:event}"/>
-                </li>
-            </f:for>
-        </ul>
-    </f:for>
-</f:section>
+            <button data-theodia-show-more="1"
+                    data-theodia-target="theodia-list-{plugin.uid}"
+                    data-theodia-plugin="{plugin.uid}"
+                    data-theodia-url="{f:uri.action(action:'showMore', pageType:1718265459)}"
+                    class="btn btn-primary">
+                <f:translate key="events.showMore"/>
+            </button>
 
-<f:section name="Event">
-    <div class="ms-2 me-auto tx-theodia-event {f:if(condition:event.cancelled, then:'event-cancelled')}">
-        <div>
-            {event.start -> f:format.date(format:settings.eventTimeFormat)}
-            <span class="fw-bold">{event.name}</span>
-            <f:if condition="{settings.showLocation}">
-                <f:render section="Location" arguments="{event:event}"/>
-            </f:if>
-        </div>
-    </div>
-
-    <f:if condition="{event.cancelled}">
-        <span class="badge bg-danger"><f:translate key="event.cancelled"/></span>
+            <f:asset.script identifier="theodia" src="EXT:theodia/Resources/Public/JavaScript/theodia-more.js"/>
+        </f:then>
+        <f:else>
+            <f:render partial="Event/GroupedEvents" arguments="{groupedEvents:groupedEvents}"/>
+        </f:else>
     </f:if>
-
-    <f:comment>
-        <!-- show link to download ICS file -->
-        <a href="https://theodia.org/api/feed?language=en&events={event.id}">ICS</a>
-    </f:comment>
-</f:section>
-
-<f:section name="Location">
-    <f:alias map="{place: event.place}">
-        <div class="tx-theodia-event-location">
-            <f:if condition="{place.page_uid}">
-                <f:then><f:link.page pageUid="{place.page_uid}">{place.name}</f:link.page></f:then>
-                <f:else>{place.name}</f:else>
-            </f:if>
-        </div>
-    </f:alias>
 </f:section>
 
 </html>

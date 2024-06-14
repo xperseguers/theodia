@@ -18,6 +18,9 @@
             <trans-unit id="plugins.event.settings.numberOfEvents">
                 <target>Nombre d'événements à afficher</target>
             </trans-unit>
+            <trans-unit id="plugins.event.settings.showMoreLink">
+                <target>Ajouter un lien/bouton pour charger dynamiquement d'autres événements</target>
+            </trans-unit>
             <trans-unit id="plugins.event.settings.showLocation">
                 <target>Afficher le lieu de culte</target>
             </trans-unit>

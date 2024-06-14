@@ -39,6 +39,16 @@
                             </config>
                         </TCEforms>
                     </settings.numberOfEvents>
+                    <settings.showMoreLink>
+                        <TCEforms>
+                            <label>LLL:EXT:theodia/Resources/Private/Language/locallang_db.xlf:plugins.event.settings.showMoreLink</label>
+                            <displayCond><![CDATA[FIELD:settings.iframe:=:0]]></displayCond>
+                            <config>
+                                <type>check</type>
+                                <renderType>checkboxToggle</renderType>
+                            </config>
+                        </TCEforms>
+                    </settings.showMoreLink>
                     <settings.showLocation>
                         <TCEforms>
                             <label>LLL:EXT:theodia/Resources/Private/Language/locallang_db.xlf:plugins.event.settings.showLocation</label>

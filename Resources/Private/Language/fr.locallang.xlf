@@ -6,6 +6,9 @@
             <trans-unit id="events.empty">
                 <target>Aucune messe agendée.</target>
             </trans-unit>
+            <trans-unit id="events.showMore">
+                <target>Afficher la suite</target>
+            </trans-unit>
             <trans-unit id="event.cancelled">
                 <target>annulée</target>
             </trans-unit>

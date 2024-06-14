@@ -18,6 +18,9 @@
             <trans-unit id="plugins.event.settings.numberOfEvents">
                 <source>Number of events to display</source>
             </trans-unit>
+            <trans-unit id="plugins.event.settings.showMoreLink">
+                <source>Add a link/button to dynamically load more events</source>
+            </trans-unit>
             <trans-unit id="plugins.event.settings.showLocation">
                 <source>Show place of worship</source>
             </trans-unit>
