@@ -32,9 +32,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 body: formData
             }).then(response => response.json())
                 .then(data => {
-                    if (!data.hasMore) {
+                    if (data.html) {
                         targetEl.innerHTML = data.html;
                         targetEl.dataset.events = data.numberEvents;
+                    }
+                    if (!data.hasMore) {
                         // Hide the show more button if not needed anymore
                         element.style.display = 'none';
                     }
