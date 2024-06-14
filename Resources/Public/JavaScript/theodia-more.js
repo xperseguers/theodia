@@ -30,7 +30,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 credentials: 'same-origin',
                 referrerPolicy: 'no-referrer',
                 body: formData
-            }).then(response => response.json())
+            })
+                .then(response => response.json())
                 .then(data => {
                     if (data.html) {
                         targetEl.innerHTML = data.html;
