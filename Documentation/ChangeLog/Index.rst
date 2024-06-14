@@ -17,6 +17,8 @@ Version  Changes
 2.2.x    - Add early support for TYPO3 v13
          - Drop support for TYPO3 v10 (would cause too much
            work to maintain Doctrine calls)
+         - Support for cropped images
+         - Support for dynamically loading more events
 2.1.x    - Multiple photos for a place
          - Dynamic selection of the place to display
 2.0.x    - Migration of the plugins to dedicated CType's
