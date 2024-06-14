@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }).then(response => response.json())
                 .then(data => {
                     if (data.html) {
-                        targetEl.innerHTML += data.html;
+                        targetEl.innerHTML = data.html;
                         targetEl.dataset.events = data.numberEvents;
                     }
                     if (!data.hasMore) {
