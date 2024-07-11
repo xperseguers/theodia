@@ -32,7 +32,7 @@ use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 class EventController extends ActionController
 {
     protected const CACHE_LIFETIME = 14400; /* 4 hours */
-    protected const MAX_EVENTS = 200;
+    protected const MAX_EVENTS = 1000;
 
     /**
      * @var TheodiaOrg
