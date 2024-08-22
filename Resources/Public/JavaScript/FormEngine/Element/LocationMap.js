@@ -11,6 +11,7 @@
  * The TYPO3 project - inspiring people to share!
  */
 
+// For usage in TYPO3 up to v11
 define(['jquery', 'TYPO3/CMS/Theodia/Leaflet'],
     function ($, L) {
         'use strict';
