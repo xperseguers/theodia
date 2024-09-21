@@ -6,3 +6,4 @@ services:
 
   Causal\Theodia\:
     resource: '../Classes/*'
+    exclude: '../Classes/Xclass/V11/Backend/Form/FormDataProvider/*'

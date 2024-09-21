@@ -30,9 +30,16 @@ defined('TYPO3') || die();
         'class' => \Causal\Theodia\Backend\Form\Element\LocationMap::class,
     ];
 
-    $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][\TYPO3\CMS\Backend\Form\FormDataProvider\SiteDatabaseEditRow::class] = [
-        'className' => \Causal\Theodia\Xclass\V11\Backend\Form\FormDataProvider\SiteDatabaseEditRow::class,
-    ];
+    if ((new \TYPO3\CMS\Core\Information\Typo3Version())->getMajorVersion() >= 13) {
+        $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][\TYPO3\CMS\Backend\Form\FormDataProvider\SiteDatabaseEditRow::class] = [
+            'className' => \Causal\Theodia\Xclass\V13\Backend\Form\FormDataProvider\SiteDatabaseEditRow::class,
+        ];
+    } else {
+        $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][\TYPO3\CMS\Backend\Form\FormDataProvider\SiteDatabaseEditRow::class] = [
+            'className' => \Causal\Theodia\Xclass\V11\Backend\Form\FormDataProvider\SiteDatabaseEditRow::class,
+        ];
+    }
+
     $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][\TYPO3\CMS\Backend\Form\FormDataProvider\SiteTcaInline::class] = [
         'className' => \Causal\Theodia\Xclass\V11\Backend\Form\FormDataProvider\SiteTcaInline::class,
     ];
