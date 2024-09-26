@@ -60,6 +60,12 @@ class EventController extends ActionController
             static::CACHE_LIFETIME
         );
 
+        // Keep only future events
+        $now = new \DateTime();
+        $events = array_filter($events, static function ($event) use ($now) {
+            return $event['start'] >= $now || (($event['end'] ?? null) instanceof \DateTime && $event['end'] >= $now);
+        });
+
         if (!empty($this->settings['filter'])) {
             $filteredEvents = [];
             foreach ($events as $event) {
@@ -77,10 +83,22 @@ class EventController extends ActionController
         }
         $eventsGroupedByDay = $this->groupEventsByDay($events);
 
-        // Mark the cache for this content element (well the whole page...) as valid for 4 hours
-        // TODO: is there a trick to mark only this specific content element as to be cached for 4 hours?
+        $nextStart = null;
+        foreach ($events as $event) {
+            if ($event['start'] > $now) {
+                $nextStart = $event['start'];
+                break;
+            }
+        }
+
+        if ($nextStart !== null) {
+            $cacheLifetime = min(60, $nextStart->diff($now)->s);
+        } else {
+            $cacheLifetime = static::CACHE_LIFETIME;
+        }
+        // Mark the cache for this content element (well the whole page...)
+        // TODO: is there a trick to mark only this specific content element as to be cached for a given amount of time?
         $frontendController = $this->getTypoScriptFrontendController();
-        $cacheLifetime = $frontendController->page['cache_timeout'] ?: static::CACHE_LIFETIME;
         $frontendController->page['cache_timeout'] = min($cacheLifetime, static::CACHE_LIFETIME);
 
         $this->view->assignMultiple([
