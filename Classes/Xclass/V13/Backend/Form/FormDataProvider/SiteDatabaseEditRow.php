@@ -16,7 +16,6 @@ declare(strict_types=1);
 
 namespace Causal\Theodia\Xclass\V13\Backend\Form\FormDataProvider;
 
-use Symfony\Component\DependencyInjection\Attribute\Autoconfigure;
 use TYPO3\CMS\Backend\Form\FormDataProviderInterface;
 use TYPO3\CMS\Core\Configuration\SiteConfiguration;
 use TYPO3\CMS\Core\Exception\SiteNotFoundException;
@@ -28,10 +27,11 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  *
  * Fetch "row" data from yml file and set as 'databaseRow'
  */
-#[Autoconfigure(public: true)]
 readonly class SiteDatabaseEditRow implements FormDataProviderInterface
 {
-    public function __construct(private SiteConfiguration $siteConfiguration) {}
+    public function __construct(
+        private SiteFinder $siteFinder,
+    ) {}
 
     /**
      * First level of ['customData']['siteData'] to ['databaseRow']
@@ -45,17 +45,16 @@ readonly class SiteDatabaseEditRow implements FormDataProviderInterface
         }
 
         $tableName = $result['tableName'];
-        $siteFinder = GeneralUtility::makeInstance(SiteFinder::class, $this->siteConfiguration);
         if ($tableName === 'site') {
             $rootPageId = (int)$result['vanillaUid'];
-            $rowData = $this->getRawConfigurationForSiteWithRootPageId($siteFinder, $rootPageId);
+            $rowData = $this->getRawConfigurationForSiteWithRootPageId($rootPageId);
             $result['databaseRow']['uid'] = $rowData['rootPageId'];
             $result['databaseRow']['identifier'] = $result['customData']['siteIdentifier'];
         // XCLASS: Add site_theodia_calendar to the list of allowed tables:
         } elseif (in_array($tableName, ['site_errorhandling', 'site_language', 'site_route', 'site_base_variant', 'site_theodia_calendar'], true)) {
             $rootPageId = (int)($result['inlineTopMostParentUid'] ?? $result['inlineParentUid']);
             try {
-                $rowData = $this->getRawConfigurationForSiteWithRootPageId($siteFinder, $rootPageId);
+                $rowData = $this->getRawConfigurationForSiteWithRootPageId($rootPageId);
                 $parentFieldName = $result['inlineParentFieldName'];
                 if (!isset($rowData[$parentFieldName])) {
                     throw new \RuntimeException('Field "' . $parentFieldName . '" not found', 1520886092);
@@ -80,11 +79,11 @@ readonly class SiteDatabaseEditRow implements FormDataProviderInterface
         return $result;
     }
 
-    protected function getRawConfigurationForSiteWithRootPageId(SiteFinder $siteFinder, int $rootPageId): array
+    protected function getRawConfigurationForSiteWithRootPageId(int $rootPageId): array
     {
-        $site = $siteFinder->getSiteByRootPageId($rootPageId);
+        $site = $this->siteFinder->getSiteByRootPageId($rootPageId);
         // load config as it is stored on disk (without replacements)
-        $configuration = $this->siteConfiguration->load($site->getIdentifier());
+        $configuration = GeneralUtility::makeInstance(SiteConfiguration::class)->load($site->getIdentifier());
         // @todo parse pseudo TCA and react on type==select and renderType==selectMultipleSideBySide
         if (is_array($configuration['dependencies'] ?? null)) {
             $configuration['dependencies'] = implode(',', $configuration['dependencies']);
