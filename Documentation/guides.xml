@@ -9,5 +9,5 @@
                edit-on-github-branch="main"
                edit-on-github="xperseguers/theodia"
                typo3-core-preferred="stable"/>
-    <project title="theodia" release="2.2.1" version="2.2" copyright="2023-2024"/>
+    <project title="theodia" release="2.2.2" version="2.2" copyright="2023-2024"/>
 </guides>
