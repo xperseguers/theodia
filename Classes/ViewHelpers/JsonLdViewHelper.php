@@ -1,5 +1,5 @@
 <?php
-declare(strict_types = 1);
+declare(strict_types=1);
 
 /*
  * This file is part of the TYPO3 CMS project.
@@ -20,6 +20,8 @@ use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Resource\ResourceFactory;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Utility\VersionNumberUtility;
+use TYPO3\CMS\Extbase\Service\ImageService;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
@@ -199,15 +201,40 @@ class JsonLdViewHelper extends AbstractViewHelper
         if (!empty($place['photos'])) {
             $imageFile = $place['photos'][0];
             $baseUrl = rtrim(GeneralUtility::getIndpEnv('TYPO3_SITE_URL'), '/');
-            $image = $contentObject->getImgResource($imageFile, [
-                'maxW' => '600',
-                'maxH' => '600',
-            ])[3];
-            $data['photo'] = [
-                '@context' => 'http://schema.org',
-                '@type' => 'Photograph',
-                'image' => $baseUrl . $image,
-            ];
+            $imageUrl = '';
+
+            $typo3Version = VersionNumberUtility::convertVersionNumberToInteger(
+                VersionNumberUtility::getCurrentTypo3Version()
+            );
+
+            if ($typo3Version >= 13000000) {
+                /** @var ImageService $imageService */
+                $imageService = GeneralUtility::makeInstance(ImageService::class);
+                $processedImage = $imageService->applyProcessingInstructions($imageFile, [
+                    'width' => '600m',
+                    'height' => '600m',
+                ]);
+                $imageUrl = $baseUrl . '/' . ltrim($processedImage->getPublicUrl(), '/');
+
+            } else {
+                /** @var ContentObjectRenderer $contentObject */
+                $image = $contentObject->getImgResource($imageFile, [
+                    'maxW' => '600',
+                    'maxH' => '600',
+                ]);
+
+                if (is_array($image) && !empty($image[3])) {
+                    $imageUrl = $baseUrl . '/' . ltrim($image[3], '/');
+                }
+            }
+
+            if (!empty($imageUrl)) {
+                $data['photo'] = [
+                    '@context' => 'http://schema.org',
+                    '@type' => 'Photograph',
+                    'image' => $imageUrl,
+                ];
+            }
         }
 
         return $data;
