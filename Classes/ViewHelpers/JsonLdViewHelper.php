@@ -18,6 +18,7 @@ namespace Causal\Theodia\ViewHelpers;
 
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Resource\ResourceFactory;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
@@ -199,14 +200,23 @@ class JsonLdViewHelper extends AbstractViewHelper
         if (!empty($place['photos'])) {
             $imageFile = $place['photos'][0];
             $baseUrl = rtrim(GeneralUtility::getIndpEnv('TYPO3_SITE_URL'), '/');
-            $image = $contentObject->getImgResource($imageFile, [
-                'maxW' => '600',
-                'maxH' => '600',
-            ])[3];
+            $typo3Version = (new Typo3Version())->getMajorVersion();
+            if ($typo3Version >= 13) {
+                $image = $contentObject->getImgResource($imageFile, [
+                    'maxW' => '600',
+                    'maxH' => '600',
+                ])->getPublicUrl();
+            } else {
+                $image = $contentObject->getImgResource($imageFile, [
+                    'maxW' => '600',
+                    'maxH' => '600',
+                ])[3];
+            }
+
             $data['photo'] = [
                 '@context' => 'http://schema.org',
                 '@type' => 'Photograph',
-                'image' => $baseUrl . $image,
+                'image' => $baseUrl . ltrim($image, '/'),
             ];
         }
 
