@@ -13,8 +13,8 @@ foreach ($plugins as $CType => $title) {
     ], 'CType', 'theodia');
 }
 
-$typo3Branch = (new \TYPO3\CMS\Core\Information\Typo3Version())->getBranch();
-if (version_compare($typo3Branch, '12.0', '>=')) {
+$typo3Version = (new \TYPO3\CMS\Core\Information\Typo3Version())->getMajorVersion();
+if ($typo3Version >= 12) {
     $flexForms = [
         'theodia_event' => 'FILE:EXT:theodia/Configuration/FlexForms/flexform_event_v12.xml',
         'theodia_place' => 'FILE:EXT:theodia/Configuration/FlexForms/flexform_place_v12.xml',
