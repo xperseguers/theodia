@@ -388,6 +388,9 @@ class TheodiaOrg
             'country' => $place['country']['code'] ?? 'CH',
             'url' => $place['url'] ?? '',
         ];
+        if ($data['year'] > 0) {
+            $data['century'] = $this->numberToRomanRepresentation(intdiv($data['year'], 100) + 1);
+        }
 
         $tableConnection->insert('tx_theodia_place', $data);
 
@@ -398,5 +401,39 @@ class TheodiaOrg
                 $where
             )
             ->fetchAssociative();
+    }
+
+    /**
+     * @param int $number
+     * @return string
+     */
+    private function numberToRomanRepresentation(int $number): string
+    {
+        $map = [
+            'M' => 1000,
+            'CM' => 900,
+            'D' => 500,
+            'CD' => 400,
+            'C' => 100,
+            'XC' => 90,
+            'L' => 50,
+            'XL' => 40,
+            'X' => 10,
+            'IX' => 9,
+            'V' => 5,
+            'IV' => 4,
+            'I' => 1
+        ];
+        $returnValue = '';
+        while ($number > 0) {
+            foreach ($map as $roman => $int) {
+                if ($number >= $int) {
+                    $number -= $int;
+                    $returnValue .= $roman;
+                    break;
+                }
+            }
+        }
+        return $returnValue;
     }
 }
