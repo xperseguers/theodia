@@ -71,7 +71,7 @@ Show place of worship
 
    Whether the location of the event should be made visible. Please note that
    actual display may change if the default templates are overridden. This is
-   particularly useful to show the location of you select more than one calendar
+   particularly useful to show the location if you select more than one calendar
    for the plugin.
 
 .. _pluginFilter:
