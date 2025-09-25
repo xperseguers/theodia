@@ -137,6 +137,12 @@
                 <target>theodia</target>
             </trans-unit>
 
+            <trans-unit id="site.tx_theodia_api_key">
+                <source>Clé d'API</source>
+            </trans-unit>
+            <trans-unit id="site.tx_theodia_api_key.description">
+                <source>La clé d'API qui permet l'accès aux données de theodia.</source>
+            </trans-unit>
             <trans-unit id="site.tx_theodia_storage">
                 <target>ID du dossier de stockage</target>
             </trans-unit>

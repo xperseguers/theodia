@@ -1,4 +1,16 @@
 <?php
+$GLOBALS['SiteConfiguration']['site']['columns']['tx_theodia_api_key'] = [
+    'label' => 'LLL:EXT:theodia/Resources/Private/Language/locallang_db.xlf:site.tx_theodia_api_key',
+    'description' => 'LLL:EXT:theodia/Resources/Private/Language/locallang_db.xlf:site.tx_theodia_api_key.description',
+    'config' => [
+        'type' => 'input',
+        'size' => 20,
+        'min' => 5,
+        'default' => '',
+        'eval' => 'required, trim',
+    ],
+];
+
 $GLOBALS['SiteConfiguration']['site']['columns']['tx_theodia_storage'] = [
     'label' => 'LLL:EXT:theodia/Resources/Private/Language/locallang_db.xlf:site.tx_theodia_storage',
     'description' => 'LLL:EXT:theodia/Resources/Private/Language/locallang_db.xlf:site.tx_theodia_storage.description',
@@ -40,4 +52,4 @@ $GLOBALS['SiteConfiguration']['site']['columns']['tx_theodia_calendars'] = [
 
 $GLOBALS['SiteConfiguration']['site']['types']['0']['showitem'] .= ',
     --div--;LLL:EXT:theodia/Resources/Private/Language/locallang_db.xlf:tabs.theodia,
-        tx_theodia_storage, tx_theodia_free_storage, tx_theodia_calendars';
+        tx_theodia_api_key, tx_theodia_storage, tx_theodia_free_storage, tx_theodia_calendars';
