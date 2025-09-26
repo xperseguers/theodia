@@ -453,7 +453,7 @@ class TheodiaOrg
      */
     private function sign(Site $site, string $payload): string
     {
-        $key = $site->getConfiguration()['tx_theodia_api_key'];
+        $key = $site->getConfiguration()['tx_theodia_api_key'] ?? null;
         if (!$key) {
             throw new \RuntimeException("You must configure a theodia API key", 1758789702);
         }
