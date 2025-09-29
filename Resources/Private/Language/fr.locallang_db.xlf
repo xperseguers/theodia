@@ -141,7 +141,7 @@
                 <source>Clé d'API</source>
             </trans-unit>
             <trans-unit id="site.tx_theodia_api_key.description">
-                <source>La clé d'API qui permet l'accès aux données de theodia.</source>
+                <source>La clé d'API qui permet l'accès aux données de theodia. Obtenez votre clé via https://about.theodia.org/api</source>
             </trans-unit>
             <trans-unit id="site.tx_theodia_storage">
                 <target>ID du dossier de stockage</target>
