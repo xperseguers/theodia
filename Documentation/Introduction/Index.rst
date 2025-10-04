@@ -7,10 +7,10 @@ Introduction
 This extension provides a few plugins to display the Mass schedule for the
 various places of worship in a parish or pastoral unit.
 
-`Theodia <https://theodia.org>`__ has been tailor-made to meet the needs of the
-Catholic Church, from religious communities to parishes and dioceses. This tool
-is used to share Catholic mass times and has been designed and developed to be
-extended to several countries.
+`theodia.org <https://theodia.org>`__ has been tailor-made to meet the needs of
+the Catholic Church, from religious communities to parishes and dioceses. This
+tool is used to share Catholic mass times and has been designed and developed to
+be extended to several countries.
 
 In this context, parishes and pastoral units are invited to enter the times of
 their Catholic celebrations in the form of ICS feeds (e.g., Google Calendar) or
