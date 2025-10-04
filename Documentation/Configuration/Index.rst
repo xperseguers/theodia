@@ -6,7 +6,7 @@ Configuration
 
 In order to use this extension, you must configure an API key, and which places
 of worship you intend to use. This is done by editing your site configuration
-(stored in :file:`config/sites/<site>/config.yaml`), adding the API key that
+(stored in :file:`config/sites/<site>/config.yaml`), adding the API key that you
 obtained via https://about.theodia.org/api, and adding a list of theodia
 calendars.
 
