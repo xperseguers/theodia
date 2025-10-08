@@ -38,7 +38,7 @@
   },
   "extra": {
     "branch-alias": {
-      "dev-main": "2.3.x-dev"
+      "dev-main": "3.0.x-dev"
     },
     "typo3/cms": {
       "extension-key": "theodia"

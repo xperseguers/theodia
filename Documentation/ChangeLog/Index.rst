@@ -12,7 +12,7 @@ For more details,
 =======  ======================================================
 Version  Changes
 =======  ======================================================
-2.3.x    - Add support for signed requests to theodia API
+3.0.x    - Add support for signed requests to theodia API
 2.2.x    - Add early support for TYPO3 v13
          - Drop support for TYPO3 v10 (would cause too much
            work to maintain Doctrine calls)
