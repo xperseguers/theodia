@@ -464,7 +464,7 @@ class TheodiaOrg
 
         $timestamp = time();
         $hashPayload = $timestamp . $payload;
-        $hash = hash_hmac('sha256', $hashPayload, $key);
+        $hash = hash_hmac('sha256', $hashPayload, $key ?? '');
 
         return "X-Signature: v1.$timestamp.$hash";
     }
