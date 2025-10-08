@@ -62,7 +62,7 @@ This extension has been initially developed in May 2020 by
 (CH), and is now further maintained by the same company and other contributors.
 
 Since end of 2023, the extension is sponsored as well by the web agency
-`hemmer <https://www.hemmer.ch>`__, the company behind theodia.
+`hemmer <https://www.hemmer.ch>`__, the company behind theodia.org.
 
 
 .. _support:
