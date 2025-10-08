@@ -137,6 +137,12 @@
                 <source>theodia</source>
             </trans-unit>
 
+            <trans-unit id="site.tx_theodia_api_key">
+                <source>API key</source>
+            </trans-unit>
+            <trans-unit id="site.tx_theodia_api_key.description">
+                <source>The API key allowing access to theodia's data. Get your key via https://about.theodia.org/api</source>
+            </trans-unit>
             <trans-unit id="site.tx_theodia_storage">
                 <source>Storage Page ID</source>
             </trans-unit>

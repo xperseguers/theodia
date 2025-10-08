@@ -63,7 +63,7 @@ class TheodiaOrg
         sort($calendars);
         $payload = $this->prepareEventsPayload($calendars, $today, $items);
         $cacheKey = 'events_' . implode('-', $calendars) . '_' . $items;
-        $data = $this->callApi($payload, $cacheKey, $cacheLifeTime - 10 /* safeguard */);
+        $data = $this->callApi($site, $payload, $cacheKey, $cacheLifeTime - 10 /* safeguard */);
 
         $events = $data[0]['data']['events']['items'] ?? [];
         foreach ($events as &$event) {
@@ -106,7 +106,7 @@ class TheodiaOrg
         return $places[$id];
     }
 
-    protected function callApi(array $payload, string $cacheKey, int $cacheLifeTime): array
+    protected function callApi(Site $site, array $payload, string $cacheKey, int $cacheLifeTime): array
     {
         $data = [];
         $cacheDirectory = Environment::getVarPath() . '/transient/';
@@ -114,11 +114,14 @@ class TheodiaOrg
         $useCache = file_exists($cacheFileName);
 
         if (!$useCache || $GLOBALS['EXEC_TIME'] - filemtime($cacheFileName) > $cacheLifeTime) {
+            $payload = json_encode($payload);
+
             // Try to or must fetch fresh content
             $url = 'https://theodia.org/graphql?language=fr';
             $headers = [
                 'accept: application/json',
                 'content-type: application/json',
+                $this->sign($site, $payload),
             ];
 
             $ch = curl_init();
@@ -128,16 +131,24 @@ class TheodiaOrg
             curl_setopt($ch, CURLOPT_FRESH_CONNECT, 1);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
             curl_setopt($ch, CURLOPT_POST, true);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($payload));
-            if (!($content = curl_exec($ch))) {
-                $useCache = file_exists($cacheFileName);
-            } else {
-                $data = json_decode($content, true) ?? [];
-                if (!isset($data['error'])) {
-                    GeneralUtility::writeFile($cacheFileName, $content);
-                }
-            }
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
+
+            $content = curl_exec($ch);
+            $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
             curl_close($ch);
+
+            if ($httpCode === 200 && $content) {
+                $data = json_decode($content, true) ?? [];
+                if ($data && !isset($data['error'])) {
+                    GeneralUtility::writeFile($cacheFileName, $content);
+                } else {
+                    $useCache = file_exists($cacheFileName);
+                }
+            } elseif ($httpCode === 403) {
+                throw new \RuntimeException("Your theodia API key is invalid, or your server's time is not synchronized", 1758789409);
+            } else {
+                $useCache = file_exists($cacheFileName);
+            }
         }
 
         if ($useCache) {
@@ -365,7 +376,7 @@ class TheodiaOrg
         }
 
         $payload = $this->prepareFrontOfficePlacePayload($id);
-        $info = $this->callApi($payload, 'place_' . $id, 604800 /* 1 week */);
+        $info = $this->callApi($site, $payload, 'place_' . $id, 604800 /* 1 week */);
         // TODO: (possibly) extract image from theodia by fetching $info['_links']['images']['href']
 
         $place = $info[0]['data']['place'];
@@ -435,5 +446,26 @@ class TheodiaOrg
             }
         }
         return $returnValue;
+    }
+
+    /**
+     * Returns the HTTP header to sign the GraphQL query with the configured key
+     */
+    private function sign(Site $site, string $payload): string
+    {
+        $key = $site->getConfiguration()['tx_theodia_api_key'] ?? null;
+        if (!$key) {
+            if (time() < strtotime('2025-11-30')) {
+                trigger_error('Using theodia without an API key configured is deprecated and it will stop working entirely in November 2025. Get your API key via https://about.theodia.org/api', E_USER_DEPRECATED);
+            } else {
+                throw new \RuntimeException("You must configure a theodia API key. Get your API key via https://about.theodia.org/api", 1758789702);
+            }
+        }
+
+        $timestamp = time();
+        $hashPayload = $timestamp . $payload;
+        $hash = hash_hmac('sha256', $hashPayload, $key ?? '');
+
+        return "X-Signature: v1.$timestamp.$hash";
     }
 }

@@ -42,6 +42,15 @@ Screenshots
    :alt: Upcoming masses as seen on https://www.paroisse.ch
 
 
+.. _requirements:
+
+Requirements
+------------
+
+This extension requires TYPO3 11 LTS or later, and a valid API key from
+https://about.theodia.org/api.
+
+
 .. _sponsors:
 
 Sponsors
