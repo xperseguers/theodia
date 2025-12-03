@@ -8,11 +8,11 @@ $EM_CONF[$_EXTKEY] = [
     'author_email' => 'xavier@causal.ch',
     'author_company' => 'Causal Sàrl',
     'state' => 'stable',
-    'version' => '3.0.0',
+    'version' => '3.1.0-dev',
     'constraints' => [
         'depends' => [
-            'php' => '7.4.0-8.4.99',
-            'typo3' => '11.5.0-13.4.99',
+            'php' => '7.4.0-8.5.99',
+            'typo3' => '11.5.0-14.0.99',
         ],
         'conflicts' => [
         ],
