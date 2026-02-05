@@ -116,7 +116,7 @@ class EventController extends ActionController
             ->fetchOne();
 
         $flexFormService = GeneralUtility::makeInstance(FlexFormService::class);
-        $flexFormSettings = $flexFormService->convertFlexFormContentToArray($flexForm ?? '')['settings'] ?? [];
+        $flexFormSettings = $flexFormService->convertFlexFormContentToArray($flexForm ?: '')['settings'] ?? [];
         ArrayUtility::mergeRecursiveWithOverrule($this->settings, $flexFormSettings);
 
         $calendars = GeneralUtility::intExplode(',', $this->settings['calendars'] ?? '', true);
