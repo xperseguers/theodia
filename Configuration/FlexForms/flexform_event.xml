@@ -43,7 +43,7 @@
                         <TCEforms>
                             <label>LLL:EXT:theodia/Resources/Private/Language/locallang_db.xlf:plugins.event.settings.showMoreLink</label>
                             <description>LLL:EXT:theodia/Resources/Private/Language/locallang_db.xlf:plugins.event.settings.showMoreLink.description</description>
-                            <displayCond><![CDATA[FIELD:settings.iframe:=:0]]></displayCond>
+                            <displayCond><![CDATA[FIELD:settings.iframe:!=:1]]></displayCond>
                             <config>
                                 <type>check</type>
                                 <renderType>checkboxToggle</renderType>
@@ -53,7 +53,7 @@
                     <settings.showLocation>
                         <TCEforms>
                             <label>LLL:EXT:theodia/Resources/Private/Language/locallang_db.xlf:plugins.event.settings.showLocation</label>
-                            <displayCond><![CDATA[FIELD:settings.iframe:=:0]]></displayCond>
+                            <displayCond><![CDATA[FIELD:settings.iframe:!=:1]]></displayCond>
                             <config>
                                 <type>check</type>
                                 <renderType>checkboxToggle</renderType>
@@ -64,7 +64,7 @@
                         <TCEforms>
                             <label>LLL:EXT:theodia/Resources/Private/Language/locallang_db.xlf:plugins.event.settings.filter</label>
                             <description>LLL:EXT:theodia/Resources/Private/Language/locallang_db.xlf:plugins.event.settings.filter.description</description>
-                            <displayCond><![CDATA[FIELD:settings.iframe:=:0]]></displayCond>
+                            <displayCond><![CDATA[FIELD:settings.iframe:!=:1]]></displayCond>
                             <config>
                                 <type>input</type>
                                 <size>20</size>
