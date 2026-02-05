@@ -60,41 +60,8 @@ class EventController extends ActionController
             static::CACHE_LIFETIME
         );
 
-        // Keep only future events
-        $now = new \DateTime();
-        $events = array_filter($events, static function ($event) use ($now) {
-            return $event['start'] >= $now || (($event['end'] ?? null) instanceof \DateTime && $event['end'] >= $now);
-        });
-
-        // If a filter for start/end dates is set, apply it
-        $filterStart = (int)$this->settings['filter_start'];
-        $filterEnd = (int)$this->settings['filter_end'];
-        if ($filterStart !== 0 || $filterEnd !== 0) {
-            $filterStartDate = $filterStart !== 0 ? date('Y-m-d', $filterStart) : '';
-            $filterEndDate = $filterEnd !== 0 ? date('Y-m-d', $filterEnd) : '';
-            $events = array_filter($events, static function ($event) use ($filterStartDate, $filterEndDate) {
-                $eventStart = $event['start']->format('Y-m-d');
-                $eventEnd = ($event['end'] ?? null) instanceof \DateTime ? $event['end']->format('Y-m-d') : $eventStart;
-                $keep = true;
-                if ($filterStartDate !== '') {
-                    $keep = $keep && $eventEnd >= $filterStartDate;
-                }
-                if ($filterEndDate !== '') {
-                    $keep = $keep && $eventStart <= $filterEndDate;
-                }
-                return $keep;
-            });
-        }
-
-        if ($this->settings['filter'] !== '') {
-            $filteredEvents = [];
-            foreach ($events as $event) {
-                if (preg_match($this->settings['filter'], $event['name'])) {
-                    $filteredEvents[] = $event;
-                }
-            }
-            $events = $filteredEvents;
-        }
+        // Apply filtering
+        $events = $this->filterEvents($events);
 
         $limitNumberOfEvents = (int)$this->settings['numberOfEvents'];
         $isPartial = count($events) > $limitNumberOfEvents;
@@ -104,6 +71,7 @@ class EventController extends ActionController
         $eventsGroupedByDay = $this->groupEventsByDay($events);
 
         $nextStart = null;
+        $now = new \DateTime();
         foreach ($events as $event) {
             if ($event['start'] > $now) {
                 $nextStart = $event['start'];
@@ -163,6 +131,9 @@ class EventController extends ActionController
             static::CACHE_LIFETIME
         );
 
+        // Apply filtering
+        $events = $this->filterEvents($events);
+
         $limitNumberOfEvents = $offset + 5;   // Arbitrary number of additional events to show
         $isPartial = count($events) > $limitNumberOfEvents;
         if ($isPartial) {
@@ -184,6 +155,47 @@ class EventController extends ActionController
             'numberEvents' => count($events),
             'html' => trim($html),
         ]);
+    }
+
+    protected function filterEvents(array $events): array
+    {
+        // Keep only future events
+        $now = new \DateTime();
+        $events = array_filter($events, static function ($event) use ($now) {
+            return $event['start'] >= $now || (($event['end'] ?? null) instanceof \DateTime && $event['end'] >= $now);
+        });
+
+        // If a filter for start/end dates is set, apply it
+        $filterStart = (int)$this->settings['filter_start'];
+        $filterEnd = (int)$this->settings['filter_end'];
+        if ($filterStart !== 0 || $filterEnd !== 0) {
+            $filterStartDate = $filterStart !== 0 ? date('Y-m-d', $filterStart) : '';
+            $filterEndDate = $filterEnd !== 0 ? date('Y-m-d', $filterEnd) : '';
+            $events = array_filter($events, static function ($event) use ($filterStartDate, $filterEndDate) {
+                $eventStart = $event['start']->format('Y-m-d');
+                $eventEnd = ($event['end'] ?? null) instanceof \DateTime ? $event['end']->format('Y-m-d') : $eventStart;
+                $keep = true;
+                if ($filterStartDate !== '') {
+                    $keep = $keep && $eventEnd >= $filterStartDate;
+                }
+                if ($filterEndDate !== '') {
+                    $keep = $keep && $eventStart <= $filterEndDate;
+                }
+                return $keep;
+            });
+        }
+
+        if ($this->settings['filter'] !== '') {
+            $filteredEvents = [];
+            foreach ($events as $event) {
+                if (preg_match($this->settings['filter'], $event['name'])) {
+                    $filteredEvents[] = $event;
+                }
+            }
+            $events = $filteredEvents;
+        }
+
+        return $events;
     }
 
     protected function groupEventsByDay(array $events): array
