@@ -61,7 +61,7 @@ This extension has been initially developed in May 2020 by
 `Pastoral Unit Sainte-Claire <https://www.paroisse.ch>`__ in canton Fribourg
 (CH), and is now further maintained by the same company and other contributors.
 
-Since end of 2023, the extension is sponsored as well by the web agency
+Since end of 2023, the extension is sponsored partly as well by the web agency
 `hemmer <https://www.hemmer.ch>`__, the company behind theodia.org.
 
 
