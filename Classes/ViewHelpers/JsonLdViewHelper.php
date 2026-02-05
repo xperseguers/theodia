@@ -24,28 +24,25 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
-use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithRenderStatic;
 
 class JsonLdViewHelper extends AbstractViewHelper
 {
-    use CompileWithRenderStatic;
-
     protected $escapeOutput = false;
 
-    public function initializeArguments()
+    public function initializeArguments(): void
     {
         $this->registerArgument('events', 'array', 'Events to render', false);
         $this->registerArgument('place', 'array', 'Place to render', false);
     }
 
-    public static function renderStatic(array $arguments, \Closure $renderChildrenClosure, RenderingContextInterface $renderingContext)
+    public function render(): string
     {
         $jsonObjects = [];
-        if (!empty($arguments['events'])) {
-            $jsonObjects = static::getJsonLdEvents($arguments['events']);
+        if (!empty($this->arguments['events'])) {
+            $jsonObjects = static::getJsonLdEvents($this->arguments['events']);
         }
-        if (!empty($arguments['place'])) {
-            $jsonObjects[] = static::getJsonLdLocation($arguments['place']);
+        if (!empty($this->arguments['place'])) {
+            $jsonObjects[] = static::getJsonLdLocation($this->arguments['place']);
         }
 
         if (count($jsonObjects) === 1) {
