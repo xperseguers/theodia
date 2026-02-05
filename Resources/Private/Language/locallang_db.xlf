@@ -36,8 +36,14 @@
             <trans-unit id="plugins.event.settings.filter_start">
                 <source>Filter on the start date</source>
             </trans-unit>
+            <trans-unit id="plugins.event.settings.filter_start.description">
+                <source>Only events occurring from this date onwards will be displayed. Furthermore, regardless of your filter settings, only future events will be displayed.</source>
+            </trans-unit>
             <trans-unit id="plugins.event.settings.filter_end">
                 <source>Filter on the end date</source>
+            </trans-unit>
+            <trans-unit id="plugins.event.settings.filter_end.description">
+                <source>Only events occurring up to that date will be displayed. Furthermore, regardless of your filter settings, only future events will be displayed.</source>
             </trans-unit>
             <trans-unit id="plugins.event.settings.iframe">
                 <source>Use an iframe block</source>

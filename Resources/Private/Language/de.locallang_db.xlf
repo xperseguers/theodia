@@ -36,8 +36,14 @@
             <trans-unit id="plugins.event.settings.filter_start">
                 <target>Filter nach Startdatum</target>
             </trans-unit>
+            <trans-unit id="plugins.event.settings.filter_start.description">
+                <target>Es werden nur Ereignisse angezeigt, die ab diesem Datum stattfinden. Unabhängig von Ihrem Filter werden außerdem nur zukünftige Ereignisse angezeigt.</target>
+            </trans-unit>
             <trans-unit id="plugins.event.settings.filter_end">
                 <target>Filter nach Enddatum</target>
+            </trans-unit>
+            <trans-unit id="plugins.event.settings.filter_end.description">
+                <target>Es werden nur Ereignisse angezeigt, die bis zu diesem Datum stattfinden. Unabhängig von Ihrem Filter werden nur zukünftige Ereignisse angezeigt.</target>
             </trans-unit>
             <trans-unit id="plugins.event.settings.iframe">
                 <target>Verwenden eines iframe-Blocks</target>

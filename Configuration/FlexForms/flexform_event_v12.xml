@@ -62,6 +62,7 @@
                     </settings.filter>
                     <settings.filter_start>
                         <label>LLL:EXT:theodia/Resources/Private/Language/locallang_db.xlf:plugins.event.settings.filter_start</label>
+                        <description>LLL:EXT:theodia/Resources/Private/Language/locallang_db.xlf:plugins.event.settings.filter_start.description</description>
                         <displayCond><![CDATA[FIELD:settings.iframe:=:0]]></displayCond>
                         <config>
                             <type>datetime</type>
@@ -70,6 +71,7 @@
                     </settings.filter_start>
                     <settings.filter_end>
                         <label>LLL:EXT:theodia/Resources/Private/Language/locallang_db.xlf:plugins.event.settings.filter_end</label>
+                        <description>LLL:EXT:theodia/Resources/Private/Language/locallang_db.xlf:plugins.event.settings.filter_end.description</description>
                         <displayCond><![CDATA[FIELD:settings.iframe:=:0]]></displayCond>
                         <config>
                             <type>datetime</type>
