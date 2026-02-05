@@ -126,10 +126,10 @@
                 <target>Carte</target>
             </trans-unit>
             <trans-unit id="tx_theodia_place.map.address">
-                <source>Adresse</source>
+                <target>Adresse</target>
             </trans-unit>
             <trans-unit id="tx_theodia_place.map.show">
-                <source>Afficher</source>
+                <target>Afficher</target>
             </trans-unit>
 
             <trans-unit id="tx_theodia_parish">
@@ -153,10 +153,10 @@
             </trans-unit>
 
             <trans-unit id="site.tx_theodia_api_key">
-                <source>Clé d'API</source>
+                <target>Clé d'API</target>
             </trans-unit>
             <trans-unit id="site.tx_theodia_api_key.description">
-                <source>La clé d'API qui permet l'accès aux données de theodia. Obtenez votre clé via https://about.theodia.org/api</source>
+                <target>La clé d'API qui permet l'accès aux données de theodia. Obtenez votre clé via https://about.theodia.org/api</target>
             </trans-unit>
             <trans-unit id="site.tx_theodia_storage">
                 <target>ID du dossier de stockage</target>
