@@ -12,6 +12,8 @@ For more details,
 =======  ======================================================
 Version  Changes
 =======  ======================================================
+3.1.x    - Add support for TYPO3 v14
+         - Start and end date filters for the events plugin
 3.0.x    - Add support for signed requests to theodia API
 2.2.x    - Add early support for TYPO3 v13
          - Drop support for TYPO3 v10 (would cause too much
