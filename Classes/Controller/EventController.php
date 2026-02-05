@@ -235,11 +235,10 @@ class EventController extends ActionController
             $languageCode = $siteLanguage->getTwoLetterIsoCode();
         }
 
-        $baseUrl = 'https://theodia.org/widget/v1/events';
+        $baseUrl = 'https://theodia.org/' . $languageCode . '/widget/v2/events';
         $parameters = [
             'calendars' => $this->settings['calendars'],
             'dateFormat' => 'EEEE d MMMM yyyy',
-            'language' => $languageCode,
             'quantity' => (int)$this->settings['numberOfEvents'],
             'showMore' => 'false',
             'showPlace' => 'false',
@@ -261,7 +260,7 @@ class EventController extends ActionController
 <script>
    (function() {
        var d = document, s = d.createElement('script');
-       s.src = "https://theodia.org/widget/v1/embed.js";
+       s.src = "https://theodia.org/$languageCode/widget/v2/embed.js";
        s.setAttribute('data-timestamp', +new Date());
        (d.head || d.body).appendChild(s);
    })();
