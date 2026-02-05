@@ -51,9 +51,4 @@ defined('TYPO3') || die();
             @import \'EXT:theodia/Configuration/TSconfig/ContentElementWizard.tsconfig\'
         ');
     }
-
-    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update']['TxTheodiaPlugins']
-        = \Causal\Theodia\Updates\PluginsUpdater::class;
-    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update']['TxTheodiaSiteConfiguration']
-        = \Causal\Theodia\Updates\SiteConfigurationUpdater::class;
 })('theodia');
