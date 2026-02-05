@@ -172,8 +172,8 @@ class EventController extends ActionController
         });
 
         // If a filter for start/end dates is set, apply it
-        $filterStart = (int)$this->settings['filter_start'];
-        $filterEnd = (int)$this->settings['filter_end'];
+        $filterStart = (int)($this->settings['filter_start'] ?? 0);
+        $filterEnd = (int)($this->settings['filter_end'] ?? 0);
         if ($filterStart !== 0 || $filterEnd !== 0) {
             $filterStartDate = $filterStart !== 0 ? date('Y-m-d', $filterStart) : '';
             $filterEndDate = $filterEnd !== 0 ? date('Y-m-d', $filterEnd) : '';
@@ -191,7 +191,7 @@ class EventController extends ActionController
             });
         }
 
-        if ($this->settings['filter'] !== '') {
+        if (($this->settings['filter'] ?? '') !== '') {
             $filteredEvents = [];
             foreach ($events as $event) {
                 if (preg_match($this->settings['filter'], $event['name'])) {
