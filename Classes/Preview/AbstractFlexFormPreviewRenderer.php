@@ -52,7 +52,12 @@ abstract class AbstractFlexFormPreviewRenderer extends StandardContentPreviewRen
         }
 
         if (is_array($this->flexFormData) || $this->flexFormData instanceof \ArrayAccess) {
-            $out[] = '<table class="table table-sm mt-3 mb-0">';
+            if ($this->typo3Version >= 14) {
+                $cssClasses = 'table table-sm table-vertical-top mt-3 mb-0';
+            } else {
+                $cssClasses = 'table table-sm mt-3 mb-0';
+            }
+            $out[] = '<table class="' . $cssClasses . '">';
             $this->renderFlexFormPreviewContent($record, $out);
             $out[] = '</table>';
         }
@@ -98,9 +103,11 @@ abstract class AbstractFlexFormPreviewRenderer extends StandardContentPreviewRen
 
     protected function addTableRow(string $label, string $content): string
     {
+        $cssClasses = $this->typo3Version >= 14 ? '' : 'align-top';
+
         $out[] = '<tr>';
-        $out[] = '<td class="align-top">' . htmlspecialchars($label) . '</td>';
-        $out[] = '<td class="align-top" style="font-weight: bold">' . $content . '</td>';
+        $out[] = '<td class="' . $cssClasses . '">' . htmlspecialchars($label) . '</td>';
+        $out[] = '<td class="' . $cssClasses . '" style="font-weight: bold">' . $content . '</td>';
         $out[] = '</tr>';
 
         return implode(LF, $out);
