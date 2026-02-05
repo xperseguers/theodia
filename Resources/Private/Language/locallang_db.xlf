@@ -30,6 +30,12 @@
             <trans-unit id="plugins.event.settings.filter.description">
                 <source>E.g., "/family/i". Regular expression syntax: https://www.php.net/manual/en/pcre.pattern.php</source>
             </trans-unit>
+            <trans-unit id="plugins.event.settings.filter_start">
+                <source>Filter on the start date</source>
+            </trans-unit>
+            <trans-unit id="plugins.event.settings.filter_end">
+                <source>Filter on the end date</source>
+            </trans-unit>
             <trans-unit id="plugins.event.settings.iframe">
                 <source>Use an iframe block</source>
             </trans-unit>

@@ -51,10 +51,21 @@ class EventPreviewRenderer extends AbstractFlexFormPreviewRenderer
             $showLocation = (bool)$this->getFieldFromFlexForm('settings.showLocation');
             $out[] = $this->addTableRow($label, $this->describeBoolean($showLocation));
 
-            $filter = $this->getFieldFromFlexForm('settings.filter');
-            if (!empty($filter)) {
+            $filter = $this->getFieldFromFlexForm('settings.filter') ?? '';
+            $filterStart = (int)($this->getFieldFromFlexForm('settings.filter_start') ?? '0');
+            $filterEnd = (int)($this->getFieldFromFlexForm('settings.filter_end') ?? '0');
+            if ($filter !== '' || $filterStart !== 0 || $filterEnd !== 0) {
                 $label = $languageService->sL($this->labelPrefix . 'settings.filter');
-                $out[] = $this->addTableRow($label, htmlspecialchars($filter));
+                $filterOptions = [];
+                if ($filter !== '') {
+                    $filterOptions[] = htmlspecialchars($filter);
+                }
+                $dateFormat = $GLOBALS['TYPO3_CONF_VARS']['SYS']['ddmmyy'] ?: 'd-m-Y';
+                $filterDate = $filterStart !== 0 ? date($dateFormat, $filterStart) : '...';
+                $filterDate .= ' - ';
+                $filterDate .= $filterEnd !== 0 ? date($dateFormat, $filterEnd) : '...';
+                $filterOptions[] = htmlspecialchars($filterDate);
+                $out[] = $this->addTableRow($label, implode('<br>' . LF, $filterOptions));
             }
         }
     }

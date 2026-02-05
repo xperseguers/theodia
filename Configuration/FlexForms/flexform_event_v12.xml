@@ -59,6 +59,22 @@
                             <eval>trim</eval>
                         </config>
                     </settings.filter>
+                    <settings.filter_start>
+                        <label>LLL:EXT:theodia/Resources/Private/Language/locallang_db.xlf:plugins.event.settings.filter_start</label>
+                        <displayCond><![CDATA[FIELD:settings.iframe:=:0]]></displayCond>
+                        <config>
+                            <type>datetime</type>
+                            <format>date</format>
+                        </config>
+                    </settings.filter_start>
+                    <settings.filter_end>
+                        <label>LLL:EXT:theodia/Resources/Private/Language/locallang_db.xlf:plugins.event.settings.filter_end</label>
+                        <displayCond><![CDATA[FIELD:settings.iframe:=:0]]></displayCond>
+                        <config>
+                            <type>datetime</type>
+                            <format>date</format>
+                        </config>
+                    </settings.filter_end>
                     <settings.iframe>
                         <label>LLL:EXT:theodia/Resources/Private/Language/locallang_db.xlf:plugins.event.settings.iframe</label>
                         <description>LLL:EXT:theodia/Resources/Private/Language/locallang_db.xlf:plugins.event.settings.iframe.description</description>

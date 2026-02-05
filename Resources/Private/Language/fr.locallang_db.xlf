@@ -30,6 +30,12 @@
             <trans-unit id="plugins.event.settings.filter.description">
                 <target>Par exemple : "/famille/i". Syntaxe de l'expression régulière : https://www.php.net/manual/fr/pcre.pattern.php</target>
             </trans-unit>
+            <trans-unit id="plugins.event.settings.filter_start">
+                <target>Filtre sur la date de début</target>
+            </trans-unit>
+            <trans-unit id="plugins.event.settings.filter_end">
+                <target>Filtre sur la date de fin</target>
+            </trans-unit>
             <trans-unit id="plugins.event.settings.iframe">
                 <target>Utiliser un bloc iframe</target>
             </trans-unit>

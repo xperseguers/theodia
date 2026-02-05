@@ -66,7 +66,27 @@ class EventController extends ActionController
             return $event['start'] >= $now || (($event['end'] ?? null) instanceof \DateTime && $event['end'] >= $now);
         });
 
-        if (!empty($this->settings['filter'])) {
+        // If a filter for start/end dates is set, apply it
+        $filterStart = (int)$this->settings['filter_start'];
+        $filterEnd = (int)$this->settings['filter_end'];
+        if ($filterStart !== 0 || $filterEnd !== 0) {
+            $filterStartDate = $filterStart !== 0 ? date('Y-m-d', $filterStart) : '';
+            $filterEndDate = $filterEnd !== 0 ? date('Y-m-d', $filterEnd) : '';
+            $events = array_filter($events, static function ($event) use ($filterStartDate, $filterEndDate) {
+                $eventStart = $event['start']->format('Y-m-d');
+                $eventEnd = ($event['end'] ?? null) instanceof \DateTime ? $event['end']->format('Y-m-d') : $eventStart;
+                $keep = true;
+                if ($filterStartDate !== '') {
+                    $keep = $keep && $eventEnd >= $filterStartDate;
+                }
+                if ($filterEndDate !== '') {
+                    $keep = $keep && $eventStart <= $filterEndDate;
+                }
+                return $keep;
+            });
+        }
+
+        if ($this->settings['filter'] !== '') {
             $filteredEvents = [];
             foreach ($events as $event) {
                 if (preg_match($this->settings['filter'], $event['name'])) {

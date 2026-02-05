@@ -71,6 +71,28 @@
                             </config>
                         </TCEforms>
                     </settings.filter>
+                    <settings.filter_start>
+                        <TCEforms>
+                            <label>LLL:EXT:theodia/Resources/Private/Language/locallang_db.xlf:plugins.event.settings.filter_start</label>
+                            <displayCond><![CDATA[FIELD:settings.iframe:=:0]]></displayCond>
+                            <config>
+                                <type>input</type>
+                                <renderType>inputDateTime</renderType>
+                                <eval>date</eval>
+                            </config>
+                        </TCEforms>
+                    </settings.filter_start>
+                    <settings.filter_end>
+                        <TCEforms>
+                            <label>LLL:EXT:theodia/Resources/Private/Language/locallang_db.xlf:plugins.event.settings.filter_end</label>
+                            <displayCond><![CDATA[FIELD:settings.iframe:=:0]]></displayCond>
+                            <config>
+                                <type>input</type>
+                                <renderType>inputDateTime</renderType>
+                                <eval>date</eval>
+                            </config>
+                        </TCEforms>
+                    </settings.filter_end>
                     <settings.iframe>
                         <TCEforms>
                             <label>LLL:EXT:theodia/Resources/Private/Language/locallang_db.xlf:plugins.event.settings.iframe</label>
