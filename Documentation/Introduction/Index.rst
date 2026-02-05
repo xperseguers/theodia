@@ -23,7 +23,7 @@ THEODIA.
 What does it do?
 ----------------
 
-Webmasters can easily add a theodia widget (JavaScript) to their site to display
+Webmasters can easily add a THEODIA widget (JavaScript) to their site to display
 the Mass schedule for one or more locations or according to certain criteria
 (e.g., Masses in a particular language).
 
