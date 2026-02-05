@@ -1,5 +1,8 @@
 <?php
 $typo3Version = (new \TYPO3\CMS\Core\Information\Typo3Version())->getMajorVersion();
+$fileTypeImage = $typo3Version >= 13
+    ? \TYPO3\CMS\Core\Resource\FileType::IMAGE->value
+    : \TYPO3\CMS\Core\Resource\File::FILETYPE_IMAGE;
 $tca = [
     'ctrl' => [
         'title' => 'LLL:EXT:theodia/Resources/Private/Language/locallang_db.xlf:tx_theodia_place',
@@ -340,7 +343,7 @@ $tca = [
                     // Use the imageoverlayPalette instead of the basicoverlayPalette
                     'overrideChildTca' => [
                         'types' => [
-                            \TYPO3\CMS\Core\Resource\File::FILETYPE_IMAGE => [
+                            $fileTypeImage => [
                                 'showitem' => '
                                     --palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
                                     --palette--;;filePalette'
