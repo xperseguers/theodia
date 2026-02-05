@@ -98,8 +98,14 @@ class EventController extends ActionController
         }
         // Mark the cache for this content element (well the whole page...)
         // TODO: is there a trick to mark only this specific content element as to be cached for a given amount of time?
-        $frontendController = $this->getTypoScriptFrontendController();
-        $frontendController->page['cache_timeout'] = min($cacheLifetime, static::CACHE_LIFETIME);
+        if ((new Typo3Version())->getMajorVersion() >= 13) {
+            $pageInformation = $this->request->getAttribute('frontend.page.information');
+            $pageRecord = $pageInformation->getPageRecord();
+            $pageRecord['cache_timeout'] = min($cacheLifetime, static::CACHE_LIFETIME);
+            $pageInformation->setPageRecord($pageRecord);
+        } else {
+            $GLOBALS['TSFE']->page['cache_timeout'] = min($cacheLifetime, static::CACHE_LIFETIME);
+        }
 
         $this->view->assignMultiple([
             'events' => $events,
@@ -240,13 +246,5 @@ HTML;
         } else {
             return $this->configurationManager->getContentObject();
         }
-    }
-
-    /**
-     * @return TypoScriptFrontendController
-     */
-    protected function getTypoScriptFrontendController()
-    {
-        return $GLOBALS['TSFE'];
     }
 }
