@@ -1,7 +1,7 @@
 <?php
 
 $EM_CONF[$_EXTKEY] = [
-    'title' => 'theodia',
+    'title' => 'THEODIA',
     'description' => 'Fetch data from theodia.org to display the mass schedule for the various places of worship in a parish or pastoral unit.',
     'category' => 'plugin',
     'author' => 'Xavier Perseguers',

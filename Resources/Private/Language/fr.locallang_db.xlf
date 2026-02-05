@@ -4,7 +4,7 @@
         <header/>
         <body>
             <trans-unit id="plugins.event.title">
-                <target>theodia - Horaire des célébrations</target>
+                <target>THEODIA - Horaire des célébrations</target>
             </trans-unit>
             <trans-unit id="plugins.event.settings.calendars">
                 <target>Calendriers</target>
@@ -53,7 +53,7 @@
             </trans-unit>
 
             <trans-unit id="plugins.place.title">
-                <target>theodia - Lieu</target>
+                <target>THEODIA - Lieu</target>
             </trans-unit>
             <trans-unit id="plugins.place.settings.place">
                 <target>Lieu</target>
@@ -66,7 +66,7 @@
             </trans-unit>
 
             <trans-unit id="tx_theodia_place">
-                <target>Lieu theodia</target>
+                <target>Lieu THEODIA</target>
             </trans-unit>
             <trans-unit id="tx_theodia_place.name">
                 <target>Nom</target>
@@ -75,7 +75,7 @@
                 <target>Paroisse (obsolète)</target>
             </trans-unit>
             <trans-unit id="tx_theodia_place.place_id">
-                <target>ID du lieu dans theodia</target>
+                <target>ID du lieu dans THEODIA</target>
             </trans-unit>
             <trans-unit id="tx_theodia_place.latitude">
                 <target>Latitude</target>
@@ -133,7 +133,7 @@
             </trans-unit>
 
             <trans-unit id="tx_theodia_parish">
-                <target>Paroisse theodia (obsolète)</target>
+                <target>Paroisse THEODIA (obsolète)</target>
             </trans-unit>
             <trans-unit id="tx_theodia_parish.name">
                 <target>Nom</target>
@@ -149,14 +149,14 @@
                 <target>Relations</target>
             </trans-unit>
             <trans-unit id="tabs.theodia">
-                <target>theodia</target>
+                <target>THEODIA</target>
             </trans-unit>
 
             <trans-unit id="site.tx_theodia_api_key">
                 <target>Clé d'API</target>
             </trans-unit>
             <trans-unit id="site.tx_theodia_api_key.description">
-                <target>La clé d'API qui permet l'accès aux données de theodia. Obtenez votre clé via https://about.theodia.org/api</target>
+                <target>La clé d'API qui permet l'accès aux données de THEODIA. Obtenez votre clé via https://about.theodia.org/api</target>
             </trans-unit>
             <trans-unit id="site.tx_theodia_storage">
                 <target>ID du dossier de stockage</target>
@@ -178,7 +178,7 @@
                 <target>Calendrier theodia</target>
             </trans-unit>
             <trans-unit id="site_theodia_calendar.id">
-                <target>ID du calendrier dans theodia</target>
+                <target>ID du calendrier dans THEODIA</target>
             </trans-unit>
             <trans-unit id="site_theodia_calendar.name">
                 <target>Nom</target>

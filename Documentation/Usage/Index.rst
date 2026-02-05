@@ -114,7 +114,7 @@ Use an iframe block
 
    This generates a standard iframe block instead of a list of events, just as
    you would do on your own when you embed the default JS-based
-   `widget from theodia <https://theodia.org/en/widget>`__.
+   `widget from THEODIA <https://theodia.org/en/widget>`__.
 
    Many options may be passed as parameter but the whole point of using this
    TYPO3 extension is to be much more flexible and better in term of SEO than

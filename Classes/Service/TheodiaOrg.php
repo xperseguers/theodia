@@ -145,7 +145,7 @@ class TheodiaOrg
                     $useCache = file_exists($cacheFileName);
                 }
             } elseif ($httpCode === 403) {
-                throw new \RuntimeException("Your theodia API key is invalid, or your server's time is not synchronized", 1758789409);
+                throw new \RuntimeException("Your THEODIA API key is invalid, or your server's time is not synchronized", 1758789409);
             } else {
                 $useCache = file_exists($cacheFileName);
             }
@@ -377,7 +377,7 @@ class TheodiaOrg
 
         $payload = $this->prepareFrontOfficePlacePayload($id);
         $info = $this->callApi($site, $payload, 'place_' . $id, 604800 /* 1 week */);
-        // TODO: (possibly) extract image from theodia by fetching $info['_links']['images']['href']
+        // TODO: (possibly) extract image from THEODIA by fetching $info['_links']['images']['href']
 
         $place = $info[0]['data']['place'];
         $data = [
@@ -456,9 +456,9 @@ class TheodiaOrg
         $key = $site->getConfiguration()['tx_theodia_api_key'] ?? null;
         if (!$key) {
             if (time() < strtotime('2025-11-30')) {
-                trigger_error('Using theodia without an API key configured is deprecated and it will stop working entirely in November 2025. Get your API key via https://about.theodia.org/api', E_USER_DEPRECATED);
+                trigger_error('Using THEODIA without an API key configured is deprecated and it will stop working entirely in November 2025. Get your API key via https://about.theodia.org/api', E_USER_DEPRECATED);
             } else {
-                throw new \RuntimeException("You must configure a theodia API key. Get your API key via https://about.theodia.org/api", 1758789702);
+                throw new \RuntimeException("You must configure a THEODIA API key. Get your API key via https://about.theodia.org/api", 1758789702);
             }
         }
 

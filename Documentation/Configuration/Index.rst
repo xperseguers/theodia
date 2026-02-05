@@ -7,7 +7,7 @@ Configuration
 In order to use this extension, you must configure an API key, and which places
 of worship you intend to use. This is done by editing your site configuration
 (stored in :file:`config/sites/<site>/config.yaml`), adding the API key that you
-obtained via https://about.theodia.org/api, and adding a list of theodia
+obtained via https://about.theodia.org/api, and adding a list of THEODIA
 calendars.
 
 The easiest way to do this is to use the site configuration editor in the
@@ -16,7 +16,7 @@ so, go to the Backend and then:
 
 - Open Site Management > Sites
 - Find the site you want to configure and click the pencil icon to edit it
-- Go to the "theodia" tab
+- Go to the "THEODIA" tab
 - Add a "record" for each calendar you want to use in this site.
 
 .. image:: Images/configuration.png
@@ -42,7 +42,7 @@ be used with :ref:`the plugin <usage>`:
 
 .. hint::
 
-   The order in which you configure your different theodia calendars has no
+   The order in which you configure your different THEODIA calendars has no
    effect whatsoever on the order in which the calendars are presented in the
    plugin. The plugin automatically sorts the available calendars in
    alphabetical order.
@@ -63,7 +63,7 @@ You should also configure the extension in TypoScript. You can do so like that:
 3. Make sure you are on the "Info/Modify" view (top selector).
 4. Click on the button "Edit the whole template record".
 5. Switch to tab "Includes".
-6. Include "theodia (theodia)" within the "Include static (from extensions)"
+6. Include "THEODIA (theodia)" within the "Include static (from extensions)"
    section.
 
 Alternatively if you are using a Site package, you can add the following to

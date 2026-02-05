@@ -2,7 +2,7 @@
 ..  _start:
 
 =======
-theodia
+THEODIA
 =======
 
 :Extension key:

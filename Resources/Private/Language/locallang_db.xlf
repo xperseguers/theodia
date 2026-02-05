@@ -4,7 +4,7 @@
         <header/>
         <body>
             <trans-unit id="plugins.event.title">
-                <source>theodia - Schedule of celebrations</source>
+                <source>THEODIA - Schedule of celebrations</source>
             </trans-unit>
             <trans-unit id="plugins.event.settings.calendars">
                 <source>Calendars</source>
@@ -53,7 +53,7 @@
             </trans-unit>
 
             <trans-unit id="plugins.place.title">
-                <source>theodia - Place</source>
+                <source>THEODIA - Place</source>
             </trans-unit>
             <trans-unit id="plugins.place.settings.place">
                 <source>Place</source>
@@ -66,7 +66,7 @@
             </trans-unit>
 
             <trans-unit id="tx_theodia_place">
-                <source>theodia Place</source>
+                <source>THEODIA Place</source>
             </trans-unit>
             <trans-unit id="tx_theodia_place.name">
                 <source>Name</source>
@@ -75,7 +75,7 @@
                 <source>Parish (deprecated)</source>
             </trans-unit>
             <trans-unit id="tx_theodia_place.place_id">
-                <source>Place ID in theodia</source>
+                <source>Place ID in THEODIA</source>
             </trans-unit>
             <trans-unit id="tx_theodia_place.latitude">
                 <source>Latitude</source>
@@ -133,7 +133,7 @@
             </trans-unit>
 
             <trans-unit id="tx_theodia_parish">
-                <source>theodia Parish (deprecated)</source>
+                <source>THEODIA Parish (deprecated)</source>
             </trans-unit>
             <trans-unit id="tx_theodia_parish.name">
                 <source>Name</source>
@@ -156,7 +156,7 @@
                 <source>API key</source>
             </trans-unit>
             <trans-unit id="site.tx_theodia_api_key.description">
-                <source>The API key allowing access to theodia's data. Get your key via https://about.theodia.org/api</source>
+                <source>The API key allowing access to THEODIA's data. Get your key via https://about.theodia.org/api</source>
             </trans-unit>
             <trans-unit id="site.tx_theodia_storage">
                 <source>Storage Page ID</source>

@@ -1,5 +1,5 @@
 mod.wizards.newContentElement.wizardItems.ext-theodia {
-    header = theodia
+    header = THEODIA
     after = common
     elements {
         theodia_event {

@@ -15,7 +15,7 @@ be extended to several countries.
 In this context, parishes and pastoral units are invited to enter the times of
 their Catholic celebrations in the form of ICS feeds (e.g., Google Calendar) or
 in a structured way on their website so that they can be easily added to
-theodia.
+THEODIA.
 
 
 .. _what-it-does:

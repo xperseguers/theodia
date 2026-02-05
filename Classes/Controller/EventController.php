@@ -256,7 +256,7 @@ class EventController extends ActionController
         $iframeSrc =  $baseUrl . '?' . str_replace('&', '&amp;', http_build_query($parameters));
 
         $html = <<<HTML
-<iframe title="Horaire des messes theodia" src="$iframeSrc" style="width:100%;height:auto;padding:0;border:0;"></iframe>
+<iframe title="Horaire des messes THEODIA" src="$iframeSrc" style="width:100%;height:auto;padding:0;border:0;"></iframe>
 <script>
    (function() {
        var d = document, s = d.createElement('script');

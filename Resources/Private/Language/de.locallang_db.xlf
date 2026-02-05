@@ -4,7 +4,7 @@
         <header/>
         <body>
             <trans-unit id="plugins.event.title">
-                <target>theodia - Gottesdienstplan</target>
+                <target>THEODIA - Gottesdienstplan</target>
             </trans-unit>
             <trans-unit id="plugins.event.settings.calendars">
                 <target>Kalender</target>
@@ -53,7 +53,7 @@
             </trans-unit>
 
             <trans-unit id="plugins.place.title">
-                <target>theodia – Ort</target>
+                <target>THEODIA – Ort</target>
             </trans-unit>
             <trans-unit id="plugins.place.settings.place">
                 <target>Ort</target>
@@ -66,7 +66,7 @@
             </trans-unit>
 
             <trans-unit id="tx_theodia_place">
-                <target>Ort theodia</target>
+                <target>Ort THEODIA</target>
             </trans-unit>
             <trans-unit id="tx_theodia_place.name">
                 <target>Name</target>
@@ -75,7 +75,7 @@
                 <target>Pfarrei (veraltet)</target>
             </trans-unit>
             <trans-unit id="tx_theodia_place.place_id">
-                <target>ID des Ortes in theodia</target>
+                <target>ID des Ortes in THEODIA</target>
             </trans-unit>
             <trans-unit id="tx_theodia_place.latitude">
                 <target>Breitengrad</target>
@@ -133,7 +133,7 @@
             </trans-unit>
 
             <trans-unit id="tx_theodia_parish">
-                <target>Pfarrei theodia (veraltet)</target>
+                <target>Pfarrei THEODIA (veraltet)</target>
             </trans-unit>
             <trans-unit id="tx_theodia_parish.name">
                 <target>Name</target>
@@ -149,14 +149,14 @@
                 <target>Verbindungen</target>
             </trans-unit>
             <trans-unit id="tabs.theodia">
-                <target>theodia</target>
+                <target>THEODIA</target>
             </trans-unit>
 
             <trans-unit id="site.tx_theodia_api_key">
                 <target>API-Schlüssel</target>
             </trans-unit>
             <trans-unit id="site.tx_theodia_api_key.description">
-                <target>Der API-Schlüssel, der den Zugriff auf die Daten von Theodia ermöglicht. Beantragen Sie Ihren Schlüssel unter https://about.theodia.org/api.</target>
+                <target>Der API-Schlüssel, der den Zugriff auf die Daten von THEODIA ermöglicht. Beantragen Sie Ihren Schlüssel unter https://about.theodia.org/api.</target>
             </trans-unit>
             <trans-unit id="site.tx_theodia_storage">
                 <target>ID des Speicherordners</target>
