@@ -455,11 +455,7 @@ class TheodiaOrg
     {
         $key = $site->getConfiguration()['tx_theodia_api_key'] ?? null;
         if (!$key) {
-            if (time() < strtotime('2025-11-30')) {
-                trigger_error('Using THEODIA without an API key configured is deprecated and it will stop working entirely in November 2025. Get your API key via https://about.theodia.org/api', E_USER_DEPRECATED);
-            } else {
-                throw new \RuntimeException("You must configure a THEODIA API key. Get your API key via https://about.theodia.org/api", 1758789702);
-            }
+            throw new \RuntimeException('You must configure a THEODIA API key. Get your API key via https://about.theodia.org/api', 1758789702);
         }
 
         $timestamp = time();
