@@ -26,11 +26,15 @@ if ($typo3Version >= 12) {
     ];
 }
 foreach ($flexForms as $CType => $flexForm) {
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue(
-        '*',
-        $flexForm,
-        $CType
-    );
+    if ($typo3Version >= 14) {
+        $GLOBALS['TCA']['tt_content']['types'][$CType]['columnsOverrides']['pi_flexform']['config']['ds'] = $flexForm;
+    } else {
+        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue(
+            '*',
+            $flexForm,
+            $CType
+        );
+    }
 
     $GLOBALS['TCA']['tt_content']['types'][$CType]['showitem'] = '
         --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:general,
