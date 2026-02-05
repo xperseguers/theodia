@@ -42,7 +42,7 @@ class TheodiaCalendarSelector
             $pid = $record['pid'] ?? 0;
         } else {
             // Last resort... Let's get the pid from the GET parameters!
-            $pid = key(GeneralUtility::_GET('edit')['tt_content']);
+            $pid = key($_GET('edit')['tt_content']);
         }
 
         $theodiaCalendars = TheodiaOrg::getTheodiaCalendars($pid);
