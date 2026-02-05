@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+    <file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2026-02-05T16:20:03" product-name="theodia">
+        <header/>
+        <body>
+            <trans-unit id="plugin.theodia_event.title">
+                <target>Gottesdienstplan</target>
+            </trans-unit>
+            <trans-unit id="plugin.theodia_event.description">
+                <target>Zeigt die bevorstehenden Ereignisse für einen oder mehrere Kalender an.</target>
+            </trans-unit>
+            <trans-unit id="plugin.theodia_place.title">
+                <target>Kultstätte</target>
+            </trans-unit>
+            <trans-unit id="plugin.theodia_place.description">
+                <target>Zeigt eine Detailseite für eine bestimmte Kultstätte an.</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

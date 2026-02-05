@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+    <file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2026-02-05T16:20:03" product-name="theodia">
+        <header/>
+        <body>
+            <trans-unit id="plugins.event.title">
+                <target>theodia - Gottesdienstplan</target>
+            </trans-unit>
+            <trans-unit id="plugins.event.settings.calendars">
+                <target>Kalender</target>
+            </trans-unit>
+            <trans-unit id="plugins.event.settings.calendars.more">
+                <target>(%s andere)</target>
+            </trans-unit>
+            <trans-unit id="plugins.event.settings.calendars.errorEmpty">
+                <target>Kein Kalender ausgewählt</target>
+            </trans-unit>
+            <trans-unit id="plugins.event.settings.numberOfEvents">
+                <target>Anzahl der anzuzeigenden Ereignisse</target>
+            </trans-unit>
+            <trans-unit id="plugins.event.settings.showMoreLink">
+                <target>Link/Button hinzufügen, um weitere Ereignisse dynamisch zu laden</target>
+            </trans-unit>
+            <trans-unit id="plugins.event.settings.showMoreLink.description">
+                <target>Eventuelle Filter werden weiterhin angewendet.</target>
+            </trans-unit>
+            <trans-unit id="plugins.event.settings.showLocation">
+                <target>Gebetsstätte anzeigen</target>
+            </trans-unit>
+            <trans-unit id="plugins.event.settings.filter">
+                <target>Filter</target>
+            </trans-unit>
+            <trans-unit id="plugins.event.settings.filter.description">
+                <target>Beispiel: „/familie/i“. Syntax des regulären Ausdrucks: https://www.php.net/manual/de/pcre.pattern.php</target>
+            </trans-unit>
+            <trans-unit id="plugins.event.settings.filter_start">
+                <target>Filter nach Startdatum</target>
+            </trans-unit>
+            <trans-unit id="plugins.event.settings.filter_end">
+                <target>Filter nach Enddatum</target>
+            </trans-unit>
+            <trans-unit id="plugins.event.settings.iframe">
+                <target>Verwenden eines iframe-Blocks</target>
+            </trans-unit>
+            <trans-unit id="plugins.event.settings.iframe.description">
+                <target>Bitte beachten Sie, dass dies für die Suchmaschinenoptimierung weniger vorteilhaft ist.</target>
+            </trans-unit>
+
+            <trans-unit id="plugins.place.title">
+                <target>theodia – Ort</target>
+            </trans-unit>
+            <trans-unit id="plugins.place.settings.place">
+                <target>Ort</target>
+            </trans-unit>
+            <trans-unit id="plugins.place.settings.place.dynamic">
+                <target>(dynamisch)</target>
+            </trans-unit>
+            <trans-unit id="plugins.place.settings.place.errorEmpty">
+                <target>Kein Ort ausgewählt</target>
+            </trans-unit>
+
+            <trans-unit id="tx_theodia_place">
+                <target>Ort theodia</target>
+            </trans-unit>
+            <trans-unit id="tx_theodia_place.name">
+                <target>Name</target>
+            </trans-unit>
+            <trans-unit id="tx_theodia_place.parish">
+                <target>Pfarrei (veraltet)</target>
+            </trans-unit>
+            <trans-unit id="tx_theodia_place.place_id">
+                <target>ID des Ortes in theodia</target>
+            </trans-unit>
+            <trans-unit id="tx_theodia_place.latitude">
+                <target>Breitengrad</target>
+            </trans-unit>
+            <trans-unit id="tx_theodia_place.longitude">
+                <target>Längengrad</target>
+            </trans-unit>
+            <trans-unit id="tx_theodia_place.patron">
+                <target>Schutzpatron</target>
+            </trans-unit>
+            <trans-unit id="tx_theodia_place.description">
+                <target>Beschreibung</target>
+            </trans-unit>
+            <trans-unit id="tx_theodia_place.year">
+                <target>Baujahr</target>
+            </trans-unit>
+            <trans-unit id="tx_theodia_place.century">
+                <target>Baujahrhundert</target>
+            </trans-unit>
+            <trans-unit id="tx_theodia_place.seats">
+                <target>Anzahl der Plätze</target>
+            </trans-unit>
+            <trans-unit id="tx_theodia_place.address">
+                <target>Strasse</target>
+            </trans-unit>
+            <trans-unit id="tx_theodia_place.postal_code">
+                <target>PLZ</target>
+            </trans-unit>
+            <trans-unit id="tx_theodia_place.city">
+                <target>Stadt</target>
+            </trans-unit>
+            <trans-unit id="tx_theodia_place.region">
+                <target>Region</target>
+            </trans-unit>
+            <trans-unit id="tx_theodia_place.country">
+                <target>Land</target>
+            </trans-unit>
+            <trans-unit id="tx_theodia_place.url">
+                <target>Externe URL</target>
+            </trans-unit>
+            <trans-unit id="tx_theodia_place.page_uid">
+                <target>Detailseite auf dieser Website</target>
+            </trans-unit>
+            <trans-unit id="tx_theodia_place.photo">
+                <target>Foto(s)</target>
+            </trans-unit>
+            <trans-unit id="tx_theodia_place.map">
+                <target>Karte</target>
+            </trans-unit>
+            <trans-unit id="tx_theodia_place.map.address">
+                <source>Adresse</source>
+            </trans-unit>
+            <trans-unit id="tx_theodia_place.map.show">
+                <source>Anzeigen</source>
+            </trans-unit>
+
+            <trans-unit id="tx_theodia_parish">
+                <target>Pfarrei theodia (veraltet)</target>
+            </trans-unit>
+            <trans-unit id="tx_theodia_parish.name">
+                <target>Name</target>
+            </trans-unit>
+
+            <trans-unit id="tabs.address">
+                <target>Adresse</target>
+            </trans-unit>
+            <trans-unit id="tabs.gps">
+                <target>GPS</target>
+            </trans-unit>
+            <trans-unit id="tabs.relations">
+                <target>Verbindungen</target>
+            </trans-unit>
+            <trans-unit id="tabs.theodia">
+                <target>theodia</target>
+            </trans-unit>
+
+            <trans-unit id="site.tx_theodia_api_key">
+                <source>API-Schlüssel</source>
+            </trans-unit>
+            <trans-unit id="site.tx_theodia_api_key.description">
+                <source>Der API-Schlüssel, der den Zugriff auf die Daten von Theodia ermöglicht. Beantragen Sie Ihren Schlüssel unter https://about.theodia.org/api.</source>
+            </trans-unit>
+            <trans-unit id="site.tx_theodia_storage">
+                <target>ID des Speicherordners</target>
+            </trans-unit>
+            <trans-unit id="site.tx_theodia_storage.description">
+                <target>Dieser Ordner speichert die Standortaufzeichnungen von theodia.</target>
+            </trans-unit>
+            <trans-unit id="site.tx_theodia_free_storage">
+                <target>Verschieben von Ortsaufzeichnungen zulassen theodia</target>
+            </trans-unit>
+            <trans-unit id="site.tx_theodia_free_storage.description">
+                <target>Ermöglicht es Ihnen, die Aufzeichnungen von theodia nach dem ersten Import frei in einen anderen Speicherordner zu verschieben.</target>
+            </trans-unit>
+            <trans-unit id="site.tx_theodia_calendars">
+                <target>Für diesen Standort verfügbare Kalender</target>
+            </trans-unit>
+
+            <trans-unit id="site_theodia_calendar">
+                <target>Kalender theodia</target>
+            </trans-unit>
+            <trans-unit id="site_theodia_calendar.id">
+                <target>Kalender-ID in theodia</target>
+            </trans-unit>
+            <trans-unit id="site_theodia_calendar.name">
+                <target>Name</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

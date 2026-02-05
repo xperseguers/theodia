@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+    <file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2026-02-05T16:20:03Z" product-name="theodia">
+        <header/>
+        <body>
+            <trans-unit id="events.empty">
+                <target>Keine Messe geplant.</target>
+            </trans-unit>
+            <trans-unit id="events.showMore">
+                <target>Weiter anzeigen</target>
+            </trans-unit>
+            <trans-unit id="event.cancelled">
+                <target>abgebrochen</target>
+            </trans-unit>
+
+            <trans-unit id="place.history">
+                <target>Geschichte</target>
+            </trans-unit>
+            <trans-unit id="place.patron">
+                <target>Schutzpatron</target>
+            </trans-unit>
+            <trans-unit id="place.year">
+                <target>Baujahr</target>
+            </trans-unit>
+            <trans-unit id="place.construction">
+                <target>Bau</target>
+            </trans-unit>
+            <trans-unit id="place.construction.century">
+                <target>%. Jahrhundert</target>
+            </trans-unit>
+            <trans-unit id="place.seats">
+                <target>Anzahl der Plätze</target>
+            </trans-unit>
+            <trans-unit id="place.address">
+                <target>Adresse</target>
+            </trans-unit>
+            <trans-unit id="place.directions">
+                <target>Anreise</target>
+            </trans-unit>
+            <trans-unit id="place.showOnMap">
+                <target>Auf der Karte anzeigen</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>
