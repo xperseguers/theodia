@@ -21,6 +21,9 @@
             <trans-unit id="plugins.event.settings.showMoreLink">
                 <source>Add a link/button to dynamically load more events</source>
             </trans-unit>
+            <trans-unit id="plugins.event.settings.showMoreLink.description">
+                <source>Any filters will continue to be applied.</source>
+            </trans-unit>
             <trans-unit id="plugins.event.settings.showLocation">
                 <source>Show place of worship</source>
             </trans-unit>
