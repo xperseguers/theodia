@@ -16,6 +16,8 @@ declare(strict_types=1);
 
 namespace Causal\Theodia\Service;
 
+use Causal\Theodia\Event\AfterEventsFetchedEvent;
+use Psr\EventDispatcher\EventDispatcherInterface;
 use TYPO3\CMS\Core\Core\Environment;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Exception\SiteNotFoundException;
@@ -25,6 +27,10 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class TheodiaOrg
 {
+    public function __construct(
+        private readonly EventDispatcherInterface $eventDispatcher
+    ) {}
+
     /**
      * @return array
      */
@@ -92,7 +98,10 @@ class TheodiaOrg
             $event['calendar']['rite']['id'] = (int)$event['calendar']['rite']['id'];
         }
 
-        return $events;
+        $afterEventsFetchedEvent = new AfterEventsFetchedEvent($calendars, $events);
+        $this->eventDispatcher->dispatch($afterEventsFetchedEvent);
+
+        return $afterEventsFetchedEvent->getEvents();
     }
 
     protected function getPlace(Site $site, int $id): array
