@@ -14,17 +14,10 @@ foreach ($plugins as $CType => $title) {
 }
 
 $typo3Version = (new \TYPO3\CMS\Core\Information\Typo3Version())->getMajorVersion();
-if ($typo3Version >= 12) {
-    $flexForms = [
-        'theodia_event' => 'FILE:EXT:theodia/Configuration/FlexForms/flexform_event_v12.xml',
-        'theodia_place' => 'FILE:EXT:theodia/Configuration/FlexForms/flexform_place_v12.xml',
-    ];
-} else {
-    $flexForms = [
-        'theodia_event' => 'FILE:EXT:theodia/Configuration/FlexForms/flexform_event.xml',
-        'theodia_place' => 'FILE:EXT:theodia/Configuration/FlexForms/flexform_place.xml',
-    ];
-}
+$flexForms = [
+    'theodia_event' => 'FILE:EXT:theodia/Configuration/FlexForms/flexform_event.xml',
+    'theodia_place' => 'FILE:EXT:theodia/Configuration/FlexForms/flexform_place.xml',
+];
 foreach ($flexForms as $CType => $flexForm) {
     if ($typo3Version >= 14) {
         $GLOBALS['TCA']['tt_content']['types'][$CType]['columnsOverrides']['pi_flexform']['config']['ds'] = $flexForm;

@@ -12,6 +12,7 @@ For more details,
 =======  ======================================================
 Version  Changes
 =======  ======================================================
+3.2.x    - Drop support for TYPO3 v11
 3.1.x    - Add support for TYPO3 v14
          - Start and end date filters for the events plugin
          - German localization

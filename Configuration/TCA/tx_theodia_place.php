@@ -3,13 +3,12 @@ $typo3Version = (new \TYPO3\CMS\Core\Information\Typo3Version())->getMajorVersio
 $fileTypeImage = $typo3Version >= 13
     ? \TYPO3\CMS\Core\Resource\FileType::IMAGE->value
     : \TYPO3\CMS\Core\Resource\File::FILETYPE_IMAGE;
-$tca = [
+return [
     'ctrl' => [
         'title' => 'LLL:EXT:theodia/Resources/Private/Language/locallang_db.xlf:tx_theodia_place',
         'label' => 'name',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
-        'cruser_id' => 'cruser_id',
         'versioningWS' => true,
         'origUid' => 't3_origuid',
         'languageField' => 'sys_language_uid',
@@ -57,20 +56,9 @@ $tca = [
         'sys_language_uid' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.language',
-            'config' => $typo3Version >= 11
-                ? [
-                    'type' => 'language',
-                ]
-                : [
-                    'type' => 'select',
-                    'renderType' => 'selectSingle',
-                    'foreign_table' => 'sys_language',
-                    'foreign_table_where' => 'ORDER BY sys_language.title',
-                    'items' => [
-                        ['LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.allLanguages', -1],
-                        ['LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.default_value', 0]
-                    ],
-                ],
+            'config' => [
+                'type' => 'language',
+            ],
         ],
         'l10n_parent' => [
             'displayCond' => 'FIELD:sys_language_uid:>:0',
@@ -78,16 +66,12 @@ $tca = [
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
-                'items' => $typo3Version >= 12
-                    ? [
-                        [
-                            'label' => '',
-                            'value' => 0,
-                        ],
-                    ]
-                    : [
-                        ['', 0],
+                'items' => [
+                    [
+                        'label' => '',
+                        'value' => 0,
                     ],
+                ],
                 'foreign_table' => 'tx_theodia_place',
                 'foreign_table_where' => 'AND tx_theodia_place.pid=###CURRENT_PID### AND tx_theodia_place.sys_language_uid IN (-1,0)',
             ],
@@ -112,7 +96,7 @@ $tca = [
                 'type' => 'input',
                 'size' => '30',
                 'max' => '255',
-                'eval' => $typo3Version >= 12 ? 'trim' : 'required,trim',
+                'eval' => 'trim',
                 'required' => true,
             ],
         ],
@@ -122,16 +106,12 @@ $tca = [
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
-                'items' => $typo3Version >= 12
-                    ? [
-                        [
-                            'label' => '',
-                            'value' => 0,
-                        ],
-                    ]
-                    : [
-                        ['', 0],
+                'items' => [
+                    [
+                        'label' => '',
+                        'value' => 0,
                     ],
+                ],
                 'foreign_table' => 'tx_theodia_parish',
                 'foreign_table_where' => 'AND tx_theodia_parish.pid=###CURRENT_PID### AND tx_theodia_parish.sys_language_uid IN (0, -1) ORDER BY tx_theodia_parish.name',
                 'size' => 1,
@@ -143,16 +123,10 @@ $tca = [
             'exclude' => 1,
             'label' => 'LLL:EXT:theodia/Resources/Private/Language/locallang_db.xlf:tx_theodia_place.place_id',
             'l10n_mode' => 'exclude',
-            'config' => $typo3Version >= 12
-                ? [
-                    'type' => 'number',
-                    'size' => '6',
-                ]
-                : [
-                    'type' => 'input',
-                    'size' => '6',
-                    'eval' => 'int',
-                ],
+            'config' => [
+                'type' => 'number',
+                'size' => '6',
+            ],
         ],
         'latitude' => [
             'exclude' => 0,
@@ -206,16 +180,10 @@ $tca = [
             'exclude' => 0,
             'label' => 'LLL:EXT:theodia/Resources/Private/Language/locallang_db.xlf:tx_theodia_place.year',
             'l10n_mode' => 'exclude',
-            'config' => $typo3Version >= 12
-                ? [
-                    'type' => 'number',
-                    'size' => '6',
-                ]
-                : [
-                    'type' => 'input',
-                    'size' => '6',
-                    'eval' => 'int',
-                ],
+            'config' => [
+                'type' => 'number',
+                'size' => '6',
+            ],
         ],
         'century' => [
             'exclude' => 0,
@@ -233,16 +201,10 @@ $tca = [
             'exclude' => 0,
             'label' => 'LLL:EXT:theodia/Resources/Private/Language/locallang_db.xlf:tx_theodia_place.seats',
             'l10n_mode' => 'exclude',
-            'config' => $typo3Version >= 12
-                ? [
-                    'type' => 'number',
-                    'size' => '6',
-                ]
-                : [
-                    'type' => 'input',
-                    'size' => '6',
-                    'eval' => 'int',
-                ],
+            'config' => [
+                'type' => 'number',
+                'size' => '6',
+            ],
         ],
         'address' => [
             'exclude' => 0,
@@ -313,64 +275,35 @@ $tca = [
             'exclude' => 0,
             'label' => 'LLL:EXT:theodia/Resources/Private/Language/locallang_db.xlf:tx_theodia_place.page_uid',
             'l10n_mode' => 'exclude',
-            'config' => $typo3Version >= 12
-                ? [
-                    'type' => 'group',
-                    'allowed' => 'pages',
-                    'size' => 1,
-                    'minitems' => 0,
-                    'maxitems' => 1,
-                    'multiple' => 0,
-                ]
-                : [
-                    'type' => 'group',
-                    'internal_type' => 'db',
-                    'allowed' => 'pages',
-                    'size' => 1,
-                    'minitems' => 0,
-                    'maxitems' => 1,
-                    'multiple' => 0,
-                ],
+            'config' => [
+                'type' => 'group',
+                'allowed' => 'pages',
+                'size' => 1,
+                'minitems' => 0,
+                'maxitems' => 1,
+                'multiple' => 0,
+            ],
         ],
         'photo' => [
             'exclude' => 0,
             'label' => 'LLL:EXT:theodia/Resources/Private/Language/locallang_db.xlf:tx_theodia_place.photo',
             'l10n_mode' => 'exclude',
-            'config' => $typo3Version >= 12
-                ? [
-                    'type' => 'file',
-                    // Use the imageoverlayPalette instead of the basicoverlayPalette
-                    'overrideChildTca' => [
-                        'types' => [
-                            $fileTypeImage => [
-                                'showitem' => '
+            'config' => [
+                'type' => 'file',
+                // Use the imageoverlayPalette instead of the basicoverlayPalette
+                'overrideChildTca' => [
+                    'types' => [
+                        $fileTypeImage => [
+                            'showitem' => '
                                     --palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
                                     --palette--;;filePalette'
-                            ],
                         ],
                     ],
-                    'maxitems' => 20,
-                    'minitems' => 0,
-                    'allowed' => 'common-image-types'
-                ]
-                :  \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
-                    'photo',
-                    [
-                        // Use the imageoverlayPalette instead of the basicoverlayPalette
-                        'overrideChildTca' => [
-                            'types' => [
-                                \TYPO3\CMS\Core\Resource\File::FILETYPE_IMAGE => [
-                                    'showitem' => '
-                                    --palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
-                                    --palette--;;filePalette'
-                                ],
-                            ],
-                        ],
-                        'maxitems' => 20,
-                        'minitems'=> 0
-                    ],
-                    $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext']
-                )
+                ],
+                'maxitems' => 20,
+                'minitems' => 0,
+                'allowed' => 'common-image-types'
+            ],
         ],
         'map' => [
             'label' => 'LLL:EXT:theodia/Resources/Private/Language/locallang_db.xlf:tx_theodia_place.map',
@@ -388,11 +321,10 @@ $tca = [
                 ],
             ],
         ],
+        'categories' => [
+            'config' => [
+                'type' => 'category'
+            ]
+        ],
     ],
 ];
-
-if ($typo3Version >= 12) {
-    unset($tca['ctrl']['cruser_id']);
-}
-
-return $tca;

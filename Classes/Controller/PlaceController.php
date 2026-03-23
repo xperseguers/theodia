@@ -20,7 +20,6 @@ use Causal\Theodia\Service\TheodiaOrg;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
-use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Resource\ResourceFactory;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
@@ -112,11 +111,6 @@ class PlaceController extends ActionController
 
     protected function getContentObject(): ContentObjectRenderer
     {
-        $typo3Version = (new Typo3Version())->getMajorVersion();
-        if ($typo3Version >= 12) {
-            return $this->request->getAttribute('currentContentObject');
-        } else {
-            return $this->configurationManager->getContentObject();
-        }
+        return $this->request->getAttribute('currentContentObject');
     }
 }

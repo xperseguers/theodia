@@ -6,7 +6,6 @@ CREATE TABLE tx_theodia_place (
 	pid int(11) DEFAULT '0' NOT NULL,
 	tstamp int(11) DEFAULT '0' NOT NULL,
 	crdate int(11) DEFAULT '0' NOT NULL,
-	cruser_id int(11) DEFAULT '0' NOT NULL,
 
 	place_id int(11) unsigned DEFAULT '0' NOT NULL,
 	parish int(11) DEFAULT '0' NOT NULL,
@@ -61,7 +60,6 @@ CREATE TABLE tx_theodia_parish (
 	pid int(11) DEFAULT '0' NOT NULL,
 	tstamp int(11) DEFAULT '0' NOT NULL,
 	crdate int(11) DEFAULT '0' NOT NULL,
-	cruser_id int(11) DEFAULT '0' NOT NULL,
 
 	name varchar(255) DEFAULT '' NOT NULL,
 
