@@ -47,7 +47,7 @@ Screenshots
 Requirements
 ------------
 
-This extension requires TYPO3 11 LTS or later, and a valid API key from
+This extension requires TYPO3 12 LTS or later, and a valid API key from
 https://about.theodia.org/api.
 
 
