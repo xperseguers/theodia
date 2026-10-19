@@ -41,7 +41,11 @@
       "dev-main": "3.2.x-dev"
     },
     "typo3/cms": {
-      "extension-key": "theodia"
+      "extension-key": "theodia",
+      "version": "3.2.0-dev",
+      "Package": {
+        "providesPackages": {}
+      }
     }
   }
 }
