@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 /*
@@ -122,7 +123,7 @@ class TheodiaOrg
         $cacheFileName = $cacheDirectory . 'theodia_' . $cacheKey . '.json';
         $useCache = file_exists($cacheFileName);
 
-        if (!$useCache || $GLOBALS['EXEC_TIME'] - filemtime($cacheFileName) > $cacheLifeTime) {
+        if (!$useCache || $cacheLifeTime < $GLOBALS['EXEC_TIME'] - filemtime($cacheFileName)) {
             $payload = json_encode($payload);
 
             // Try to or must fetch fresh content
@@ -208,7 +209,7 @@ class TheodiaOrg
                                 'isExcluded' => [
                                     'equal' => [
                                         'value' => false,
-                                    ]
+                                    ],
                                 ],
                             ],
                             [
@@ -261,7 +262,7 @@ class TheodiaOrg
                     length
                   }
                 }
-            '
+            ',
         ]];
 
         return $parameters;
@@ -309,7 +310,7 @@ class TheodiaOrg
                     source
                   }
                 }
-            '
+            ',
         ]];
 
         return $parameters;
@@ -442,7 +443,7 @@ class TheodiaOrg
             'IX' => 9,
             'V' => 5,
             'IV' => 4,
-            'I' => 1
+            'I' => 1,
         ];
         $returnValue = '';
         while ($number > 0) {

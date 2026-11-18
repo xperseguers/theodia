@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 /*
  * This file is part of the TYPO3 CMS project.
@@ -24,7 +25,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 abstract class AbstractFlexFormPreviewRenderer extends StandardContentPreviewRenderer
 {
     // Self-referential 'abstract' declaration
-    const PLUGIN_NAME = self::PLUGIN_NAME;
+    public const PLUGIN_NAME = self::PLUGIN_NAME;
 
     protected int $typo3Version;
 
@@ -65,7 +66,7 @@ abstract class AbstractFlexFormPreviewRenderer extends StandardContentPreviewRen
         return implode(LF, $out);
     }
 
-    protected abstract function renderFlexFormPreviewContent(array $record, array &$out): void;
+    abstract protected function renderFlexFormPreviewContent(array $record, array &$out): void;
 
     protected function showError(string $text): string
     {

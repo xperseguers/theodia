@@ -1,4 +1,5 @@
 <?php
+
 $typo3Version = (new \TYPO3\CMS\Core\Information\Typo3Version())->getMajorVersion();
 $fileTypeImage = $typo3Version >= 13
     ? \TYPO3\CMS\Core\Resource\FileType::IMAGE->value
@@ -36,7 +37,7 @@ return [
                 --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:categories,
                     categories,
                 --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:access,
-                    hidden'
+                    hidden',
         ],
     ],
     'palettes' => [
@@ -117,7 +118,7 @@ return [
                 'size' => 1,
                 'minitems' => 0,
                 'maxitems' => 1,
-            ]
+            ],
         ],
         'place_id' => [
             'exclude' => 1,
@@ -296,13 +297,13 @@ return [
                         $fileTypeImage => [
                             'showitem' => '
                                     --palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
-                                    --palette--;;filePalette'
+                                    --palette--;;filePalette',
                         ],
                     ],
                 ],
                 'maxitems' => 20,
                 'minitems' => 0,
-                'allowed' => 'common-image-types'
+                'allowed' => 'common-image-types',
             ],
         ],
         'map' => [
@@ -323,8 +324,8 @@ return [
         ],
         'categories' => [
             'config' => [
-                'type' => 'category'
-            ]
+                'type' => 'category',
+            ],
         ],
     ],
 ];

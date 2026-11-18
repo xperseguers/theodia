@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 /*
  * This file is part of the TYPO3 CMS project.
@@ -23,17 +23,17 @@ final class AfterEventsFetchedEvent
         private readonly array $calendars,
         private array $events
     ) {}
-    
+
     public function getCalendars(): array
     {
         return $this->calendars;
     }
-    
+
     public function getEvents(): array
     {
         return $this->events;
     }
-    
+
     public function setEvents(array $events): void
     {
         $this->events = $events;

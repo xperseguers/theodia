@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 /*
@@ -18,7 +19,6 @@ namespace Causal\Theodia\Backend\Configuration\TCA;
 
 use Causal\Theodia\Service\TheodiaOrg;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class TheodiaCalendarSelector
 {

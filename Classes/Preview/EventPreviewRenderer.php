@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 /*
  * This file is part of the TYPO3 CMS project.
@@ -17,12 +18,11 @@ declare(strict_types = 1);
 namespace Causal\Theodia\Preview;
 
 use Causal\Theodia\Service\TheodiaOrg;
-use TYPO3\CMS\Backend\View\BackendLayout\Grid\GridColumnItem;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class EventPreviewRenderer extends AbstractFlexFormPreviewRenderer
 {
-    const PLUGIN_NAME = 'Event';
+    public const PLUGIN_NAME = 'Event';
 
     protected function renderFlexFormPreviewContent(array $record, array &$out): void
     {

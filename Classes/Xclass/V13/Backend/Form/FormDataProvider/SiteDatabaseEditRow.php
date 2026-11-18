@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 /*
@@ -50,7 +51,7 @@ readonly class SiteDatabaseEditRow implements FormDataProviderInterface
             $rowData = $this->getRawConfigurationForSiteWithRootPageId($rootPageId);
             $result['databaseRow']['uid'] = $rowData['rootPageId'];
             $result['databaseRow']['identifier'] = $result['customData']['siteIdentifier'];
-        // XCLASS: Add site_theodia_calendar to the list of allowed tables:
+            // XCLASS: Add site_theodia_calendar to the list of allowed tables:
         } elseif (in_array($tableName, ['site_errorhandling', 'site_language', 'site_route', 'site_base_variant', 'site_theodia_calendar'], true)) {
             $rootPageId = (int)($result['inlineTopMostParentUid'] ?? $result['inlineParentUid']);
             try {

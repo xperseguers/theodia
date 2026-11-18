@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 /*
  * This file is part of the TYPO3 CMS project.
@@ -27,7 +28,6 @@ use TYPO3\CMS\Core\Utility\ArrayUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
-use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 class EventController extends ActionController
 {
@@ -237,7 +237,7 @@ class EventController extends ActionController
             'quantity' => (int)$this->settings['numberOfEvents'],
             'showMore' => 'false',
             'showPlace' => 'false',
-            'timeFormat' => 'HH:mm'
+            'timeFormat' => 'HH:mm',
         ];
         if (!empty($this->settings['cssIframe'])) {
             $contentObject = GeneralUtility::makeInstance(ContentObjectRenderer::class);
@@ -261,7 +261,7 @@ class EventController extends ActionController
    })();
 </script>
 HTML;
-       return $this->htmlResponse($html);
+        return $this->htmlResponse($html);
     }
 
     protected function getContentObject(): ContentObjectRenderer

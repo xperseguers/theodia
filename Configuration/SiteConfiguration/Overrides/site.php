@@ -1,4 +1,5 @@
 <?php
+
 $GLOBALS['SiteConfiguration']['site']['columns']['tx_theodia_api_key'] = [
     'label' => 'LLL:EXT:theodia/Resources/Private/Language/locallang_db.xlf:site.tx_theodia_api_key',
     'description' => 'LLL:EXT:theodia/Resources/Private/Language/locallang_db.xlf:site.tx_theodia_api_key.description',
@@ -47,7 +48,7 @@ $GLOBALS['SiteConfiguration']['site']['columns']['tx_theodia_calendars'] = [
             ],
             'useSortable' => true,
         ],
-    ]
+    ],
 ];
 
 $GLOBALS['SiteConfiguration']['site']['types']['0']['showitem'] .= ',

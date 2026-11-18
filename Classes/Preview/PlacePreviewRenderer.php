@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 /*
  * This file is part of the TYPO3 CMS project.
@@ -22,7 +23,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class PlacePreviewRenderer extends AbstractFlexFormPreviewRenderer
 {
-    const PLUGIN_NAME = 'Place';
+    public const PLUGIN_NAME = 'Place';
 
     protected function renderFlexFormPreviewContent(array $record, array &$out): void
     {

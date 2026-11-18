@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 /*
@@ -16,7 +17,6 @@ declare(strict_types=1);
 
 namespace Causal\Theodia\Backend\Form\Element;
 
-use TYPO3\CMS\Core\Core\Environment;
 use TYPO3\CMS\Core\Page\JavaScriptModuleInstruction;
 use TYPO3\CMS\Core\Page\PageRenderer;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -70,7 +70,7 @@ class LocationMap extends \TYPO3\CMS\Backend\Form\Element\AbstractFormElement
                     'fieldLongitude' => $fieldLongitude,
                     'latitude' => $latitude,
                     'longitude' => $longitude,
-                    'addressFields' => $sourceAddressFields
+                    'addressFields' => $sourceAddressFields,
                 ])
         );
 

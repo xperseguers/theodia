@@ -21,3 +21,7 @@
 /index.php
 # Ignore temp directory.
 /typo3temp/
+.php-cs-fixer.cache.php
+composer.lock
+vendor/
+public/

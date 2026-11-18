@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 /*
  * This file is part of the TYPO3 CMS project.
@@ -22,7 +23,6 @@ use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Resource\ResourceFactory;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
-use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 class JsonLdViewHelper extends AbstractViewHelper
@@ -47,7 +47,7 @@ class JsonLdViewHelper extends AbstractViewHelper
 
         if (count($jsonObjects) === 1) {
             $jsonObjects = $jsonObjects[0];
-        };
+        }
 
         $out = [];
         if (!empty($jsonObjects)) {
@@ -223,7 +223,7 @@ class JsonLdViewHelper extends AbstractViewHelper
     protected static function getJsonLdOrganizer(array $event): array
     {
         $rootUrl = (string)$GLOBALS['TYPO3_REQUEST']->getAttribute('site')->getBase();
-        if (strpos($rootUrl, '://') === false) {
+        if (!str_contains($rootUrl, '://')) {
             $rootUrl = $GLOBALS['TYPO3_REQUEST']->getAttribute('normalizedParams')->getRequestHost();
         }
 
