@@ -29,9 +29,10 @@ abstract class AbstractFlexFormPreviewRenderer extends StandardContentPreviewRen
 
     protected int $typo3Version;
 
-    /** @var array|\ArrayAccess */
+    /** @var array<string, mixed>|\ArrayAccess<string, mixed> */
     protected $flexFormData;
 
+    /** @var string */
     protected $labelPrefix;
 
     public function renderPageModulePreviewContent(GridColumnItem $item): string
@@ -63,9 +64,13 @@ abstract class AbstractFlexFormPreviewRenderer extends StandardContentPreviewRen
             $out[] = '</table>';
         }
 
-        return implode(LF, $out);
+        return implode("\n", $out);
     }
 
+    /**
+     * @param array<string, mixed> $record
+     * @param list<string> $out
+     */
     abstract protected function renderFlexFormPreviewContent(array $record, array &$out): void;
 
     protected function showError(string $text): string
@@ -77,7 +82,9 @@ abstract class AbstractFlexFormPreviewRenderer extends StandardContentPreviewRen
     protected function getFieldFromFlexForm(string $key, string $sheet = 'sDEF'): ?string
     {
         if ($this->typo3Version >= 14) {
-            $sheets = $this->flexFormData->getSheets();
+            /** @var object{getSheets: callable} $flexFormData */
+            $flexFormData = $this->flexFormData;
+            $sheets = $flexFormData->getSheets();
             $keyParts = explode('.', $key);
             $value = null;
             if (isset($sheets[$sheet])) {
@@ -111,7 +118,7 @@ abstract class AbstractFlexFormPreviewRenderer extends StandardContentPreviewRen
         $out[] = '<td class="' . $cssClasses . '" style="font-weight: bold">' . $content . '</td>';
         $out[] = '</tr>';
 
-        return implode(LF, $out);
+        return implode("\n", $out);
     }
 
     protected function describeBoolean(bool $value = true): string

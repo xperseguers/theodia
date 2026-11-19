@@ -25,8 +25,8 @@ class TheodiaCalendarSelector
     /**
      * Returns the list of available THEODIA calendars.
      *
-     * @param array $conf
-     * @return array
+     * @param array<string, mixed> $conf
+     * @return array<string, mixed>
      */
     public function getAll(array $conf = []): array
     {

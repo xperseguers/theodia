@@ -19,21 +19,34 @@ namespace Causal\Theodia\Event;
 
 final class AfterEventsFetchedEvent
 {
+    /**
+     * @param int[] $calendars
+     * @param list<array<string, mixed>> $events
+     */
     public function __construct(
         private readonly array $calendars,
         private array $events
     ) {}
 
+    /**
+     * @return int[]
+     */
     public function getCalendars(): array
     {
         return $this->calendars;
     }
 
+    /**
+     * @return list<array<string, mixed>>
+     */
     public function getEvents(): array
     {
         return $this->events;
     }
 
+    /**
+     * @param list<array<string, mixed>> $events
+     */
     public function setEvents(array $events): void
     {
         $this->events = $events;

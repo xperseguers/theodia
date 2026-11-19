@@ -56,12 +56,12 @@ class JsonLdViewHelper extends AbstractViewHelper
             $out[] = '</script>';
         }
 
-        return implode(LF, $out);
+        return implode("\n", $out);
     }
 
     /**
-     * @param array $events
-     * @return array
+     * @param array<string, mixed> $events
+     * @return list<array<string, mixed>>
      */
     protected static function getJsonLdEvents(array $events): array
     {
@@ -125,8 +125,8 @@ class JsonLdViewHelper extends AbstractViewHelper
     }
 
     /**
-     * @param array $place
-     * @return array
+     * @param array<string, mixed> $place
+     * @return array<string, mixed>
      */
     protected static function getJsonLdLocation(array $place): array
     {
@@ -220,6 +220,10 @@ class JsonLdViewHelper extends AbstractViewHelper
         return $data;
     }
 
+    /**
+     * @param array<string, mixed> $event
+     * @return array<string, string>
+     */
     protected static function getJsonLdOrganizer(array $event): array
     {
         $rootUrl = (string)$GLOBALS['TYPO3_REQUEST']->getAttribute('site')->getBase();

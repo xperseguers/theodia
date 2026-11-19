@@ -163,6 +163,10 @@ class EventController extends ActionController
         ]);
     }
 
+    /**
+     * @param list<array<string, mixed>> $events
+     * @return list<array<string, mixed>>
+     */
     protected function filterEvents(array $events): array
     {
         // Keep only future events
@@ -182,7 +186,7 @@ class EventController extends ActionController
                 $eventEnd = ($event['end'] ?? null) instanceof \DateTime ? $event['end']->format('Y-m-d') : $eventStart;
                 $keep = true;
                 if ($filterStartDate !== '') {
-                    $keep = $keep && $eventEnd >= $filterStartDate;
+                    $keep = $eventEnd >= $filterStartDate;
                 }
                 if ($filterEndDate !== '') {
                     $keep = $keep && $eventStart <= $filterEndDate;
@@ -204,6 +208,11 @@ class EventController extends ActionController
         return $events;
     }
 
+    /**
+     * @param list<array<string, mixed>> $events
+     * @return array<string, array<string, mixed>>
+     * @throws \DateMalformedStringException
+     */
     protected function groupEventsByDay(array $events): array
     {
         $eventsGroupedByDay = [];
@@ -221,9 +230,6 @@ class EventController extends ActionController
         return $eventsGroupedByDay;
     }
 
-    /**
-     * @return string
-     */
     protected function generateIframeSnippet(): ResponseInterface
     {
         /** @var SiteLanguage $siteLanguage */

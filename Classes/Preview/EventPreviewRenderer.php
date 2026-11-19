@@ -65,11 +65,14 @@ class EventPreviewRenderer extends AbstractFlexFormPreviewRenderer
                 $filterDate .= ' - ';
                 $filterDate .= $filterEnd !== 0 ? date($dateFormat, $filterEnd) : '...';
                 $filterOptions[] = htmlspecialchars($filterDate);
-                $out[] = $this->addTableRow($label, implode('<br>' . LF, $filterOptions));
+                $out[] = $this->addTableRow($label, implode('<br>' . "\n", $filterOptions));
             }
         }
     }
 
+    /**
+     * @param int[] $calendars
+     */
     protected function getCalendarNames(int $storage, array $calendars): string
     {
         $theodiaCalendars = TheodiaOrg::getTheodiaCalendars($storage);
@@ -96,7 +99,7 @@ class EventPreviewRenderer extends AbstractFlexFormPreviewRenderer
         if (count($out) > 1) {
             $output .= '- ';
         }
-        $output .= implode('<br>' . LF . '- ', $out);
+        $output .= implode('<br>' . "\n" . '- ', $out);
 
         return $output;
     }

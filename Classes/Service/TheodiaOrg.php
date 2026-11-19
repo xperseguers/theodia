@@ -33,7 +33,7 @@ class TheodiaOrg
     ) {}
 
     /**
-     * @return array
+     * @return array<int, string>
      */
     public static function getTheodiaCalendars(int $storage): array
     {
@@ -57,6 +57,11 @@ class TheodiaOrg
         return $calendars;
     }
 
+    /**
+     * @param int[] $calendars
+     * @return list<array<string, mixed>>
+     * @throws \DateMalformedStringException
+     */
     public function getEventsByCalendars(array $calendars, int $items = 10, int $cacheLifeTime = 14400): array
     {
         if (empty($calendars)) {
@@ -105,6 +110,9 @@ class TheodiaOrg
         return $afterEventsFetchedEvent->getEvents();
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     protected function getPlace(Site $site, int $id): array
     {
         static $places = [];
@@ -116,6 +124,10 @@ class TheodiaOrg
         return $places[$id];
     }
 
+    /**
+     * @param list<array<string, mixed>> $payload
+     * @return list<array<string, mixed>>
+     */
     protected function callApi(Site $site, array $payload, string $cacheKey, int $cacheLifeTime): array
     {
         $data = [];
@@ -135,11 +147,11 @@ class TheodiaOrg
             ];
 
             $ch = curl_init();
-            curl_setopt($ch, CURLOPT_HEADER, 0);
+            curl_setopt($ch, CURLOPT_HEADER, false);
             curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
             curl_setopt($ch, CURLOPT_URL, $url);
-            curl_setopt($ch, CURLOPT_FRESH_CONNECT, 1);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($ch, CURLOPT_FRESH_CONNECT, true);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($ch, CURLOPT_POST, true);
             curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
 
@@ -169,6 +181,11 @@ class TheodiaOrg
         return $data;
     }
 
+    /**
+     * @param int[] $calendars
+     * @return array<int, array<string, mixed>>
+     * @throws \Random\RandomException
+     */
     protected function prepareEventsPayload(array $calendars, string $dateYmd, int $itemsPerPage = 10): array
     {
         // Trick theodia into not detecting our fetch of information too easily
@@ -268,6 +285,9 @@ class TheodiaOrg
         return $parameters;
     }
 
+    /**
+     * @return array<int, array<string, mixed>>
+     */
     protected function prepareFrontOfficePlacePayload(int $placeId): array
     {
         $parameters = [[
@@ -319,7 +339,7 @@ class TheodiaOrg
     /**
      * @param Site $site
      * @param int $id
-     * @return array
+     * @return array<string, mixed>
      */
     protected function createAndFetchTheodiaPlace(Site $site, int $id): array
     {
@@ -470,7 +490,7 @@ class TheodiaOrg
 
         $timestamp = time();
         $hashPayload = $timestamp . $payload;
-        $hash = hash_hmac('sha256', $hashPayload, $key ?? '');
+        $hash = hash_hmac('sha256', $hashPayload, $key);
 
         return "X-Signature: v1.$timestamp.$hash";
     }

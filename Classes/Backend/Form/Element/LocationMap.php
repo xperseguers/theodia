@@ -24,12 +24,19 @@ use TYPO3\CMS\Core\Utility\PathUtility;
 
 class LocationMap extends \TYPO3\CMS\Backend\Form\Element\AbstractFormElement
 {
+    /**
+     * @return array<string, mixed>
+     */
     public function render(): array
     {
         $resultArray = $this->initializeResultArray();
         return $this->renderMap($resultArray);
     }
 
+    /**
+     * @param array<string, mixed> $resultArray
+     * @return array<string, mixed>
+     */
     protected function renderMap(array $resultArray): array
     {
         $row = $this->data['databaseRow'];
