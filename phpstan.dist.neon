@@ -1,9 +1,3 @@
-includes:
-    # Baseline of pre-existing errors: new code must be clean, the backlog
-    # can be burned down over time. Regenerate with:
-    #   composer stan -- --generate-baseline phpstan-baseline.neon
-    #- phpstan-baseline.neon
-
 parameters:
     phpVersion: 80100
     level: 6
